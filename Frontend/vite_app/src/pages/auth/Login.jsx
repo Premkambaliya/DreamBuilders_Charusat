@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CircleCheckBig } from "lucide-react";
 
@@ -42,11 +42,11 @@ const Login = ({ onLogin, isAuthenticated }) => {
   };
 
   return (
-    <div className="relative grid min-h-screen place-items-center bg-[linear-gradient(rgba(10,11,20,0.8),rgba(10,11,20,0.9)),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat p-5">
+    <div className="min-h-screen grid place-items-center p-5 relative" style={{ backgroundImage: "linear-gradient(rgba(10, 11, 20, 0.8), rgba(10, 11, 20, 0.9)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
       <section className="w-full max-w-[960px] min-h-[620px] grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] rounded-[20px] overflow-hidden border border-gray-800 shadow-2xl bg-[#0a0b14]/90 animate-[fade-in-up_0.5s_ease-out]">
         
         {/* Intro Sidebar */}
-        <aside className="relative border-b border-gray-800 bg-[linear-gradient(145deg,rgba(108,99,255,0.17),rgba(0,212,170,0.08)),radial-gradient(circle_at_80%_20%,rgba(255,179,71,0.2),transparent_36%),#0f1221] p-8 lg:border-b-0 lg:border-r">
+        <aside className="relative p-8 lg:border-r border-b lg:border-b-0 border-gray-800" style={{ background: "linear-gradient(145deg, rgba(108, 99, 255, 0.17), rgba(0, 212, 170, 0.08)), radial-gradient(circle at 80% 20%, rgba(255, 179, 71, 0.2), transparent 36%), #0f1221" }}>
           {/* Decorative Blur */}
           <div className="absolute w-[220px] h-[220px] rounded-full bg-[#4cc9f0]/15 blur-[22px] right-[-35px] bottom-[-45px] pointer-events-none" />
           

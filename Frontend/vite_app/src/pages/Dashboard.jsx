@@ -1,5 +1,5 @@
 import { createElement, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutlet } from "react-router-dom";
 import {
 	Activity,
 	AlertTriangle,
@@ -16,15 +16,6 @@ import {
 } from "lucide-react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
-import AnalyzeCall from "./AnalyzeCall";
-// import CallList from "./CallList";
-// import CallDetail from "./CallDetail";
-// import Insights from "./Insights";
-// import TopDeals from "./TopDeals";
-// import HighRisk from "./HighRisk";
-import Profile from "./Profile";
-// import Employees from "./Employees";
-// import Products from "./Products";
 import { dashboardApi } from "../api/api";
 
 const defaultAnalytics = {
@@ -116,7 +107,7 @@ const ProgressRow = ({ label, count, maxCount, gradient }) => (
 	</div>
 );
 
-const Dashboard = ({ user: initialUser, token, onLogout, onUserUpdate }) => {
+const Dashboard = ({ user: initialUser, token, onLogout }) => {
 	const [user, setUser] = useState(initialUser);
 	const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 	const [mobileOpen, setMobileOpen] = useState(false);
@@ -127,7 +118,11 @@ const Dashboard = ({ user: initialUser, token, onLogout, onUserUpdate }) => {
 	const [dashboardLoading, setDashboardLoading] = useState(true);
 	const [dashboardError, setDashboardError] = useState("");
 	const navigate = useNavigate();
-	const location = useLocation();
+	const outlet = useOutlet();
+
+	useEffect(() => {
+		setUser(initialUser);
+	}, [initialUser]);
 
 	useEffect(() => {
 		const fetchDashboardData = async () => {
@@ -200,20 +195,6 @@ const Dashboard = ({ user: initialUser, token, onLogout, onUserUpdate }) => {
 	};
 
 	const mainOffsetClass = sidebarCollapsed ? "md:ml-[68px]" : "md:ml-[240px]";
-	const isAnalyzeRoute = location.pathname === "/dashboard/analyze";
-	const isCallsRoute = location.pathname === "/dashboard/calls";
-	const isCallDetailRoute = location.pathname.startsWith("/dashboard/calls/");
-	const isInsightsRoute = location.pathname === "/dashboard/insights";
-	const isTopDealsRoute = location.pathname === "/dashboard/top-deals";
-	const isHighRiskRoute = location.pathname === "/dashboard/high-risk";
-	const isEmployeesRoute = location.pathname === "/dashboard/employees";
-	const isProductsRoute = location.pathname === "/dashboard/products";
-	const isProfileRoute = location.pathname === "/dashboard/profile";
-
-	const handleUserUpdate = (updatedUser) => {
-		setUser(updatedUser);
-		onUserUpdate?.(updatedUser);
-	};
 
 	return (
 		<div
@@ -245,24 +226,8 @@ const Dashboard = ({ user: initialUser, token, onLogout, onUserUpdate }) => {
 
 			<div className={`relative z-10 pt-16 transition-[margin] duration-300 ${mainOffsetClass}`}>
 				<div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-12 lg:py-10">
-				{isAnalyzeRoute ? (
-					<AnalyzeCall token={token} />
-				) : isCallsRoute ? (
-					<CallList token={token} />
-				) : isCallDetailRoute ? (
-					<CallDetail token={token} />
-				) : isInsightsRoute ? (
-					<Insights token={token} />
-				) : isTopDealsRoute ? (
-					<TopDeals token={token} />
-				) : isHighRiskRoute ? (
-					<HighRisk token={token} />
-				) : isEmployeesRoute ? (
-					<Employees user={user} token={token} />
-				) : isProductsRoute ? (
-					<Products user={user} token={token} />
-				) : isProfileRoute ? (
-					<Profile user={user} token={token} onUserUpdate={handleUserUpdate} onLogout={handleLogout} />
+				{outlet ? (
+					outlet
 				) : (
 					<>
 				{dashboardLoading ? (
@@ -556,7 +521,7 @@ const Dashboard = ({ user: initialUser, token, onLogout, onUserUpdate }) => {
 				</section>
 					</>
 				)}
-				</>
+					</>
 				)}
 				</div>
 			</div>

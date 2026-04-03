@@ -3,14 +3,13 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, PieChart, Pie,
 } from "recharts";
-import { productIntelligenceApi } from "../api/api";
+import { employeeIntelligenceApi } from "../api/api";
 import {
   ArrowLeft,
   AlertOctagon,
-  BarChart3,
-  Package,
   TrendingDown,
   TrendingUp,
+  Target,
   Smile,
   Meh,
   Frown,
@@ -19,7 +18,9 @@ import {
   Zap,
   Phone,
   Star,
-  StarHalf,
+  User,
+  Shield,
+  Briefcase
 } from "lucide-react";
 
 /* ── Custom tooltip ── */
@@ -53,7 +54,7 @@ const Card = ({ children, className = "" }) => (
 );
 
 /* ── Stat card ── */
-const StatCard = ({ icon: StatIcon, label, value, gradient }) => (
+const StatCard = ({ icon: StatIcon, label, value, gradient, sub }) => (
   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#121527]/90 p-5 shadow-[0_16px_50px_rgba(0,0,0,0.25)] transition duration-200 hover:-translate-y-0.5 hover:border-white/20">
     <div
       className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-lg"
@@ -63,6 +64,7 @@ const StatCard = ({ icon: StatIcon, label, value, gradient }) => (
     </div>
     <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{label}</p>
     <h3 className="mt-1 text-2xl font-extrabold text-white">{value}</h3>
+    {sub && <p className="mt-1.5 text-xs text-slate-400">{sub}</p>}
     <div
       className="pointer-events-none absolute -right-4 -top-4 h-20 w-20 rounded-full opacity-15 blur-2xl"
       style={{ background: gradient }}
@@ -84,12 +86,7 @@ const ProgressRow = ({ name, count, maxCount, gradient, badge }) => (
   </div>
 );
 
-/* ── Loading skeleton ── */
-const Skeleton = ({ className = "" }) => (
-  <div className={`animate-pulse rounded-xl border border-white/6 bg-white/3 ${className}`} />
-);
-
-/* ── Detailed Insight Row (Prevents Truncation of AI text) ── */
+/* ── Detailed Insight Row ── */
 const InsightRow = ({ text, count, maxCount, gradient, badge }) => (
   <div className="flex flex-col gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-4 transition hover:bg-white/[0.05] hover:border-white/10">
     <div className="flex items-start justify-between gap-4">
@@ -105,6 +102,11 @@ const InsightRow = ({ text, count, maxCount, gradient, badge }) => (
   </div>
 );
 
+/* ── Loading skeleton ── */
+const Skeleton = ({ className = "" }) => (
+  <div className={`animate-pulse rounded-xl border border-white/6 bg-white/3 ${className}`} />
+);
+
 const sentimentIcons = { positive: Smile, negative: Frown, neutral: Meh };
 const sentimentGradients = {
   positive: "linear-gradient(135deg,#00D4AA,#06B6D4)",
@@ -112,29 +114,29 @@ const sentimentGradients = {
   neutral: "linear-gradient(135deg,#F59E0B,#FCD34D)",
 };
 
-const ProductIntelligence = ({ product, token, onBack }) => {
+const EmployeeIntelligence = ({ employee, token, onBack }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!product?._id) return;
+    if (!employee?._id) return;
 
     setLoading(true);
     setError(null);
 
-    productIntelligenceApi
-      .getProductIntelligence(product._id, token)
+    employeeIntelligenceApi
+      .getEmployeeIntelligence(employee._id, token)
       .then((res) => {
         if (!res || !res.success) {
-          setError("Could not load product intelligence.");
+          setError("Could not load employee intelligence.");
           return;
         }
         setData(res);
       })
       .catch(() => setError("Failed to connect to intelligence API."))
       .finally(() => setLoading(false));
-  }, [product, token]);
+  }, [employee, token]);
 
   if (loading) {
     return (
@@ -143,8 +145,8 @@ const ProductIntelligence = ({ product, token, onBack }) => {
           <div className="mb-2 h-9 w-52 rounded-xl bg-white/5" />
           <div className="h-4 w-80 rounded-lg bg-white/4" />
         </div>
-        <div className="mb-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {[...Array(4)].map((_, i) => <Skeleton key={i} className="h-28" />)}
+        <div className="mb-5 grid grid-cols-2 gap-4 lg:grid-cols-5">
+          {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-28" />)}
         </div>
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           {[...Array(2)].map((_, i) => <Skeleton key={i} className="h-80" />)}
@@ -157,7 +159,7 @@ const ProductIntelligence = ({ product, token, onBack }) => {
     return (
       <div className="py-8 flex flex-col gap-4">
         <button onClick={onBack} className="inline-flex w-fit items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10">
-          <ArrowLeft size={16} /> Back to Products
+          <ArrowLeft size={16} /> Back to Employees
         </button>
         <div className="rounded-xl border border-rose-500/20 bg-rose-500/10 p-6 text-center text-rose-300">
           {error || "No intelligence data available."}
@@ -168,24 +170,21 @@ const ProductIntelligence = ({ product, token, onBack }) => {
 
   /* ── Extract data from backend response ── */
   const { summary, insights, recentCalls } = data;
-  const prod = data.product || product;
+  const emp = data.employee || employee;
 
   const totalCalls = summary.totalCalls;
   const avgDealProb = summary.avgDealProbability;
   const avgRepRating = summary.avgRepRating;
-  const productRating = summary.overallProductRating;
+  const latestSummary = summary.latestPerformanceSummary;
   const avgEngagement = summary.avgCustomerEngagement;
   const sent = summary.sentiment || {};
   const domSentiment = sent.dominant || "neutral";
   const DomSentIcon = sentimentIcons[domSentiment] || Meh;
   const domGradient = sentimentGradients[domSentiment] || sentimentGradients.neutral;
 
-  const topObjections = insights.topObjections || [];
-  const topPositive = insights.topPositivePoints || [];
-  const topBuyingSignals = insights.topBuyingSignals || [];
-  const topImprovements = insights.topImprovements || [];
-  const topCompetitors = insights.topCompetitors || [];
-  const compAdvantages = insights.competitorAdvantages || [];
+  const topStrengths = insights.strengths || [];
+  const topWeaknesses = insights.weaknesses || [];
+  const topMissed = insights.missedOpportunities || [];
   const callTypeDist = summary.callTypeDistribution || [];
 
   // Pie chart: sentiment
@@ -201,11 +200,6 @@ const ProductIntelligence = ({ product, token, onBack }) => {
     </div>
   );
 
-  const chartTooltipStyle = {
-    contentStyle: { background: "#161829", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 10, fontSize: 12 },
-    cursor: { fill: "rgba(255,255,255,0.03)" },
-  };
-
   return (
     <div className="py-2 text-slate-200 animate-in fade-in duration-300 flex flex-col gap-6">
 
@@ -215,34 +209,59 @@ const ProductIntelligence = ({ product, token, onBack }) => {
           onClick={onBack}
           className="inline-flex w-fit items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10"
         >
-          <ArrowLeft size={16} /> Back to Products
+          <ArrowLeft size={16} /> Back to Employees
         </button>
         <div>
           <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-indigo-400/25 bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-300">
-            <Package size={11} /> Product Intelligence
+            <User size={11} /> Agent Intelligence
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">{prod.productName}</h1>
-          {prod.category && <span className="mt-1 inline-flex rounded-full border border-indigo-500/20 bg-indigo-500/10 px-2.5 py-0.5 text-[10px] uppercase font-bold text-indigo-300">{prod.category}</span>}
-          <p className="mt-2 text-sm text-slate-400 md:text-base">
-            Server-aggregated intelligence from <strong className="text-white">{totalCalls}</strong> related conversations.
+          <h1 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">{emp.name}</h1>
+          <div className="mt-2 flex items-center gap-2">
+            <span className="inline-flex rounded-full border border-slate-500/20 bg-slate-500/10 px-2.5 py-0.5 text-[10px] uppercase font-bold text-slate-300">{emp.designation || "Sales Representative"}</span>
+            <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] uppercase font-bold text-emerald-300">
+              <Shield size={10} /> {emp.role || 'employee'}
+            </span>
+            <span className="text-xs text-slate-400">{emp.email}</span>
+          </div>
+          <p className="mt-3 text-sm text-slate-400 md:text-base">
+            Server-aggregated performance data from <strong className="text-white">{totalCalls}</strong> calls handled.
           </p>
+
+          {/* ── AI Short Summary ── */}
+          {latestSummary && (
+            <div className="relative mt-5 overflow-hidden rounded-xl border border-indigo-500/20 bg-gradient-to-br from-indigo-500/10 to-indigo-900/5 p-4 pl-5">
+              <div className="absolute left-0 top-0 h-full w-1 bg-indigo-500/50" />
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 shrink-0 rounded-full bg-indigo-500/20 p-1.5 text-indigo-400">
+                  <Star size={14} />
+                </div>
+                <div>
+                  <h4 className="flex space-x-2 text-xs font-bold uppercase tracking-wider text-indigo-300">
+                    Overall Agent Performance Summary
+                  </h4>
+                  <p className="mt-1 text-sm leading-relaxed text-indigo-100/80">
+                    {latestSummary}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       {/* ── Summary stat cards ── */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-6">
-        <StatCard icon={Phone}       label="Total Calls"      value={totalCalls}            gradient="linear-gradient(135deg,#6C63FF,#8B5CF6)" />
-        <StatCard icon={Activity}    label="Avg Deal Prob."    value={`${avgDealProb}%`}     gradient="linear-gradient(135deg,#8B5CF6,#D946EF)" />
-        <StatCard icon={DomSentIcon} label="Overall Sentiment" value={domSentiment.charAt(0).toUpperCase() + domSentiment.slice(1)} gradient={domGradient} />
-        <StatCard icon={StarHalf}    label="Product Rating"    value={`${productRating}/10`} gradient="linear-gradient(135deg,#F59E0B,#EF4444)" />
-        <StatCard icon={Star}        label="Avg Rep Rating"    value={`${avgRepRating}/10`}     gradient="linear-gradient(135deg,#10B981,#84CC16)" />
-        <StatCard icon={Users}       label="Engagement"  value={`${avgEngagement}/10`} gradient="linear-gradient(135deg,#06B6D4,#3B82F6)" />
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+        <StatCard icon={Phone}       label="Calls Handled"    value={totalCalls}            gradient="linear-gradient(135deg,#6C63FF,#8B5CF6)" />
+        <StatCard icon={Activity}    label="Avg Deal Hit Rate" value={`${avgDealProb}%`}     gradient="linear-gradient(135deg,#8B5CF6,#D946EF)" />
+        <StatCard icon={DomSentIcon} label="Call Atmosphere"   value={domSentiment.charAt(0).toUpperCase() + domSentiment.slice(1)} gradient={domGradient} />
+        <StatCard icon={Star}        label="Agent Rating"      value={`${avgRepRating}/10`}     gradient="linear-gradient(135deg,#10B981,#84CC16)" />
+        <StatCard icon={Users}       label="Customer Engagement" value={`${avgEngagement}/10`} gradient="linear-gradient(135deg,#06B6D4,#3B82F6)" />
       </div>
 
       {/* ── Sentiment Pie + Call Type Distribution ── */}
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         <Card>
-          <h3 className="mb-4 text-sm font-bold text-white">Sentiment Distribution</h3>
+          <h3 className="mb-4 text-sm font-bold text-white">Call Sentiment History</h3>
           {sentimentPieData.length > 0 ? (
             <div className="flex items-center justify-center gap-6">
               <ResponsiveContainer width={180} height={180}>
@@ -265,11 +284,11 @@ const ProductIntelligence = ({ product, token, onBack }) => {
                 ))}
               </div>
             </div>
-          ) : emptyState("No sentiment data.")}
+          ) : emptyState("No sentiment data for this agent.")}
         </Card>
 
         <Card>
-          <h3 className="mb-4 text-sm font-bold text-white">Call Type Breakdown</h3>
+          <h3 className="mb-4 text-sm font-bold text-white">Call Type Handled</h3>
           {callTypeDist.length > 0 ? (
             <div className="flex flex-col gap-3">
               {callTypeDist.map((item, i) => (
@@ -283,14 +302,12 @@ const ProductIntelligence = ({ product, token, onBack }) => {
                 />
               ))}
             </div>
-          ) : emptyState("No call type data.")}
+          ) : emptyState("No call type data recorded.")}
         </Card>
       </div>
 
-      {/* ── Charts: Positives + Objections ── */}
+      {/* ── Strengths and Weaknesses ── */}
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-
-        {/* Positive Points */}
         <Card>
           <div className="mb-5 flex items-start justify-between gap-3 border-b border-white/5 pb-4">
             <div className="flex items-center gap-2.5">
@@ -298,147 +315,81 @@ const ProductIntelligence = ({ product, token, onBack }) => {
                 <TrendingUp size={17} />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white">What Customers Love</h3>
-                <p className="text-xs text-slate-500">Top discussed positive points</p>
+                <h3 className="text-sm font-bold text-white">Agent Strengths</h3>
+                <p className="text-xs text-slate-500">What they do extremely well</p>
               </div>
             </div>
-            <Badge tone="positive" className="ml-auto">{topPositive.length} themes</Badge>
+            <Badge tone="positive" className="ml-auto">{topStrengths.length} tracked</Badge>
           </div>
-          {topPositive.length > 0 ? (
+          {topStrengths.length > 0 ? (
             <div className="flex flex-col gap-3">
-              {topPositive.slice(0, 5).map((item, i) => (
-                <InsightRow key={i} text={item.text} count={item.count} maxCount={topPositive[0].count} gradient="linear-gradient(90deg,#00D4AA,#06B6D4)" badge="positive" />
+              {topStrengths.slice(0, 5).map((item, i) => (
+                <InsightRow key={i} text={item.text} count={item.count} maxCount={topStrengths[0].count} gradient="linear-gradient(90deg,#00D4AA,#06B6D4)" badge="positive" />
               ))}
             </div>
-          ) : emptyState("No positive themes captured yet.")}
+          ) : emptyState("Not enough data to determine strengths.")}
         </Card>
 
-        {/* Objections */}
         <Card>
           <div className="mb-5 flex items-start justify-between gap-3 border-b border-white/5 pb-4">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500/15 text-rose-400">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400">
                 <TrendingDown size={17} />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white">Main Objections</h3>
-                <p className="text-xs text-slate-500">Recurring friction & pushbacks</p>
+                <h3 className="text-sm font-bold text-white">Areas For Improvement</h3>
+                <p className="text-xs text-slate-500">Skills slowing deals down</p>
               </div>
             </div>
-            <Badge tone="negative" className="ml-auto">{topObjections.length} risks</Badge>
+            <Badge tone="neutral" className="ml-auto">{topWeaknesses.length} tracked</Badge>
           </div>
-          {topObjections.length > 0 ? (
+          {topWeaknesses.length > 0 ? (
             <div className="flex flex-col gap-3">
-              {topObjections.slice(0, 5).map((item, i) => (
-                <InsightRow key={i} text={item.text} count={item.count} maxCount={topObjections[0].count} gradient="linear-gradient(90deg,#FB923C,#EF4444)" badge="negative" />
+              {topWeaknesses.slice(0, 5).map((item, i) => (
+                <InsightRow key={i} text={item.text} count={item.count} maxCount={topWeaknesses[0].count} gradient="linear-gradient(90deg,#F59E0B,#FCD34D)" badge="neutral" />
               ))}
             </div>
-          ) : emptyState("No objections on record.")}
+          ) : emptyState("No flagged areas for improvement.")}
         </Card>
       </div>
 
-      {/* ── Buying Signals ── */}
-      {topBuyingSignals.length > 0 && (
+      {/* ── Missed Opportunities ── */}
+      {topMissed.length > 0 && (
         <Card>
           <div className="mb-5 flex items-start flex-wrap gap-4 justify-between border-b border-white/5 pb-4">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/15 text-cyan-400"><Zap size={17} /></div>
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500/15 text-rose-400"><Target size={17} /></div>
               <div>
-                <h3 className="text-sm font-bold text-white">Buying Signals Detected</h3>
-                <p className="text-xs text-slate-500">Purchase-intent indicators across conversations</p>
+                <h3 className="text-sm font-bold text-white">Missed Opportunities</h3>
+                <p className="text-xs text-slate-500">Moments where the agent could have dug deeper or closed</p>
               </div>
             </div>
-            <Badge tone="positive">{topBuyingSignals.length} signals</Badge>
+            <Badge tone="negative">{topMissed.length} found</Badge>
           </div>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {topBuyingSignals.slice(0, 8).map((item, i) => (
-              <InsightRow key={i} text={item.text} count={item.count} maxCount={topBuyingSignals[0].count} gradient="linear-gradient(90deg,#00D4AA,#06B6D4)" badge="positive" />
+            {topMissed.slice(0, 8).map((item, i) => (
+              <InsightRow key={i} text={item.text} count={item.count} maxCount={topMissed[0].count} gradient="linear-gradient(90deg,#FB7185,#EF4444)" badge="negative" />
             ))}
           </div>
         </Card>
       )}
 
-      {/* ── Improvements ── */}
-      {topImprovements.length > 0 && (
-        <Card>
-          <div className="mb-5 flex items-start flex-wrap gap-4 justify-between border-b border-white/5 pb-4">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-400"><Package size={17} /></div>
-              <div>
-                <h3 className="text-sm font-bold text-white">Suggested Product Improvements</h3>
-                <p className="text-xs text-slate-500">Most requested changes from customer feedback</p>
-              </div>
-            </div>
-            <Badge tone="neutral">{topImprovements.length} requests</Badge>
-          </div>
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {topImprovements.slice(0, 8).map((item, i) => (
-              <InsightRow key={i} text={item.text} count={item.count} maxCount={topImprovements[0].count} gradient="linear-gradient(90deg,#8B5CF6,#D946EF)" badge="neutral" />
-            ))}
-          </div>
-        </Card>
-      )}
-
-      {/* ── Competitors ── */}
-      {(topCompetitors.length > 0 || compAdvantages.length > 0) && (
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-          <Card>
-            <div className="mb-5 flex items-start flex-wrap gap-4 justify-between border-b border-white/5 pb-4">
-              <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400"><AlertOctagon size={17} /></div>
-                <div>
-                  <h3 className="text-sm font-bold text-white">Competitor Mentions</h3>
-                  <p className="text-xs text-slate-500">How often alternatives were discussed</p>
-                </div>
-              </div>
-              {topCompetitors.length > 0 && <Badge tone="neutral">{topCompetitors.length} competitors</Badge>}
-            </div>
-            {topCompetitors.length > 0 ? (
-              <div className="flex flex-col gap-3">
-                {topCompetitors.map((c, i) => (
-                  <InsightRow key={i} text={c.text} count={c.count} maxCount={topCompetitors[0].count} gradient="linear-gradient(90deg,#FFB347,#FF8C42)" badge="neutral" />
-                ))}
-              </div>
-            ) : emptyState("No competitor mentions.")}
-          </Card>
-          <Card>
-            <div className="mb-5 flex items-start flex-wrap gap-4 justify-between border-b border-white/5 pb-4">
-              <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500/15 text-rose-400"><Users size={17} /></div>
-                <div>
-                  <h3 className="text-sm font-bold text-white">Competitor Advantages</h3>
-                  <p className="text-xs text-slate-500">Why customers considered alternatives</p>
-                </div>
-              </div>
-              {compAdvantages.length > 0 && <Badge tone="negative">{compAdvantages.length} reasons</Badge>}
-            </div>
-            {compAdvantages.length > 0 ? (
-              <div className="flex flex-col gap-3">
-                {compAdvantages.map((a, i) => (
-                  <InsightRow key={i} text={a.text} count={a.count} maxCount={compAdvantages[0].count} gradient="linear-gradient(90deg,#FB7185,#EF4444)" badge="negative" />
-                ))}
-              </div>
-            ) : emptyState("No competitor advantage data.")}
-          </Card>
-        </div>
-      )}
-
-      {/* ── Recent Calls for this Product ── */}
+      {/* ── Recent Calls Handled ── */}
       {recentCalls && recentCalls.length > 0 && (
         <Card>
           <div className="mb-5 flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-500/15 text-violet-400"><Phone size={17} /></div>
             <div>
-              <h3 className="text-sm font-bold text-white">Recent Conversations</h3>
-              <p className="text-xs text-slate-500">Latest calls related to this product</p>
+              <h3 className="text-sm font-bold text-white">Recent Conversational Output</h3>
+              <p className="text-xs text-slate-500">Latest calls logged under this agent</p>
             </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-white/10 text-xs uppercase tracking-wider text-slate-500">
-                  <th className="py-3 pr-4">Call</th>
-                  <th className="py-3 pr-4">Employee</th>
+                  <th className="py-3 pr-4">Call Title</th>
+                  <th className="py-3 pr-4">Product</th>
                   <th className="py-3 pr-4">Customer</th>
                   <th className="py-3 pr-4">Sentiment</th>
                   <th className="py-3 pr-4">Deal %</th>
@@ -452,7 +403,7 @@ const ProductIntelligence = ({ product, token, onBack }) => {
                   return (
                     <tr key={call.callId} className="border-b border-white/5 transition hover:bg-white/[0.02]">
                       <td className="py-3 pr-4 font-medium text-slate-200">{call.callTitle}</td>
-                      <td className="py-3 pr-4 text-slate-400">{call.employeeName}</td>
+                      <td className="py-3 pr-4 text-slate-400">{call.productName}</td>
                       <td className="py-3 pr-4 text-slate-400">{call.customerName}</td>
                       <td className="py-3 pr-4">
                         <span className={`inline-flex rounded-full border px-2 py-0.5 text-[0.68rem] font-semibold capitalize ${sClass}`}>{sKey}</span>
@@ -471,4 +422,4 @@ const ProductIntelligence = ({ product, token, onBack }) => {
   );
 };
 
-export default ProductIntelligence;
+export default EmployeeIntelligence;
