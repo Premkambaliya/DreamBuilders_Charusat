@@ -3,6 +3,9 @@ import cors from "cors";
 import "dotenv/config.js";
 import authRoutes from "./modules/auth/auth.routes.js";
 import audioRoutes from "./modules/audio/audio.routes.js";
+import transcriptionRoutes from "./modules/transcription/transcription.routes.js";
+
+
 
 const app = express();
 
@@ -28,6 +31,8 @@ app.use("/uploads", express.static("uploads"));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/audio", audioRoutes);
+app.use("/api/transcription", transcriptionRoutes);
+
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {
