@@ -4,6 +4,7 @@ import "dotenv/config.js";
 import authRoutes from "./modules/auth/auth.routes.js";
 import audioRoutes from "./modules/audio/audio.routes.js";
 import transcriptionRoutes from "./modules/transcription/transcription.routes.js";
+import aiRoutes from "./modules/ai-analysis/ai.routes.js";
 
 
 
@@ -32,6 +33,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/auth", authRoutes);
 app.use("/api/audio", audioRoutes);
 app.use("/api/transcription", transcriptionRoutes);
+app.use("/api/ai", aiRoutes);
 
 
 // Health check endpoint
