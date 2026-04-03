@@ -107,3 +107,43 @@ export const uploadText = async (req, res) => {
   }
 };
 
+export const getAudioByCallId = async (req, res) => {
+  try {
+    const { callId } = req.params;
+
+    const call = await CallModel.findById(callId);
+
+    if (!call) {
+      return res.status(404).json({
+        message: "Call not found",
+      });
+    }
+
+    res.status(200).json({
+      message: "Call retrieved successfully",
+      data: call,
+    });
+  } catch (error) {
+    console.error("Fetch error:", error);
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
+export const getAllAudio = async (req, res) => {
+  try {
+    const calls = await CallModel.findAll();
+
+    res.status(200).json({
+      message: "All calls retrieved successfully",
+      count: calls.length,
+      data: calls,
+    });
+  } catch (error) {
+    console.error("Fetch error:", error);
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
