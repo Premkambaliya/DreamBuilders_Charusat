@@ -5,7 +5,7 @@ import authRoutes from "./modules/auth/auth.routes.js";
 import audioRoutes from "./modules/audio/audio.routes.js";
 import transcriptionRoutes from "./modules/transcription/transcription.routes.js";
 import aiRoutes from "./modules/ai-analysis/ai.routes.js";
-
+import dashboardRoutes from "./modules/dashboard/dashboard.routes.js";
 
 
 const app = express();
@@ -34,7 +34,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/audio", audioRoutes);
 app.use("/api/transcription", transcriptionRoutes);
 app.use("/api/ai", aiRoutes);
-
+app.use("/api/dashboard", dashboardRoutes);
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {
