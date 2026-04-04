@@ -46,7 +46,7 @@ const injectKeyframes = () => {
 const Viz = ({ active }) => (
   <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", gap: 3, height: 30, marginTop: 8 }}>
     {Array.from({ length: 20 }).map((_, i) => (
-      <div key={i} style={{ width: 3, borderRadius: 3, background: active ? "linear-gradient(to top,#6C63FF,#00D4AA)" : "rgba(255,255,255,.06)", height: active ? undefined : 5, animation: active ? `cp-bar ${.4 + Math.random() * .6}s ease-in-out infinite alternate ${i * .04}s` : "none", "--bh": `${10 + Math.random() * 22}px`, transition: "background .3s" }} />
+      <div key={i} style={{ width: 3, borderRadius: 3, background: active ? "linear-gradient(to top,#6C63FF,#00D4AA)" : "rgba(15,23,42,.08)", height: active ? undefined : 5, animation: active ? `cp-bar ${.4 + Math.random() * .6}s ease-in-out infinite alternate ${i * .04}s` : "none", "--bh": `${10 + Math.random() * 22}px`, transition: "background .3s" }} />
     ))}
   </div>
 );
@@ -69,24 +69,24 @@ const HintCard = ({ hint, onDismiss }) => {
 
   return (
     <div style={{ position: "relative", background: c.bgColor, border: `1px solid ${c.borderColor}`, borderRadius: 16, padding: "14px 16px", boxShadow: `0 4px 24px ${c.glowColor}`, animation: "cp-hint-in .4s cubic-bezier(.4,0,.2,1)", overflow: "hidden" }}>
-      <button className="cp-hint-x" style={{ position: "absolute", top: 8, right: 8, background: "rgba(255,255,255,.06)", border: "none", borderRadius: "50%", width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "#94a3b8", transition: "all .2s" }} onClick={onDismiss}><X size={11} /></button>
+      <button className="cp-hint-x" style={{ position: "absolute", top: 8, right: 8, background: "rgba(15,23,42,.08)", border: "none", borderRadius: "50%", width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "#475569", transition: "all .2s" }} onClick={onDismiss}><X size={11} /></button>
       <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "2px 8px", borderRadius: 999, background: c.gradient, fontSize: ".65rem", fontWeight: 700, color: "#fff", textTransform: "uppercase", letterSpacing: ".05em" }}><Icon size={10} />{c.label}</span>
       </div>
       {hint.trigger && <div style={{ fontSize: ".7rem", color: "#64748b", fontStyle: "italic", marginBottom: 5 }}>"{hint.trigger}"</div>}
       <div style={{ fontSize: ".88rem", fontWeight: 600, color: c.textColor, lineHeight: 1.4, marginBottom: 4 }}>{hint.hint}</div>
-      {hint.detail && <div style={{ fontSize: ".75rem", color: "#94a3b8", lineHeight: 1.5, marginBottom: 6 }}>{hint.detail}</div>}
+      {hint.detail && <div style={{ fontSize: ".75rem", color: "#475569", lineHeight: 1.5, marginBottom: 6 }}>{hint.detail}</div>}
 
       {/* Talk Track — the exact script to say */}
       {hint.talkTrack && (
         <div style={{ marginTop: 6, padding: "10px 12px", borderRadius: 10, background: "rgba(0,0,0,.2)", border: `1px solid ${c.borderColor}` }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 5 }}>
             <span style={{ fontSize: ".68rem", fontWeight: 700, color: c.accentColor, textTransform: "uppercase", letterSpacing: ".06em" }}>💬 Say This:</span>
-            <button className="cp-copy-btn" onClick={copyTalkTrack} style={{ display: "flex", alignItems: "center", gap: 3, padding: "2px 7px", borderRadius: 6, border: "1px solid rgba(255,255,255,.08)", background: "rgba(255,255,255,.03)", color: ttCopied ? "#10b981" : "#94a3b8", fontSize: ".65rem", cursor: "pointer", transition: "all .2s" }}>
+            <button className="cp-copy-btn" onClick={copyTalkTrack} style={{ display: "flex", alignItems: "center", gap: 3, padding: "2px 7px", borderRadius: 6, border: "1px solid rgba(255,255,255,.08)", background: "rgba(15,23,42,.04)", color: ttCopied ? "#10b981" : "#475569", fontSize: ".65rem", cursor: "pointer", transition: "all .2s" }}>
               {ttCopied ? <><Check size={10} /> Copied</> : <><Copy size={10} /> Copy</>}
             </button>
           </div>
-          <div style={{ fontSize: ".82rem", color: "#e2e8f0", lineHeight: 1.6, fontStyle: "italic" }}>"{hint.talkTrack}"</div>
+          <div style={{ fontSize: ".82rem", color: "#1f2937", lineHeight: 1.6, fontStyle: "italic" }}>"{hint.talkTrack}"</div>
         </div>
       )}
 
@@ -99,12 +99,12 @@ const HintCard = ({ hint, onDismiss }) => {
                 {p.name} {p.variant ? `(${p.variant})` : ""}
               </div>
               {p.shortLine && (
-                <div style={{ fontSize: ".68rem", color: "#cbd5e1", marginBottom: 3, lineHeight: 1.5 }}>
+                <div style={{ fontSize: ".68rem", color: "#334155", marginBottom: 3, lineHeight: 1.5 }}>
                   {p.shortLine}
                 </div>
               )}
               {p.featureLine && (
-                <div style={{ fontSize: ".66rem", color: "#94a3b8", lineHeight: 1.5 }}>
+                <div style={{ fontSize: ".66rem", color: "#475569", lineHeight: 1.5 }}>
                   Key highlights: {p.featureLine}
                 </div>
               )}
@@ -145,8 +145,8 @@ const AnalyticsDashboard = ({ summary, fullTranscript, hints, elapsed, fmtTime }
   const sentimentColor = sentimentColors[summary.sentiment] || sentimentColors.neutral;
 
   const cardStyle = {
-    background: "rgba(255,255,255,.02)",
-    border: "1px solid rgba(255,255,255,.06)",
+    background: "rgba(15,23,42,.03)",
+    border: "1px solid rgba(15,23,42,.08)",
     borderRadius: 16,
     padding: "18px 20px",
     animation: "cp-fade-in .5s ease",
@@ -159,11 +159,11 @@ const AnalyticsDashboard = ({ summary, fullTranscript, hints, elapsed, fmtTime }
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 36, height: 36, borderRadius: 12, background: "linear-gradient(135deg,#6C63FF,#00D4AA)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 20px rgba(108,99,255,.3)" }}><BarChart3 size={18} color="#fff" /></div>
           <div>
-            <div style={{ fontSize: "1.1rem", fontWeight: 700, color: "#fff" }}>Session Analytics</div>
+            <div style={{ fontSize: "1.1rem", fontWeight: 700, color: "#0f172a" }}>Session Analytics</div>
             <div style={{ fontSize: ".72rem", color: "#64748b" }}>AI-powered post-call intelligence</div>
           </div>
         </div>
-        <button className="cp-copy-btn" onClick={copyTranscript} style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 10, border: "1px solid rgba(255,255,255,.08)", background: "rgba(255,255,255,.03)", color: copied ? "#10b981" : "#94a3b8", fontSize: ".78rem", fontWeight: 500, cursor: "pointer", transition: "all .2s" }}>
+        <button className="cp-copy-btn" onClick={copyTranscript} style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 10, border: "1px solid rgba(255,255,255,.08)", background: "rgba(15,23,42,.04)", color: copied ? "#10b981" : "#475569", fontSize: ".78rem", fontWeight: 500, cursor: "pointer", transition: "all .2s" }}>
           {copied ? <><Check size={14} /> Copied!</> : <><Copy size={14} /> Copy Transcript</>}
         </button>
       </div>
@@ -183,7 +183,7 @@ const AnalyticsDashboard = ({ summary, fullTranscript, hints, elapsed, fmtTime }
         <div style={{ ...cardStyle, textAlign: "center" }}>
           <div style={{ fontSize: "2rem", fontWeight: 800, color: (summary.dealProbability || 0) >= 60 ? "#10b981" : (summary.dealProbability || 0) >= 30 ? "#f59e0b" : "#ef4444", lineHeight: 1 }}>{summary.dealProbability || 0}%</div>
           <div style={{ fontSize: ".68rem", color: "#64748b", marginTop: 4 }}>Deal Probability</div>
-          <div style={{ width: "100%", height: 4, borderRadius: 2, background: "rgba(255,255,255,.06)", marginTop: 8, overflow: "hidden" }}>
+          <div style={{ width: "100%", height: 4, borderRadius: 2, background: "rgba(15,23,42,.08)", marginTop: 8, overflow: "hidden" }}>
             <div style={{ height: "100%", width: `${summary.dealProbability || 0}%`, borderRadius: 2, background: (summary.dealProbability || 0) >= 60 ? "#10b981" : (summary.dealProbability || 0) >= 30 ? "#f59e0b" : "#ef4444", transition: "width 1s ease" }} />
           </div>
         </div>
@@ -192,35 +192,35 @@ const AnalyticsDashboard = ({ summary, fullTranscript, hints, elapsed, fmtTime }
         <div style={{ ...cardStyle, textAlign: "center" }}>
           <div style={{ fontSize: "2rem", fontWeight: 800, color: "#a78bfa", lineHeight: 1 }}>{summary.repPerformance?.score || 0}<span style={{ fontSize: ".9rem", color: "#64748b" }}>/10</span></div>
           <div style={{ fontSize: ".68rem", color: "#64748b", marginTop: 4 }}>Rep Performance</div>
-          <div style={{ fontSize: ".72rem", color: "#94a3b8", marginTop: 4 }}>{summary.repPerformance?.verdict || ""}</div>
+          <div style={{ fontSize: ".72rem", color: "#475569", marginTop: 4 }}>{summary.repPerformance?.verdict || ""}</div>
         </div>
 
         {/* Duration */}
         <div style={{ ...cardStyle, textAlign: "center" }}>
-          <div style={{ fontSize: "2rem", fontWeight: 800, color: "#fff", lineHeight: 1 }}>{fmtTime(elapsed)}</div>
+          <div style={{ fontSize: "2rem", fontWeight: 800, color: "#0f172a", lineHeight: 1 }}>{fmtTime(elapsed)}</div>
           <div style={{ fontSize: ".68rem", color: "#64748b", marginTop: 4 }}>Duration</div>
         </div>
       </div>
 
       {/* ── Executive Summary ── */}
       <div style={cardStyle}>
-        <div style={{ fontSize: ".84rem", fontWeight: 600, color: "#cbd5e1", marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}><MessageSquare size={14} color="#6C63FF" /> Executive Summary</div>
-        <div style={{ fontSize: ".84rem", color: "#94a3b8", lineHeight: 1.7 }}>{summary.executiveSummary || "No summary available."}</div>
+        <div style={{ fontSize: ".84rem", fontWeight: 600, color: "#334155", marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}><MessageSquare size={14} color="#6C63FF" /> Executive Summary</div>
+        <div style={{ fontSize: ".84rem", color: "#475569", lineHeight: 1.7 }}>{summary.executiveSummary || "No summary available."}</div>
       </div>
 
       {/* ── Two Column: Actions + Hints Breakdown ── */}
       <div className="cp-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         {/* Action Items */}
         <div style={cardStyle}>
-          <div style={{ fontSize: ".84rem", fontWeight: 600, color: "#cbd5e1", marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}><Target size={14} color="#10b981" /> Action Items</div>
+          <div style={{ fontSize: ".84rem", fontWeight: 600, color: "#334155", marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}><Target size={14} color="#10b981" /> Action Items</div>
           {(summary.actionItems || []).length === 0 ? (
             <div style={{ fontSize: ".78rem", color: "#475569" }}>No action items identified.</div>
           ) : (
             (summary.actionItems || []).map((a, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, padding: "8px 10px", borderRadius: 10, background: a.priority === "high" ? "rgba(239,68,68,.06)" : "rgba(255,255,255,.02)", border: `1px solid ${a.priority === "high" ? "rgba(239,68,68,.15)" : "rgba(255,255,255,.04)"}`, marginBottom: 6 }}>
-                <span style={{ padding: "1px 6px", borderRadius: 6, fontSize: ".6rem", fontWeight: 700, textTransform: "uppercase", background: a.priority === "high" ? "rgba(239,68,68,.15)" : a.priority === "medium" ? "rgba(245,158,11,.15)" : "rgba(255,255,255,.06)", color: a.priority === "high" ? "#fca5a5" : a.priority === "medium" ? "#fcd34d" : "#94a3b8", whiteSpace: "nowrap", marginTop: 2 }}>{a.priority}</span>
+              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, padding: "8px 10px", borderRadius: 10, background: a.priority === "high" ? "rgba(239,68,68,.06)" : "rgba(15,23,42,.03)", border: `1px solid ${a.priority === "high" ? "rgba(239,68,68,.15)" : "rgba(15,23,42,.06)"}`, marginBottom: 6 }}>
+                <span style={{ padding: "1px 6px", borderRadius: 6, fontSize: ".6rem", fontWeight: 700, textTransform: "uppercase", background: a.priority === "high" ? "rgba(239,68,68,.15)" : a.priority === "medium" ? "rgba(245,158,11,.15)" : "rgba(15,23,42,.08)", color: a.priority === "high" ? "#fca5a5" : a.priority === "medium" ? "#fcd34d" : "#475569", whiteSpace: "nowrap", marginTop: 2 }}>{a.priority}</span>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: ".78rem", color: "#e2e8f0" }}>{a.action}</div>
+                  <div style={{ fontSize: ".78rem", color: "#1f2937" }}>{a.action}</div>
                   {a.deadline && <div style={{ fontSize: ".68rem", color: "#64748b", marginTop: 2 }}>⏰ {a.deadline}</div>}
                 </div>
               </div>
@@ -230,7 +230,7 @@ const AnalyticsDashboard = ({ summary, fullTranscript, hints, elapsed, fmtTime }
 
         {/* Hint Breakdown */}
         <div style={cardStyle}>
-          <div style={{ fontSize: ".84rem", fontWeight: 600, color: "#cbd5e1", marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}><Sparkles size={14} color="#f59e0b" /> AI Hints Breakdown</div>
+          <div style={{ fontSize: ".84rem", fontWeight: 600, color: "#334155", marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}><Sparkles size={14} color="#f59e0b" /> AI Hints Breakdown</div>
           {Object.entries(hintCounts).map(([type, count]) => {
             const cfg = HINT_CONFIG[type];
             const pct = Math.round((count / totalHints) * 100);
@@ -239,10 +239,10 @@ const AnalyticsDashboard = ({ summary, fullTranscript, hints, elapsed, fmtTime }
                 <div style={{ width: 28, height: 28, borderRadius: 8, background: cfg.bgColor, border: `1px solid ${cfg.borderColor}`, display: "flex", alignItems: "center", justifyContent: "center" }}>{<cfg.icon size={13} color={cfg.accentColor} />}</div>
                 <div style={{ flex: 1 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-                    <span style={{ fontSize: ".72rem", color: "#94a3b8" }}>{cfg.label}</span>
+                    <span style={{ fontSize: ".72rem", color: "#475569" }}>{cfg.label}</span>
                     <span style={{ fontSize: ".72rem", fontWeight: 700, color: cfg.textColor }}>{count}</span>
                   </div>
-                  <div style={{ height: 4, borderRadius: 2, background: "rgba(255,255,255,.04)", overflow: "hidden" }}>
+                  <div style={{ height: 4, borderRadius: 2, background: "rgba(15,23,42,.06)", overflow: "hidden" }}>
                     <div style={{ height: "100%", width: `${pct}%`, borderRadius: 2, background: cfg.gradient, transition: "width .8s ease" }} />
                   </div>
                 </div>
@@ -259,7 +259,7 @@ const AnalyticsDashboard = ({ summary, fullTranscript, hints, elapsed, fmtTime }
             <ChevronRight size={16} color="#6C63FF" />
             <span style={{ fontSize: ".84rem", fontWeight: 600, color: "#a78bfa" }}>Next Best Action</span>
           </div>
-          <div style={{ fontSize: ".84rem", color: "#e2e8f0", lineHeight: 1.5 }}>{summary.nextBestAction}</div>
+          <div style={{ fontSize: ".84rem", color: "#1f2937", lineHeight: 1.5 }}>{summary.nextBestAction}</div>
         </div>
       )}
 
@@ -268,11 +268,11 @@ const AnalyticsDashboard = ({ summary, fullTranscript, hints, elapsed, fmtTime }
         <div className="cp-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
           <div style={{ ...cardStyle, background: "rgba(16,185,129,.03)", border: "1px solid rgba(16,185,129,.1)" }}>
             <div style={{ fontSize: ".78rem", fontWeight: 600, color: "#6ee7b7", marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}><Shield size={13} /> Top Strength</div>
-            <div style={{ fontSize: ".82rem", color: "#94a3b8", lineHeight: 1.5 }}>{summary.repPerformance.topStrength || "—"}</div>
+            <div style={{ fontSize: ".82rem", color: "#475569", lineHeight: 1.5 }}>{summary.repPerformance.topStrength || "—"}</div>
           </div>
           <div style={{ ...cardStyle, background: "rgba(239,68,68,.03)", border: "1px solid rgba(239,68,68,.1)" }}>
             <div style={{ fontSize: ".78rem", fontWeight: 600, color: "#fca5a5", marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}><TrendingUp size={13} /> Top Improvement</div>
-            <div style={{ fontSize: ".82rem", color: "#94a3b8", lineHeight: 1.5 }}>{summary.repPerformance.topImprovement || "—"}</div>
+            <div style={{ fontSize: ".82rem", color: "#475569", lineHeight: 1.5 }}>{summary.repPerformance.topImprovement || "—"}</div>
           </div>
         </div>
       )}
@@ -281,20 +281,20 @@ const AnalyticsDashboard = ({ summary, fullTranscript, hints, elapsed, fmtTime }
       {summary.followUpEmail && (
         <div style={cardStyle}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-            <div style={{ fontSize: ".84rem", fontWeight: 600, color: "#cbd5e1", display: "flex", alignItems: "center", gap: 6 }}><Mail size={14} color="#3b82f6" /> Follow-Up Email Draft</div>
-            <button className="cp-copy-btn" onClick={copyEmail} style={{ display: "flex", alignItems: "center", gap: 4, padding: "4px 10px", borderRadius: 8, border: "1px solid rgba(255,255,255,.08)", background: "rgba(255,255,255,.03)", color: emailCopied ? "#10b981" : "#94a3b8", fontSize: ".72rem", cursor: "pointer", transition: "all .2s" }}>
+            <div style={{ fontSize: ".84rem", fontWeight: 600, color: "#334155", display: "flex", alignItems: "center", gap: 6 }}><Mail size={14} color="#3b82f6" /> Follow-Up Email Draft</div>
+            <button className="cp-copy-btn" onClick={copyEmail} style={{ display: "flex", alignItems: "center", gap: 4, padding: "4px 10px", borderRadius: 8, border: "1px solid rgba(255,255,255,.08)", background: "rgba(15,23,42,.04)", color: emailCopied ? "#10b981" : "#475569", fontSize: ".72rem", cursor: "pointer", transition: "all .2s" }}>
               {emailCopied ? <><Check size={12} /> Copied</> : <><Copy size={12} /> Copy</>}
             </button>
           </div>
           <div style={{ fontSize: ".75rem", color: "#6C63FF", fontWeight: 600, marginBottom: 6 }}>Subject: {summary.followUpEmail.subject}</div>
-          <div style={{ fontSize: ".8rem", color: "#94a3b8", lineHeight: 1.7, whiteSpace: "pre-wrap", padding: "12px 14px", borderRadius: 10, background: "rgba(0,0,0,.15)", border: "1px solid rgba(255,255,255,.04)" }}>{summary.followUpEmail.body}</div>
+          <div style={{ fontSize: ".8rem", color: "#475569", lineHeight: 1.7, whiteSpace: "pre-wrap", padding: "12px 14px", borderRadius: 10, background: "rgba(0,0,0,.15)", border: "1px solid rgba(15,23,42,.06)" }}>{summary.followUpEmail.body}</div>
         </div>
       )}
 
       {/* ── Full Transcript (collapsible) ── */}
       <details style={cardStyle}>
-        <summary style={{ fontSize: ".84rem", fontWeight: 600, color: "#cbd5e1", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}><Radio size={14} color="#6C63FF" /> Full Transcript</summary>
-        <div style={{ fontSize: ".8rem", color: "#94a3b8", lineHeight: 1.8, marginTop: 12, whiteSpace: "pre-wrap" }}>{fullTranscript}</div>
+        <summary style={{ fontSize: ".84rem", fontWeight: 600, color: "#334155", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}><Radio size={14} color="#6C63FF" /> Full Transcript</summary>
+        <div style={{ fontSize: ".8rem", color: "#475569", lineHeight: 1.8, marginTop: 12, whiteSpace: "pre-wrap" }}>{fullTranscript}</div>
       </details>
     </div>
   );
@@ -571,14 +571,26 @@ const LiveCopilot = ({ token }) => {
 
   /* ═══ RENDER ═══ */
   return (
-    <div style={{ minHeight: "100%", padding: "24px 28px", color: "#e2e8f0", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif" }}>
+    <div
+      style={{
+        minHeight: "100%",
+        padding: "24px 28px",
+        color: "#1f2937",
+        fontFamily: "'Inter','Segoe UI',system-ui,sans-serif",
+        background:
+          "radial-gradient(circle at 10% 15%, rgba(249,115,22,.08), transparent 30%), radial-gradient(circle at 88% 8%, rgba(251,191,36,.09), transparent 26%), linear-gradient(180deg, #FDFAF1 0%, #FCF7EA 58%, #FAF2E2 100%)",
+        borderRadius: 18,
+        border: "1px solid rgba(217,194,153,.45)",
+        boxShadow: "0 10px 26px rgba(120,94,56,.08)",
+      }}
+    >
       {/* Header */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24, flexWrap: "wrap", gap: 14 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ width: 42, height: 42, borderRadius: 14, background: "linear-gradient(135deg,#6C63FF,#00D4AA)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 8px 26px rgba(108,99,255,.35)" }}><Zap size={20} color="#fff" /></div>
           <div>
-            <div style={{ fontSize: "1.3rem", fontWeight: 700, color: "#fff", letterSpacing: "-.02em" }}>Live Sales Copilot</div>
-            <div style={{ fontSize: ".76rem", color: "#94a3b8", marginTop: 1 }}>Real-time AI assistant for your sales calls</div>
+            <div style={{ fontSize: "1.3rem", fontWeight: 700, color: "#0f172a", letterSpacing: "-.02em" }}>Live Sales Copilot</div>
+            <div style={{ fontSize: ".76rem", color: "#475569", marginTop: 1 }}>Real-time AI assistant for your sales calls</div>
           </div>
         </div>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 14px", borderRadius: 999, fontSize: ".76rem", fontWeight: 600, border: `1px solid ${connected ? "rgba(52,211,153,.3)" : "rgba(248,113,113,.3)"}`, background: connected ? "rgba(16,185,129,.12)" : "rgba(239,68,68,.1)", color: connected ? "#34d399" : "#f87171" }}>
@@ -588,12 +600,12 @@ const LiveCopilot = ({ token }) => {
 
       {/* Call Context */}
       {!sessionActive && !showAnalytics && (
-        <div style={{ background: "rgba(255,255,255,.02)", border: "1px solid rgba(255,255,255,.06)", borderRadius: 16, padding: "18px 22px", marginBottom: 20 }}>
-          <div style={{ fontSize: ".86rem", fontWeight: 600, color: "#cbd5e1", marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}><ChevronDown size={15} /> Call Context (optional)</div>
+        <div style={{ background: "rgba(253,250,241,.92)", border: "1px solid rgba(217,194,153,.4)", borderRadius: 16, padding: "18px 22px", marginBottom: 20 }}>
+          <div style={{ fontSize: ".86rem", fontWeight: 600, color: "#334155", marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}><ChevronDown size={15} /> Call Context (optional)</div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 12 }}>
-            <div><label style={{ fontSize: ".7rem", color: "#64748b", marginBottom: 3, display: "block", textTransform: "uppercase", letterSpacing: ".06em", fontWeight: 600 }}>Customer Name</label><input className="cp-input" style={{ width: "100%", padding: "9px 13px", borderRadius: 10, border: "1px solid rgba(255,255,255,.08)", background: "rgba(0,0,0,.2)", color: "#e2e8f0", fontSize: ".82rem", outline: "none", boxSizing: "border-box" }} placeholder="e.g. John Doe" value={customerName} onChange={(e) => setCustomerName(e.target.value)} /></div>
-            <div><label style={{ fontSize: ".7rem", color: "#64748b", marginBottom: 3, display: "block", textTransform: "uppercase", letterSpacing: ".06em", fontWeight: 600 }}>Product</label><input className="cp-input" style={{ width: "100%", padding: "9px 13px", borderRadius: 10, border: "1px solid rgba(255,255,255,.08)", background: "rgba(0,0,0,.2)", color: "#e2e8f0", fontSize: ".82rem", outline: "none", boxSizing: "border-box" }} placeholder="e.g. Enterprise Plan" value={productName} onChange={(e) => setProductName(e.target.value)} /></div>
-            <div><label style={{ fontSize: ".7rem", color: "#64748b", marginBottom: 3, display: "block", textTransform: "uppercase", letterSpacing: ".06em", fontWeight: 600 }}>Call Type</label><select className="cp-input" style={{ width: "100%", padding: "9px 13px", borderRadius: 10, border: "1px solid rgba(255,255,255,.08)", background: "rgba(0,0,0,.2)", color: "#e2e8f0", fontSize: ".82rem", outline: "none", boxSizing: "border-box", appearance: "none" }} value={callType} onChange={(e) => setCallType(e.target.value)}><option value="sales">Sales Call</option><option value="demo">Product Demo</option><option value="followup">Follow-up</option><option value="support">Support Call</option></select></div>
+            <div><label style={{ fontSize: ".7rem", color: "#6b7280", marginBottom: 3, display: "block", textTransform: "uppercase", letterSpacing: ".06em", fontWeight: 600 }}>Customer Name</label><input className="cp-input" style={{ width: "100%", padding: "9px 13px", borderRadius: 10, border: "1px solid rgba(201,175,132,.45)", background: "#fffdf7", color: "#1f2937", fontSize: ".82rem", outline: "none", boxSizing: "border-box" }} placeholder="e.g. John Doe" value={customerName} onChange={(e) => setCustomerName(e.target.value)} /></div>
+            <div><label style={{ fontSize: ".7rem", color: "#6b7280", marginBottom: 3, display: "block", textTransform: "uppercase", letterSpacing: ".06em", fontWeight: 600 }}>Product</label><input className="cp-input" style={{ width: "100%", padding: "9px 13px", borderRadius: 10, border: "1px solid rgba(201,175,132,.45)", background: "#fffdf7", color: "#1f2937", fontSize: ".82rem", outline: "none", boxSizing: "border-box" }} placeholder="e.g. Enterprise Plan" value={productName} onChange={(e) => setProductName(e.target.value)} /></div>
+            <div><label style={{ fontSize: ".7rem", color: "#6b7280", marginBottom: 3, display: "block", textTransform: "uppercase", letterSpacing: ".06em", fontWeight: 600 }}>Call Type</label><select className="cp-input" style={{ width: "100%", padding: "9px 13px", borderRadius: 10, border: "1px solid rgba(201,175,132,.45)", background: "#fffdf7", color: "#1f2937", fontSize: ".82rem", outline: "none", boxSizing: "border-box", appearance: "none" }} value={callType} onChange={(e) => setCallType(e.target.value)}><option value="sales">Sales Call</option><option value="demo">Product Demo</option><option value="followup">Follow-up</option><option value="support">Support Call</option></select></div>
           </div>
         </div>
       )}
@@ -602,13 +614,13 @@ const LiveCopilot = ({ token }) => {
       {!showAnalytics && (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "28px 0 12px" }}>
           <div style={{ position: "relative", width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: `2px solid ${sessionActive ? "rgba(108,99,255,.4)" : "rgba(255,255,255,.06)"}`, animation: sessionActive ? "cp-pulse 2s ease-in-out infinite" : "none" }} />
+            <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: `2px solid ${sessionActive ? "rgba(108,99,255,.4)" : "rgba(15,23,42,.08)"}`, animation: sessionActive ? "cp-pulse 2s ease-in-out infinite" : "none" }} />
             <div style={{ position: "absolute", inset: -12, borderRadius: "50%", border: `1.5px solid ${sessionActive ? "rgba(0,212,170,.25)" : "transparent"}`, animation: sessionActive ? "cp-pulse 2s ease-in-out infinite .5s" : "none" }} />
             <button onClick={sessionActive ? stopSession : startSession} style={{ width: 96, height: 96, borderRadius: "50%", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", background: sessionActive ? "linear-gradient(135deg,#6C63FF,#00D4AA)" : "linear-gradient(135deg,#1e2035,#262a45)", boxShadow: sessionActive ? "0 0 50px rgba(108,99,255,.45)" : "0 8px 30px rgba(0,0,0,.3)", transition: "all .4s cubic-bezier(.4,0,.2,1)", position: "relative", zIndex: 2 }}>
               {sessionActive ? <MicOff size={34} color="#fff" /> : <Mic size={34} color={connected ? "#6C63FF" : "#64748b"} />}
             </button>
           </div>
-          <div style={{ marginTop: 14, fontSize: ".82rem", color: "#94a3b8", fontWeight: 500 }}>{sessionActive ? "Listening… click to stop" : "Click the mic to start"}</div>
+          <div style={{ marginTop: 14, fontSize: ".82rem", color: "#475569", fontWeight: 500 }}>{sessionActive ? "Listening… click to stop" : "Click the mic to start"}</div>
           <Viz active={sessionActive} />
         </div>
       )}
@@ -621,8 +633,8 @@ const LiveCopilot = ({ token }) => {
             { val: transcripts.length, lbl: "Transcripts", icon: MessageSquare },
             { val: hintHistory.length, lbl: "AI Hints", icon: Sparkles },
           ].map(({ val, lbl, icon: I }) => (
-            <div key={lbl} style={{ background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.06)", borderRadius: 12, padding: "11px 20px", textAlign: "center", minWidth: 95 }}>
-              <div style={{ fontSize: "1.3rem", fontWeight: 700, color: "#fff", lineHeight: 1.2 }}>{val}</div>
+            <div key={lbl} style={{ background: "rgba(255,253,247,.92)", border: "1px solid rgba(217,194,153,.4)", borderRadius: 12, padding: "11px 20px", textAlign: "center", minWidth: 95 }}>
+              <div style={{ fontSize: "1.3rem", fontWeight: 700, color: "#0f172a", lineHeight: 1.2 }}>{val}</div>
               <div style={{ fontSize: ".66rem", color: "#64748b", textTransform: "uppercase", letterSpacing: ".08em", marginTop: 3 }}><I size={10} style={{ verticalAlign: "middle", marginRight: 3 }} />{lbl}</div>
             </div>
           ))}
@@ -633,15 +645,15 @@ const LiveCopilot = ({ token }) => {
       {sessionActive && (
         <div className="cp-grid" style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 16, marginTop: 8 }}>
           {/* Transcript */}
-          <div className="cp-scroll" style={{ background: "rgba(255,255,255,.02)", border: "1px solid rgba(255,255,255,.06)", borderRadius: 16, padding: "14px 18px", maxHeight: 380, overflowY: "auto" }}>
-            <div style={{ fontSize: ".82rem", fontWeight: 600, color: "#cbd5e1", marginBottom: 10, display: "flex", alignItems: "center", gap: 7 }}><Radio size={13} color="#6C63FF" /> Live Transcript</div>
+          <div className="cp-scroll" style={{ background: "rgba(255,253,247,.9)", border: "1px solid rgba(217,194,153,.4)", borderRadius: 16, padding: "14px 18px", maxHeight: 380, overflowY: "auto" }}>
+            <div style={{ fontSize: ".82rem", fontWeight: 600, color: "#334155", marginBottom: 10, display: "flex", alignItems: "center", gap: 7 }}><Radio size={13} color="#6C63FF" /> Live Transcript</div>
             {transcripts.length === 0 && (
               <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 12px", borderRadius: 10, background: "rgba(0,212,170,.05)", border: "1px dashed rgba(0,212,170,.2)", fontSize: ".76rem", color: "#00D4AA", fontStyle: "italic" }}>
                 <Volume2 size={13} style={{ animation: "cp-pulse 1.5s ease-in-out infinite" }} /> Waiting for speech <Dots />
               </div>
             )}
             {transcripts.map((t, i) => (
-              <div key={i} style={{ padding: "9px 12px", borderRadius: 10, background: "rgba(108,99,255,.04)", border: "1px solid rgba(108,99,255,.08)", marginBottom: 5, fontSize: ".8rem", color: "#e2e8f0", display: "flex", alignItems: "flex-start", gap: 8, lineHeight: 1.5 }}>
+              <div key={i} style={{ padding: "9px 12px", borderRadius: 10, background: "rgba(249,115,22,.05)", border: "1px solid rgba(249,115,22,.12)", marginBottom: 5, fontSize: ".8rem", color: "#1f2937", display: "flex", alignItems: "flex-start", gap: 8, lineHeight: 1.5 }}>
                 <span style={{ fontSize: ".64rem", color: "#6C63FF", whiteSpace: "nowrap", marginTop: 3, fontWeight: 600, fontFamily: "monospace" }}>{t.time}</span>
                 <span style={{ flex: 1 }}>{t.text}</span>
               </div>
@@ -661,9 +673,9 @@ const LiveCopilot = ({ token }) => {
 
           {/* Hints Panel */}
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <div style={{ fontSize: ".82rem", fontWeight: 600, color: "#cbd5e1", display: "flex", alignItems: "center", gap: 7, marginBottom: 2 }}><Sparkles size={13} color="#f59e0b" /> AI Copilot Hints</div>
+            <div style={{ fontSize: ".82rem", fontWeight: 600, color: "#334155", display: "flex", alignItems: "center", gap: 7, marginBottom: 2 }}><Sparkles size={13} color="#f59e0b" /> AI Copilot Hints</div>
             {activeHints.length === 0 ? (
-              <div style={{ textAlign: "center", color: "#475569", fontSize: ".78rem", padding: "36px 14px", background: "rgba(255,255,255,.02)", border: "1px dashed rgba(255,255,255,.06)", borderRadius: 16 }}>
+              <div style={{ textAlign: "center", color: "#475569", fontSize: ".78rem", padding: "36px 14px", background: "rgba(255,253,247,.9)", border: "1px dashed rgba(217,194,153,.55)", borderRadius: 16 }}>
                 <Sparkles size={18} color="#475569" style={{ marginBottom: 6, display: "block", margin: "0 auto 6px" }} />
                 AI hints will appear here when objections, questions, or buying signals are detected.
               </div>
@@ -678,7 +690,7 @@ const LiveCopilot = ({ token }) => {
           {summaryLoading && (
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "48px 0", gap: 14 }}>
               <Loader2 size={32} color="#6C63FF" style={{ animation: "cp-spin 1s linear infinite" }} />
-              <div style={{ fontSize: ".88rem", color: "#94a3b8" }}>Generating AI-powered session analytics...</div>
+              <div style={{ fontSize: ".88rem", color: "#475569" }}>Generating AI-powered session analytics...</div>
               <div style={{ fontSize: ".72rem", color: "#475569" }}>This may take a few seconds</div>
             </div>
           )}
@@ -705,3 +717,4 @@ const LiveCopilot = ({ token }) => {
 };
 
 export default LiveCopilot;
+
