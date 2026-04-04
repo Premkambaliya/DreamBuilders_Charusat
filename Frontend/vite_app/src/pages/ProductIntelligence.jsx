@@ -26,9 +26,9 @@ import {
 const ChartTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-xl border border-white/12 bg-[#1a1d35] px-3 py-2 text-xs shadow-lg">
-      <p className="font-semibold text-slate-200">{label || payload[0]?.payload?.text || payload[0]?.payload?._id}</p>
-      <p className="mt-0.5 text-indigo-300">{payload[0]?.value} occurrence{payload[0]?.value !== 1 ? "s" : ""}</p>
+    <div className="rounded-xl border border-gray-200 bg-[#1a1d35] px-3 py-2 text-xs shadow-lg">
+      <p className="font-semibold text-gray-700">{label || payload[0]?.payload?.text || payload[0]?.payload?._id}</p>
+      <p className="mt-0.5 text-orange-600">{payload[0]?.value} occurrence{payload[0]?.value !== 1 ? "s" : ""}</p>
     </div>
   );
 };
@@ -47,22 +47,22 @@ const Badge = ({ tone = "neutral", className = "", children }) => (
 
 /* ── Section card ── */
 const Card = ({ children, className = "" }) => (
-  <div className={`rounded-2xl border border-white/10 bg-[#121527]/90 p-5 shadow-[0_16px_50px_rgba(0,0,0,0.25)] backdrop-blur-md transition hover:border-white/15 ${className}`}>
+  <div className={`rounded-2xl border border-gray-200 bg-[#ffffff]/90 p-5 shadow-[0_16px_50px_rgba(0,0,0,0.25)] backdrop-blur-md transition hover:border-gray-300 ${className}`}>
     {children}
   </div>
 );
 
 /* ── Stat card ── */
 const StatCard = ({ icon: StatIcon, label, value, gradient }) => (
-  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#121527]/90 p-5 shadow-[0_16px_50px_rgba(0,0,0,0.25)] transition duration-200 hover:-translate-y-0.5 hover:border-white/20">
+  <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-[#ffffff]/90 p-5 shadow-[0_16px_50px_rgba(0,0,0,0.25)] transition duration-200 hover:-translate-y-0.5 hover:border-white/20">
     <div
-      className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-lg"
+      className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl text-gray-900 shadow-lg"
       style={{ background: gradient }}
     >
       {createElement(StatIcon, { size: 20 })}
     </div>
-    <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{label}</p>
-    <h3 className="mt-1 text-2xl font-extrabold text-white">{value}</h3>
+    <p className="text-xs font-medium uppercase tracking-wider text-gray-400">{label}</p>
+    <h3 className="mt-1 text-2xl font-extrabold text-gray-900">{value}</h3>
     <div
       className="pointer-events-none absolute -right-4 -top-4 h-20 w-20 rounded-full opacity-15 blur-2xl"
       style={{ background: gradient }}
@@ -73,8 +73,8 @@ const StatCard = ({ icon: StatIcon, label, value, gradient }) => (
 /* ── Progress row ── */
 const ProgressRow = ({ name, count, maxCount, gradient, badge }) => (
   <div className="flex items-center gap-3">
-    <span className="w-40 shrink-0 truncate text-[0.82rem] text-slate-300">{name}</span>
-    <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/8">
+    <span className="w-40 shrink-0 truncate text-[0.82rem] text-gray-600">{name}</span>
+    <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-100">
       <div
         className="h-full rounded-full transition-all duration-700"
         style={{ width: `${maxCount > 0 ? (count / maxCount) * 100 : 0}%`, background: gradient }}
@@ -86,17 +86,17 @@ const ProgressRow = ({ name, count, maxCount, gradient, badge }) => (
 
 /* ── Loading skeleton ── */
 const Skeleton = ({ className = "" }) => (
-  <div className={`animate-pulse rounded-xl border border-white/6 bg-white/3 ${className}`} />
+  <div className={`animate-pulse rounded-xl border border-gray-100 bg-gray-50 ${className}`} />
 );
 
 /* ── Detailed Insight Row (Prevents Truncation of AI text) ── */
 const InsightRow = ({ text, count, maxCount, gradient, badge }) => (
-  <div className="flex flex-col gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-4 transition hover:bg-white/[0.05] hover:border-white/10">
+  <div className="flex flex-col gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-4 transition hover:bg-white/[0.05] hover:border-gray-200">
     <div className="flex items-start justify-between gap-4">
-      <p className="text-[0.85rem] font-medium leading-relaxed text-slate-200">{text}</p>
+      <p className="text-[0.85rem] font-medium leading-relaxed text-gray-700">{text}</p>
       <Badge tone={badge} className="shrink-0">{count}×</Badge>
     </div>
-    <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#0a0b14]">
+    <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#ffffff]">
       <div
         className="h-full rounded-full transition-all duration-700"
         style={{ width: `${maxCount > 0 ? (count / maxCount) * 100 : 0}%`, background: gradient }}
@@ -140,8 +140,8 @@ const ProductIntelligence = ({ product, token, onBack }) => {
     return (
       <div className="py-2 animate-in fade-in duration-300">
         <div className="mb-6">
-          <div className="mb-2 h-9 w-52 rounded-xl bg-white/5" />
-          <div className="h-4 w-80 rounded-lg bg-white/4" />
+          <div className="mb-2 h-9 w-52 rounded-xl bg-gray-50" />
+          <div className="h-4 w-80 rounded-lg bg-gray-100" />
         </div>
         <div className="mb-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
           {[...Array(4)].map((_, i) => <Skeleton key={i} className="h-28" />)}
@@ -156,7 +156,7 @@ const ProductIntelligence = ({ product, token, onBack }) => {
   if (error || !data) {
     return (
       <div className="py-8 flex flex-col gap-4">
-        <button onClick={onBack} className="inline-flex w-fit items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10">
+        <button onClick={onBack} className="inline-flex w-fit items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-white/10">
           <ArrowLeft size={16} /> Back to Products
         </button>
         <div className="rounded-xl border border-rose-500/20 bg-rose-500/10 p-6 text-center text-rose-300">
@@ -196,35 +196,35 @@ const ProductIntelligence = ({ product, token, onBack }) => {
   ].filter(d => d.value > 0);
 
   const emptyState = (msg) => (
-    <div className="rounded-xl border border-dashed border-white/10 py-10 text-center text-sm text-slate-500">
+    <div className="rounded-xl border border-dashed border-gray-200 py-10 text-center text-sm text-gray-400">
       {msg}
     </div>
   );
 
   const chartTooltipStyle = {
-    contentStyle: { background: "#161829", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 10, fontSize: 12 },
+    contentStyle: { background: "#f8f9fa", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 10, fontSize: 12 },
     cursor: { fill: "rgba(255,255,255,0.03)" },
   };
 
   return (
-    <div className="py-2 text-slate-200 animate-in fade-in duration-300 flex flex-col gap-6">
+    <div className="py-2 text-gray-700 animate-in fade-in duration-300 flex flex-col gap-6">
 
       {/* ── Header ── */}
       <div className="flex flex-col gap-4">
         <button
           onClick={onBack}
-          className="inline-flex w-fit items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10"
+          className="inline-flex w-fit items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-white/10"
         >
           <ArrowLeft size={16} /> Back to Products
         </button>
         <div>
-          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-indigo-400/25 bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-300">
+          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-orange-500/25 bg-orange-500/10 px-3 py-1 text-xs font-semibold text-orange-600">
             <Package size={11} /> Product Intelligence
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">{prod.productName}</h1>
-          {prod.category && <span className="mt-1 inline-flex rounded-full border border-indigo-500/20 bg-indigo-500/10 px-2.5 py-0.5 text-[10px] uppercase font-bold text-indigo-300">{prod.category}</span>}
-          <p className="mt-2 text-sm text-slate-400 md:text-base">
-            Server-aggregated intelligence from <strong className="text-white">{totalCalls}</strong> related conversations.
+          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 md:text-4xl">{prod.productName}</h1>
+          {prod.category && <span className="mt-1 inline-flex rounded-full border border-orange-500/20 bg-orange-500/10 px-2.5 py-0.5 text-[10px] uppercase font-bold text-orange-600">{prod.category}</span>}
+          <p className="mt-2 text-sm text-gray-500 md:text-base">
+            Server-aggregated intelligence from <strong className="text-gray-900">{totalCalls}</strong> related conversations.
           </p>
         </div>
       </div>
@@ -242,7 +242,7 @@ const ProductIntelligence = ({ product, token, onBack }) => {
       {/* ── Sentiment Pie + Call Type Distribution ── */}
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         <Card>
-          <h3 className="mb-4 text-sm font-bold text-white">Sentiment Distribution</h3>
+          <h3 className="mb-4 text-sm font-bold text-gray-900">Sentiment Distribution</h3>
           {sentimentPieData.length > 0 ? (
             <div className="flex items-center justify-center gap-6">
               <ResponsiveContainer width={180} height={180}>
@@ -252,15 +252,15 @@ const ProductIntelligence = ({ product, token, onBack }) => {
                       <Cell key={idx} fill={entry.color} />
                     ))}
                   </Pie>
-                  <Tooltip contentStyle={{ background: "#161829", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 10, fontSize: 12 }} />
+                  <Tooltip contentStyle={{ background: "#f8f9fa", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 10, fontSize: 12 }} />
                 </PieChart>
               </ResponsiveContainer>
               <div className="flex flex-col gap-2">
                 {sentimentPieData.map((d) => (
                   <div key={d.name} className="flex items-center gap-2 text-sm">
                     <div className="h-3 w-3 rounded-full" style={{ background: d.color }} />
-                    <span className="text-slate-300">{d.name}</span>
-                    <span className="font-bold text-white">{d.value}</span>
+                    <span className="text-gray-600">{d.name}</span>
+                    <span className="font-bold text-gray-900">{d.value}</span>
                   </div>
                 ))}
               </div>
@@ -269,7 +269,7 @@ const ProductIntelligence = ({ product, token, onBack }) => {
         </Card>
 
         <Card>
-          <h3 className="mb-4 text-sm font-bold text-white">Call Type Breakdown</h3>
+          <h3 className="mb-4 text-sm font-bold text-gray-900">Call Type Breakdown</h3>
           {callTypeDist.length > 0 ? (
             <div className="flex flex-col gap-3">
               {callTypeDist.map((item, i) => (
@@ -298,8 +298,8 @@ const ProductIntelligence = ({ product, token, onBack }) => {
                 <TrendingUp size={17} />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white">What Customers Love</h3>
-                <p className="text-xs text-slate-500">Top discussed positive points</p>
+                <h3 className="text-sm font-bold text-gray-900">What Customers Love</h3>
+                <p className="text-xs text-gray-400">Top discussed positive points</p>
               </div>
             </div>
             <Badge tone="positive" className="ml-auto">{topPositive.length} themes</Badge>
@@ -321,8 +321,8 @@ const ProductIntelligence = ({ product, token, onBack }) => {
                 <TrendingDown size={17} />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white">Main Objections</h3>
-                <p className="text-xs text-slate-500">Recurring friction & pushbacks</p>
+                <h3 className="text-sm font-bold text-gray-900">Main Objections</h3>
+                <p className="text-xs text-gray-400">Recurring friction & pushbacks</p>
               </div>
             </div>
             <Badge tone="negative" className="ml-auto">{topObjections.length} risks</Badge>
@@ -344,8 +344,8 @@ const ProductIntelligence = ({ product, token, onBack }) => {
             <div className="flex items-center gap-2.5">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/15 text-cyan-400"><Zap size={17} /></div>
               <div>
-                <h3 className="text-sm font-bold text-white">Buying Signals Detected</h3>
-                <p className="text-xs text-slate-500">Purchase-intent indicators across conversations</p>
+                <h3 className="text-sm font-bold text-gray-900">Buying Signals Detected</h3>
+                <p className="text-xs text-gray-400">Purchase-intent indicators across conversations</p>
               </div>
             </div>
             <Badge tone="positive">{topBuyingSignals.length} signals</Badge>
@@ -363,10 +363,10 @@ const ProductIntelligence = ({ product, token, onBack }) => {
         <Card>
           <div className="mb-5 flex items-start flex-wrap gap-4 justify-between border-b border-white/5 pb-4">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-400"><Package size={17} /></div>
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-500/15 text-orange-500"><Package size={17} /></div>
               <div>
-                <h3 className="text-sm font-bold text-white">Suggested Product Improvements</h3>
-                <p className="text-xs text-slate-500">Most requested changes from customer feedback</p>
+                <h3 className="text-sm font-bold text-gray-900">Suggested Product Improvements</h3>
+                <p className="text-xs text-gray-400">Most requested changes from customer feedback</p>
               </div>
             </div>
             <Badge tone="neutral">{topImprovements.length} requests</Badge>
@@ -387,8 +387,8 @@ const ProductIntelligence = ({ product, token, onBack }) => {
               <div className="flex items-center gap-2.5">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400"><AlertOctagon size={17} /></div>
                 <div>
-                  <h3 className="text-sm font-bold text-white">Competitor Mentions</h3>
-                  <p className="text-xs text-slate-500">How often alternatives were discussed</p>
+                  <h3 className="text-sm font-bold text-gray-900">Competitor Mentions</h3>
+                  <p className="text-xs text-gray-400">How often alternatives were discussed</p>
                 </div>
               </div>
               {topCompetitors.length > 0 && <Badge tone="neutral">{topCompetitors.length} competitors</Badge>}
@@ -406,8 +406,8 @@ const ProductIntelligence = ({ product, token, onBack }) => {
               <div className="flex items-center gap-2.5">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500/15 text-rose-400"><Users size={17} /></div>
                 <div>
-                  <h3 className="text-sm font-bold text-white">Competitor Advantages</h3>
-                  <p className="text-xs text-slate-500">Why customers considered alternatives</p>
+                  <h3 className="text-sm font-bold text-gray-900">Competitor Advantages</h3>
+                  <p className="text-xs text-gray-400">Why customers considered alternatives</p>
                 </div>
               </div>
               {compAdvantages.length > 0 && <Badge tone="negative">{compAdvantages.length} reasons</Badge>}
@@ -429,14 +429,14 @@ const ProductIntelligence = ({ product, token, onBack }) => {
           <div className="mb-5 flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-500/15 text-violet-400"><Phone size={17} /></div>
             <div>
-              <h3 className="text-sm font-bold text-white">Recent Conversations</h3>
-              <p className="text-xs text-slate-500">Latest calls related to this product</p>
+              <h3 className="text-sm font-bold text-gray-900">Recent Conversations</h3>
+              <p className="text-xs text-gray-400">Latest calls related to this product</p>
             </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-white/10 text-xs uppercase tracking-wider text-slate-500">
+                <tr className="border-b border-gray-200 text-xs uppercase tracking-wider text-gray-400">
                   <th className="py-3 pr-4">Call</th>
                   <th className="py-3 pr-4">Employee</th>
                   <th className="py-3 pr-4">Customer</th>
@@ -451,14 +451,14 @@ const ProductIntelligence = ({ product, token, onBack }) => {
                   const sClass = badgeClassMap[sKey] || badgeClassMap.neutral;
                   return (
                     <tr key={call.callId} className="border-b border-white/5 transition hover:bg-white/[0.02]">
-                      <td className="py-3 pr-4 font-medium text-slate-200">{call.callTitle}</td>
-                      <td className="py-3 pr-4 text-slate-400">{call.employeeName}</td>
-                      <td className="py-3 pr-4 text-slate-400">{call.customerName}</td>
+                      <td className="py-3 pr-4 font-medium text-gray-700">{call.callTitle}</td>
+                      <td className="py-3 pr-4 text-gray-500">{call.employeeName}</td>
+                      <td className="py-3 pr-4 text-gray-500">{call.customerName}</td>
                       <td className="py-3 pr-4">
                         <span className={`inline-flex rounded-full border px-2 py-0.5 text-[0.68rem] font-semibold capitalize ${sClass}`}>{sKey}</span>
                       </td>
-                      <td className="py-3 pr-4 font-bold text-slate-200">{call.dealProbability}%</td>
-                      <td className="py-3 text-slate-500">{call.createdAt ? new Date(call.createdAt).toLocaleDateString() : "—"}</td>
+                      <td className="py-3 pr-4 font-bold text-gray-700">{call.dealProbability}%</td>
+                      <td className="py-3 text-gray-400">{call.createdAt ? new Date(call.createdAt).toLocaleDateString() : "—"}</td>
                     </tr>
                   );
                 })}

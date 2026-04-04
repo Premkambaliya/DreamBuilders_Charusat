@@ -31,11 +31,11 @@ const TopDeals = ({ token }) => {
   }, [token]);
 
   return (
-    <div className="py-8 text-slate-200">
+    <div className="py-8 text-gray-700">
       <div className="mb-4">
         <div>
-        <h1 className="text-[1.9rem] font-extrabold text-white">Top Opportunities</h1>
-        <p className="mt-1.5 text-[0.95rem] text-slate-400">Prioritized calls ranked by close probability and buying momentum.</p>
+        <h1 className="text-[1.9rem] font-extrabold text-gray-900">Top Opportunities</h1>
+        <p className="mt-1.5 text-[0.95rem] text-gray-500">Prioritized calls ranked by close probability and buying momentum.</p>
         </div>
       </div>
 
@@ -44,16 +44,16 @@ const TopDeals = ({ token }) => {
           {[...Array(4)].map((_, i) => (
             <div
               key={i}
-              className="h-35 animate-pulse rounded-xl border border-white/8 bg-[linear-gradient(110deg,rgba(255,255,255,0.03),rgba(255,255,255,0.08),rgba(255,255,255,0.03))] bg-size-[200%_100%]"
+              className="h-35 animate-pulse rounded-xl border border-gray-100 bg-[linear-gradient(110deg,rgba(255,255,255,0.03),rgba(255,255,255,0.08),rgba(255,255,255,0.03))] bg-size-[200%_100%]"
             />
           ))}
         </div>
       ) : deals.length === 0 ? (
-        <div className="grid place-items-center gap-2 rounded-2xl border border-dashed border-white/15 px-4 py-16 text-center text-slate-400">
-          <TrendingUp size={48} className="mb-2 text-slate-500" />
+        <div className="grid place-items-center gap-2 rounded-2xl border border-dashed border-gray-300 px-4 py-16 text-center text-gray-500">
+          <TrendingUp size={48} className="mb-2 text-gray-400" />
           <p>
             No analyzed calls yet. {" "}
-            <Link to="/dashboard/analyze" className="font-medium text-indigo-300 hover:text-indigo-200">
+            <Link to="/dashboard/analyze" className="font-medium text-orange-600 hover:text-orange-700">
               Analyze your first call →
             </Link>
           </p>
@@ -68,7 +68,7 @@ const TopDeals = ({ token }) => {
               : "#fb7185";
 
             return (
-              <div key={deal.callId} className="relative overflow-hidden rounded-2xl border border-white/12 bg-[#121527eb] p-4">
+              <div key={deal.callId} className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white/95 p-4">
                 <div className="absolute right-4 top-4 text-[1.4rem] opacity-15">
                   {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `#${i + 1}`}
                 </div>
@@ -77,11 +77,11 @@ const TopDeals = ({ token }) => {
                   <div className="flex-1">
                     <Link
                       to={`/dashboard/calls/${deal.callId}`}
-                      className="inline-flex items-center gap-1.5 text-base font-bold text-slate-50 transition hover:text-indigo-300"
+                      className="inline-flex items-center gap-1.5 text-base font-bold text-gray-900 transition hover:text-orange-600"
                     >
                       {deal.callTitle || deal.productName || deal.product_name || "Sales Call"} <ArrowUpRight size={14} />
                     </Link>
-                    <p className="mt-1 text-[0.8rem] text-slate-500">
+                    <p className="mt-1 text-[0.8rem] text-gray-400">
                       {deal.summary?.substring(0, 60)}{deal.summary?.length > 60 ? "..." : ""}
                     </p>
 
@@ -100,7 +100,7 @@ const TopDeals = ({ token }) => {
                     <div className="text-[2rem] font-black leading-none" style={{ color: probColor }}>
                       {prob}%
                     </div>
-                    <div className="text-[0.72rem] text-slate-500">Deal Probability</div>
+                    <div className="text-[0.72rem] text-gray-400">Deal Probability</div>
                   </div>
                 </div>
 
@@ -121,7 +121,7 @@ const TopDeals = ({ token }) => {
                   </div>
                 )}
 
-                <p className="mt-2 text-[0.78rem] text-slate-500">
+                <p className="mt-2 text-[0.78rem] text-gray-400">
                   {deal.createdAt ? new Date(deal.createdAt).toLocaleDateString() : "—"}
                 </p>
               </div>
