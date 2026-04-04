@@ -58,7 +58,7 @@ const buildProductSummary = (product) => {
 };
 
 const buildKnowledgeFallbackHint = (kbResults, callContext = {}) => {
-  const products = (kbResults?.products || []).slice(0, 3);
+  const products = kbResults?.products || [];
   if (!products.length) return null;
 
   const customerName = callContext.customerName || "there";
@@ -71,7 +71,10 @@ const buildKnowledgeFallbackHint = (kbResults, callContext = {}) => {
     ? topProduct.keyFeatures.slice(0, 2).join(" and ")
     : "";
 
-  const talkTrack = `Great question, ${customerName}! Based on what you asked, top options are ${productLabels}. ${topFeatures ? `${topProduct.name} stands out with ${topFeatures}. ` : ""}Would you like a quick comparison of the best two options for your needs?`;
+  const talkTrack =
+    products.length === 1
+      ? `Great question, ${customerName}! For ${topProduct.name}, the price is ${topProduct.priceFormatted || "available on request"}. ${topFeatures ? `Key highlights include ${topFeatures}. ` : ""}Would you like me to quickly compare this with one nearby alternative?`
+      : `Great question, ${customerName}! Based on what you asked, top options are ${productLabels}. ${topFeatures ? `${topProduct.name} stands out with ${topFeatures}. ` : ""}Would you like a quick comparison of the best two options for your needs?`;
 
   return {
     type: "QUESTION",
@@ -143,6 +146,7 @@ CRITICAL RULES:
 - For BUYING_SIGNAL: confirm interest, suggest a concrete next step (test drive, proposal, trial)
 - For COACHING: suggest the exact phrase the rep should say next
 - ALWAYS use real product names, prices, and features from the Knowledge Base — NEVER make up information
+- If the customer asks about a specific model, answer that model first. Do NOT redirect to a different model unless customer asks for alternatives/comparison.
 - If no Knowledge Base data is available, give general sales coaching advice
 - Do NOT repeat hints for the same topic
 - Return ONLY valid JSON, no markdown, no comments`;
@@ -191,11 +195,17 @@ CRITICAL RULES:
 
     if (!effectiveHint) return null;
 
+    const shouldAttachProductCards =
+      effectiveHint.type === "QUESTION" ||
+      (effectiveHint.type === "BUYING_SIGNAL" && kbResults.products.length > 0);
+
     return {
       ...effectiveHint,
       timestamp: Date.now(),
       // Include richer matched KB products for frontend rendering
-      kbProducts: kbResults.products.slice(0, 3).map((p) => buildProductSummary(p)),
+      kbProducts: shouldAttachProductCards
+        ? kbResults.products.map((p) => buildProductSummary(p))
+        : [],
     };
   } catch (error) {
     if (error.status === 429) {

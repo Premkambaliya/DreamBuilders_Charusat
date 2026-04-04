@@ -16,12 +16,20 @@ const __dirname = path.dirname(__filename);
 // Load the knowledge base once at startup
 const KB_PATH = path.join(__dirname, "../../data/knowledge-base.json");
 let knowledgeBase = null;
+let kbMtimeMs = 0;
 
 const loadKB = () => {
-  if (knowledgeBase) return knowledgeBase;
   try {
+    const stats = fs.statSync(KB_PATH);
+    const fileMtimeMs = stats.mtimeMs || 0;
+
+    if (knowledgeBase && kbMtimeMs === fileMtimeMs) {
+      return knowledgeBase;
+    }
+
     const raw = fs.readFileSync(KB_PATH, "utf-8");
     knowledgeBase = JSON.parse(raw);
+    kbMtimeMs = fileMtimeMs;
     console.log(
       `[Knowledge Base] ✅ Loaded: ${knowledgeBase.products.length} products, ${knowledgeBase.faqs.length} FAQs, ${knowledgeBase.objectionHandlers.length} objection handlers`
     );
@@ -94,6 +102,116 @@ const detectPriceRange = (text) => {
   return null;
 };
 
+const normalize = (value = "") =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const formatLakhs = (price) => {
+  if (!Number.isFinite(price)) return "";
+  return `INR ${(price / 100000).toFixed(2)}L`;
+};
+
+const normalizeProducts = (kbProducts = []) => {
+  const normalized = [];
+
+  for (const product of kbProducts) {
+    const baseTags = Array.isArray(product.tags) ? product.tags : [];
+    const baseCategory = product.category || "";
+    const baseSafety = product.safety || "";
+    const baseEngine = Array.isArray(product.engineOptions) ? product.engineOptions[0] : (product.engine || "");
+
+    if (Array.isArray(product.variants) && product.variants.length > 0) {
+      for (const variant of product.variants) {
+        const variantPrice = Number(variant.price);
+        const variantName = variant.name || product.name || "Unknown Variant";
+        normalized.push({
+          id: `${product.id || normalize(product.name)}-${normalize(variantName).replace(/\s+/g, "-")}`,
+          modelId: product.id || "",
+          modelName: product.name || "",
+          name: variantName,
+          category: baseCategory,
+          variant: variant.type || variant.name || "",
+          price: Number.isFinite(variantPrice)
+            ? variantPrice
+            : Number.isFinite(product?.priceRange?.min)
+              ? Number(product.priceRange.min)
+              : 0,
+          priceFormatted: Number.isFinite(variantPrice)
+            ? formatLakhs(variantPrice)
+            : (product?.priceRange?.formatted || ""),
+          engine: variant.engine || baseEngine,
+          power: variant.power || "",
+          mileage: variant.mileage || "",
+          fuelType: variant.fuel || "",
+          safety: baseSafety,
+          keyFeatures: Array.isArray(variant.uniqueFeatures)
+            ? variant.uniqueFeatures
+            : Array.isArray(product.highlights)
+              ? product.highlights.slice(0, 4)
+              : [],
+          bestFor: variant.bestFor || "",
+          tags: [
+            ...baseTags,
+            ...extractKeywords(`${variantName} ${variant.type || ""} ${variant.fuel || ""} ${variant.engine || ""}`),
+          ],
+        });
+      }
+      continue;
+    }
+
+    normalized.push({
+      id: product.id || normalize(product.name).replace(/\s+/g, "-"),
+      modelId: product.id || "",
+      modelName: product.name || "",
+      name: product.name || "Unknown Product",
+      category: baseCategory,
+      variant: product.variant || "",
+      price: Number(product.price) || Number(product?.priceRange?.min) || 0,
+      priceFormatted: product.priceFormatted || product?.priceRange?.formatted || formatLakhs(Number(product.price)),
+      engine: product.engine || baseEngine,
+      power: product.power || "",
+      mileage: product.mileage || "",
+      fuelType: product.fuelType || "",
+      safety: baseSafety,
+      keyFeatures: Array.isArray(product.keyFeatures)
+        ? product.keyFeatures
+        : Array.isArray(product.highlights)
+          ? product.highlights.slice(0, 4)
+          : [],
+      bestFor: product.bestFor || "",
+      tags: baseTags,
+    });
+  }
+
+  return normalized;
+};
+
+const extractMentionedProducts = (transcriptText, products = []) => {
+  const normalizedTranscript = normalize(transcriptText);
+  if (!normalizedTranscript) return [];
+
+  const genericNameTokens = new Set(["tata", "motors", "car", "cars", "variant", "variants"]);
+
+  return products
+    .filter((product) => {
+      const normalizedName = normalize(product.name);
+      if (!normalizedName) return false;
+
+      if (normalizedTranscript.includes(normalizedName)) return true;
+
+      const meaningfulTokens = normalizedName
+        .split(" ")
+        .filter((token) => token.length > 2 && !genericNameTokens.has(token));
+
+      if (meaningfulTokens.length === 0) return false;
+      return meaningfulTokens.some((token) => normalizedTranscript.includes(token));
+    })
+    .map((product) => product.id);
+};
+
 /**
  * Score how well a KB entry matches the transcript keywords.
  */
@@ -104,6 +222,25 @@ const scoreMatch = (tags, keywords) => {
       if (tag.includes(keyword) || keyword.includes(tag)) {
         score += 1;
       }
+    }
+  }
+  return score;
+};
+
+const PRODUCT_NAME_STOP_TOKENS = new Set([
+  "tata", "motors", "car", "cars", "suv", "vehicle", "model", "variant", "variants", "segment",
+]);
+
+const scoreProductNameMatch = (product, keywords) => {
+  const nameTokens = `${product.name || ""} ${product.modelName || ""}`
+    .toLowerCase()
+    .split(/\s+/)
+    .filter((token) => token.length > 2 && !PRODUCT_NAME_STOP_TOKENS.has(token));
+
+  let score = 0;
+  for (const keyword of keywords) {
+    if (nameTokens.some((token) => token.includes(keyword) || keyword.includes(token))) {
+      score += 1;
     }
   }
   return score;
@@ -120,12 +257,10 @@ export const searchKnowledgeBase = (transcriptText, callContext = {}) => {
   const kb = loadKB();
   if (!kb) return { products: [], faqs: [], objections: [], contextString: "" };
 
-  const keywords = extractKeywords(transcriptText);
+  const normalizedProducts = normalizeProducts(kb.products || []);
 
-  // Also add product name from call context as a keyword
-  if (callContext.productName) {
-    keywords.push(...extractKeywords(callContext.productName));
-  }
+  const keywords = extractKeywords(transcriptText);
+  const mentionedProductIds = extractMentionedProducts(transcriptText, normalizedProducts);
 
   if (keywords.length === 0) {
     return { products: [], faqs: [], objections: [], contextString: "" };
@@ -135,12 +270,26 @@ export const searchKnowledgeBase = (transcriptText, callContext = {}) => {
 
   // --- Search Products ---
   const priceRange = detectPriceRange(transcriptText);
-  let matchedProducts = kb.products
+  const isComparisonIntent = /\b(compare|comparison|vs|versus|between)\b/i.test(transcriptText);
+  const isMultiOptionIntent =
+    !!priceRange || /\b(under|below|within|budget|range|variant|variants|models|options|best)\b/i.test(transcriptText);
+
+  let matchedProducts = normalizedProducts
     .map((p) => ({
       ...p,
-      score: scoreMatch(p.tags, keywords) + scoreMatch([p.name.toLowerCase(), p.category.toLowerCase()], keywords),
+      tagScore: scoreMatch(p.tags || [], keywords),
+      nameScore: scoreProductNameMatch(p, keywords),
+      score:
+        scoreMatch(p.tags || [], keywords) +
+        scoreProductNameMatch(p, keywords) +
+        (mentionedProductIds.includes(p.id) ? 100 : 0),
     }))
-    .filter((p) => p.score > 0);
+    .filter((p) => {
+      if (mentionedProductIds.includes(p.id)) return true;
+      if (p.nameScore > 0) return true;
+      if (priceRange && p.price >= priceRange.min && p.price <= priceRange.max) return true;
+      return false;
+    });
 
   // Apply price filter if detected
   if (priceRange) {
@@ -152,14 +301,18 @@ export const searchKnowledgeBase = (transcriptText, callContext = {}) => {
       matchedProducts = priceFiltered;
     }
     // Also include products in price range even without keyword match
-    const priceOnly = kb.products
+    const priceOnly = normalizedProducts
       .filter((p) => p.price >= priceRange.min && p.price <= priceRange.max && !matchedProducts.find((m) => m.id === p.id))
       .map((p) => ({ ...p, score: 0.5 }));
     matchedProducts.push(...priceOnly);
   }
 
   matchedProducts.sort((a, b) => b.score - a.score);
-  const topProducts = matchedProducts.slice(0, 3);
+  let productLimit = 1;
+  if (isComparisonIntent) productLimit = 2;
+  else if (isMultiOptionIntent) productLimit = 3;
+
+  const topProducts = matchedProducts.slice(0, productLimit);
 
   // --- Search FAQs ---
   const matchedFaqs = kb.faqs
@@ -190,7 +343,7 @@ export const searchKnowledgeBase = (transcriptText, callContext = {}) => {
       contextString += `${i + 1}. ${p.name} (${p.variant}) — ${p.priceFormatted}\n`;
       contextString += `   Engine: ${p.engine} | Power: ${p.power} | Mileage: ${p.mileage}\n`;
       contextString += `   Safety: ${p.safety} | Fuel: ${p.fuelType}\n`;
-      contextString += `   Key Features: ${p.keyFeatures.join(", ")}\n`;
+      contextString += `   Key Features: ${Array.isArray(p.keyFeatures) ? p.keyFeatures.join(", ") : "N/A"}\n`;
       contextString += `   Best For: ${p.bestFor}\n\n`;
     });
   }
@@ -220,5 +373,13 @@ export const searchKnowledgeBase = (transcriptText, callContext = {}) => {
     faqs: matchedFaqs,
     objections: matchedObjections,
     contextString,
+    meta: {
+      productLimit,
+      isComparisonIntent,
+      isMultiOptionIntent,
+      mentionedProducts: normalizedProducts
+        .filter((p) => mentionedProductIds.includes(p.id))
+        .map((p) => p.name),
+    },
   };
 };
