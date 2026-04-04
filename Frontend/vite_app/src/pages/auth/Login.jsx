@@ -70,6 +70,22 @@ const Login = ({ onLogin, isAuthenticated }) => {
           <h1 className="text-2xl font-bold text-gray-900 mb-1.5">Login</h1>
           <p className="text-gray-500 mb-5">Sign in to continue your analysis workflow.</p>
 
+          <div className="mb-5 rounded-xl border border-orange-200 bg-orange-50/70 p-3.5">
+            <p className="text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-orange-700">Demo Credentials</p>
+            <div className="mt-2 grid gap-2 text-[0.83rem] text-gray-700">
+              <div className="rounded-lg border border-orange-100 bg-white px-3 py-2">
+                <p className="font-medium text-gray-800">Admin User</p>
+                <p>Email: testcompany@gmail.com</p>
+                <p>Password: 12345678</p>
+              </div>
+              <div className="rounded-lg border border-orange-100 bg-white px-3 py-2">
+                <p className="font-medium text-gray-800">Employee User</p>
+                <p>Email: testemployee@gmail.com</p>
+                <p>Password: 12345678</p>
+              </div>
+            </div>
+          </div>
+
           <form className="grid gap-3.5" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-1.5">
               <label className="text-[0.85rem] font-medium text-gray-700" htmlFor="email">Work Email</label>
