@@ -53,11 +53,19 @@ const Viz = ({ active }) => (
 
 const Dots = () => <span>{[0, 1, 2].map((i) => <span key={i} style={{ display: "inline-block", animation: `cp-dot 1.4s ease-in-out ${i * .2}s infinite` }}>•</span>)}</span>;
 
-/* ═══ Hint Card ═══ */
+/* ═══ Hint Card v2 (with Talk Tracks + KB Products) ═══ */
 const HintCard = ({ hint, onDismiss }) => {
   const c = HINT_CONFIG[hint.type] || HINT_CONFIG.COACHING;
   const Icon = c.icon;
-  useEffect(() => { const t = setTimeout(onDismiss, HINT_DISMISS_MS); return () => clearTimeout(t); }, [onDismiss]);
+  const [ttCopied, setTtCopied] = useState(false);
+  const dismissTime = hint.talkTrack ? 20000 : HINT_DISMISS_MS; // Longer for talk tracks
+  useEffect(() => { const t = setTimeout(onDismiss, dismissTime); return () => clearTimeout(t); }, [onDismiss, dismissTime]);
+
+  const copyTalkTrack = () => {
+    navigator.clipboard.writeText(hint.talkTrack);
+    setTtCopied(true);
+    setTimeout(() => setTtCopied(false), 2000);
+  };
 
   return (
     <div style={{ position: "relative", background: c.bgColor, border: `1px solid ${c.borderColor}`, borderRadius: 16, padding: "14px 16px", boxShadow: `0 4px 24px ${c.glowColor}`, animation: "cp-hint-in .4s cubic-bezier(.4,0,.2,1)", overflow: "hidden" }}>
@@ -67,8 +75,33 @@ const HintCard = ({ hint, onDismiss }) => {
       </div>
       {hint.trigger && <div style={{ fontSize: ".7rem", color: "#64748b", fontStyle: "italic", marginBottom: 5 }}>"{hint.trigger}"</div>}
       <div style={{ fontSize: ".88rem", fontWeight: 600, color: c.textColor, lineHeight: 1.4, marginBottom: 4 }}>{hint.hint}</div>
-      {hint.detail && <div style={{ fontSize: ".75rem", color: "#94a3b8", lineHeight: 1.5 }}>{hint.detail}</div>}
-      <div style={{ position: "absolute", bottom: 0, left: 0, height: 3, background: c.gradient, borderRadius: "0 0 16px 16px", animation: `cp-hint-bar ${HINT_DISMISS_MS}ms linear forwards` }} />
+      {hint.detail && <div style={{ fontSize: ".75rem", color: "#94a3b8", lineHeight: 1.5, marginBottom: 6 }}>{hint.detail}</div>}
+
+      {/* Talk Track — the exact script to say */}
+      {hint.talkTrack && (
+        <div style={{ marginTop: 6, padding: "10px 12px", borderRadius: 10, background: "rgba(0,0,0,.2)", border: `1px solid ${c.borderColor}` }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 5 }}>
+            <span style={{ fontSize: ".68rem", fontWeight: 700, color: c.accentColor, textTransform: "uppercase", letterSpacing: ".06em" }}>💬 Say This:</span>
+            <button className="cp-copy-btn" onClick={copyTalkTrack} style={{ display: "flex", alignItems: "center", gap: 3, padding: "2px 7px", borderRadius: 6, border: "1px solid rgba(255,255,255,.08)", background: "rgba(255,255,255,.03)", color: ttCopied ? "#10b981" : "#94a3b8", fontSize: ".65rem", cursor: "pointer", transition: "all .2s" }}>
+              {ttCopied ? <><Check size={10} /> Copied</> : <><Copy size={10} /> Copy</>}
+            </button>
+          </div>
+          <div style={{ fontSize: ".82rem", color: "#e2e8f0", lineHeight: 1.6, fontStyle: "italic" }}>"{hint.talkTrack}"</div>
+        </div>
+      )}
+
+      {/* KB Products — matched product chips */}
+      {hint.kbProducts && hint.kbProducts.length > 0 && (
+        <div style={{ marginTop: 8, display: "flex", flexWrap: "wrap", gap: 4 }}>
+          {hint.kbProducts.map((p, i) => (
+            <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "3px 8px", borderRadius: 8, background: "rgba(108,99,255,.08)", border: "1px solid rgba(108,99,255,.15)", fontSize: ".65rem", color: "#a78bfa" }}>
+              🚗 {p.name} — {p.price}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div style={{ position: "absolute", bottom: 0, left: 0, height: 3, background: c.gradient, borderRadius: "0 0 16px 16px", animation: `cp-hint-bar ${dismissTime}ms linear forwards` }} />
     </div>
   );
 };
