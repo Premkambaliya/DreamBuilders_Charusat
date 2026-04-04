@@ -41,9 +41,9 @@ const features = [
 export default function LandingPage() {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <LinearGradient
-        colors={["#090b13", "#0f1222", "#0a0b14"]}
+        colors={["#fff7ed", "#ffffff", "#fff7ed"]}
         locations={[0, 0.48, 1]}
         style={styles.container}
       >
@@ -156,7 +156,7 @@ export default function LandingPage() {
               {features.map((feature, index) => (
                 <View key={index} style={styles.featureCard}>
                   <LinearGradient
-                    colors={["#6366f1", "#9333ea"]}
+                    colors={["#f97316", "#ea580c"]}
                     style={styles.featureIconWrap}
                   >
                     <Ionicons name={feature.icon} size={18} color="#fff" />
@@ -201,7 +201,7 @@ export default function LandingPage() {
 
             {/* Security Section */}
             <LinearGradient
-              colors={["#10111e", "#161829"]}
+              colors={["#ffffff", "#fffbf5"]}
               start={[0, 0]}
               end={[1, 0]}
               style={styles.securitySection}
@@ -252,7 +252,7 @@ export default function LandingPage() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#090b13",
+    backgroundColor: "#fff7ed",
   },
   container: {
     flex: 1,
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 16,
-    backgroundColor: "rgba(10, 11, 20, 0.8)",
+    backgroundColor: "rgba(255,255,255,0.9)",
   },
   logoContainer: {
     flexDirection: "row",
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   logoText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: "#111827",
   },
   headerActions: {
     flexDirection: "row",
@@ -300,10 +300,10 @@ const styles = StyleSheet.create({
   loginBtnText: {
     fontSize: 15,
     fontWeight: "500",
-    color: "#d1d5db",
+    color: "#4b5563",
   },
   trialBtn: {
-    backgroundColor: "#4f46e5",
+    backgroundColor: "#f97316",
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
@@ -325,27 +325,27 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     letterSpacing: 1.5,
-    color: "#22d3ee",
+    color: "#f97316",
     marginBottom: 16,
   },
   h1: {
     fontSize: 36,
     fontWeight: "900",
-    color: "#ffffff",
+    color: "#111827",
     lineHeight: 44,
   },
   h1Gradient: {
-    color: "#4cc9f0",
+    color: "#ea580c",
   },
   heroDesc: {
     marginTop: 16,
     fontSize: 16,
     lineHeight: 24,
-    color: "#d1d5db",
+    color: "#4b5563",
   },
   ctaButton: {
     marginTop: 24,
-    backgroundColor: "#4f46e5",
+    backgroundColor: "#f97316",
     paddingVertical: 14,
     paddingHorizontal: 20,
     borderRadius: 8,
@@ -359,8 +359,8 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   benefitsCard: {
-    backgroundColor: "rgba(22, 24, 41, 0.9)",
-    borderColor: "#1f2937",
+    backgroundColor: "#ffffff",
+    borderColor: "#fed7aa",
     borderWidth: 1,
     borderRadius: 16,
     padding: 24,
@@ -369,12 +369,12 @@ const styles = StyleSheet.create({
   h3: {
     fontSize: 20,
     fontWeight: "600",
-    color: "#ffffff",
+    color: "#111827",
     marginBottom: 20,
   },
   listItem: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#fffbf5",
+    borderColor: "#fed7aa",
     borderWidth: 1,
     borderRadius: 8,
     padding: 16,
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   },
   listText: {
     fontSize: 14,
-    color: "#d1d5db",
+    color: "#4b5563",
     lineHeight: 20,
   },
   metricsNotice: {
@@ -395,7 +395,7 @@ const styles = StyleSheet.create({
   },
   metricsNoticeText: {
     fontSize: 14,
-    color: "#6ee7b7",
+    color: "#047857",
     lineHeight: 20,
   },
   sectionHeader: {
@@ -405,17 +405,17 @@ const styles = StyleSheet.create({
   h2: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: "#111827",
   },
   sectionSubtitle: {
     marginTop: 8,
     fontSize: 16,
-    color: "#9ca3af",
+    color: "#6b7280",
     lineHeight: 24,
   },
   problemCard: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#ffffff",
+    borderColor: "#fed7aa",
     borderWidth: 1,
     borderRadius: 12,
     padding: 20,
@@ -424,18 +424,18 @@ const styles = StyleSheet.create({
   problemPreTitle: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#67e8f9",
+    color: "#f97316",
     letterSpacing: 1.5,
     marginBottom: 8,
   },
   problemDesc: {
     fontSize: 15,
     lineHeight: 24,
-    color: "#d1d5db",
+    color: "#4b5563",
   },
   solutionCard: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#ffffff",
+    borderColor: "#fed7aa",
     borderWidth: 1,
     borderRadius: 12,
     padding: 20,
@@ -444,7 +444,7 @@ const styles = StyleSheet.create({
   solutionPreTitle: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#6ee7b7",
+    color: "#ea580c",
     letterSpacing: 1.5,
     marginBottom: 12,
   },
@@ -453,7 +453,7 @@ const styles = StyleSheet.create({
   },
   solutionItemText: {
     fontSize: 15,
-    color: "#d1d5db",
+    color: "#4b5563",
     lineHeight: 22,
   },
   featuresGrid: {
@@ -463,8 +463,8 @@ const styles = StyleSheet.create({
     marginBottom: 48,
   },
   featureCard: {
-    backgroundColor: "rgba(22, 24, 41, 0.4)",
-    borderColor: "#1f2937",
+    backgroundColor: "#ffffff",
+    borderColor: "#fed7aa",
     borderWidth: 1,
     borderRadius: 12,
     padding: 20,
@@ -482,32 +482,32 @@ const styles = StyleSheet.create({
   featureTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: "#111827",
     marginBottom: 8,
   },
   featureDesc: {
     fontSize: 15,
-    color: "#9ca3af",
+    color: "#6b7280",
     lineHeight: 22,
   },
   flowSection: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    borderColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#ffffff",
+    borderColor: "#fed7aa",
     borderWidth: 1,
     borderRadius: 16,
     padding: 24,
     marginBottom: 48,
   },
   flowCard: {
-    backgroundColor: "rgba(16, 17, 30, 0.7)",
-    borderColor: "#1f2937",
+    backgroundColor: "#fffbf5",
+    borderColor: "#fed7aa",
     borderWidth: 1,
     padding: 16,
     borderRadius: 12,
     marginBottom: 16,
   },
   flowStepBadge: {
-    backgroundColor: "rgba(108, 99, 255, 0.2)",
+    backgroundColor: "rgba(249, 115, 22, 0.15)",
     width: 32,
     height: 32,
     borderRadius: 16,
@@ -516,24 +516,24 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   flowStepText: {
-    color: "#818cf8",
+    color: "#ea580c",
     fontWeight: "bold",
     fontSize: 14,
   },
   flowTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: "#111827",
     marginBottom: 6,
   },
   flowDesc: {
     fontSize: 14,
-    color: "#9ca3af",
+    color: "#6b7280",
     lineHeight: 20,
   },
   securitySection: {
     borderRadius: 16,
-    borderColor: "#1f2937",
+    borderColor: "#fed7aa",
     borderWidth: 1,
     padding: 24,
     marginBottom: 48,
@@ -543,7 +543,7 @@ const styles = StyleSheet.create({
   },
   securityDesc: {
     fontSize: 15,
-    color: "#9ca3af",
+    color: "#6b7280",
     lineHeight: 22,
     marginTop: 8,
   },
@@ -572,14 +572,14 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 24,
     fontSize: 16,
-    color: "#9ca3af",
+    color: "#6b7280",
     textAlign: "center",
   },
   bottomCtaButtons: {
     width: "100%",
   },
   secondaryButton: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#ffffff",
     paddingVertical: 14,
     paddingHorizontal: 20,
     borderRadius: 8,
@@ -590,6 +590,6 @@ const styles = StyleSheet.create({
   secondaryButtonText: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#ffffff",
+    color: "#374151",
   },
 });

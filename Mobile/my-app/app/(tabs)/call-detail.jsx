@@ -114,8 +114,8 @@ const CallDetailScreen = () => {
   if (loading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.centerWrap}>
-          <ActivityIndicator size="large" color="#6C63FF" />
+        <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.centerWrap}>
+          <ActivityIndicator size="large" color="#fb923c" />
           <Text style={styles.loadingText}>Loading call detail...</Text>
         </LinearGradient>
       </SafeAreaView>
@@ -125,11 +125,11 @@ const CallDetailScreen = () => {
   if (error || !call) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.centerWrap}>
+        <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.centerWrap}>
           <Ionicons name="alert-circle-outline" size={40} color="#fb7185" />
           <Text style={styles.errorText}>{error || "Call not found"}</Text>
           <TouchableOpacity style={styles.backBtn} onPress={goBackToCalls}>
-            <Ionicons name="arrow-back" size={16} color="#e2e8f0" />
+            <Ionicons name="arrow-back" size={16} color="#ea580c" />
             <Text style={styles.backBtnText}>Back to Calls</Text>
           </TouchableOpacity>
         </LinearGradient>
@@ -150,11 +150,11 @@ const CallDetailScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
-      <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.flex}>
+      <StatusBar barStyle="dark-content" />
+      <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.flex}>
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
           <TouchableOpacity style={styles.backBtn} onPress={goBackToCalls} activeOpacity={0.75}>
-            <Ionicons name="arrow-back" size={16} color="#e2e8f0" />
+            <Ionicons name="arrow-back" size={16} color="#ea580c" />
             <Text style={styles.backBtnText}>Back to Calls</Text>
           </TouchableOpacity>
 
@@ -175,7 +175,7 @@ const CallDetailScreen = () => {
               style={styles.downloadBtn}
               onPress={() => Alert.alert("Report", "Download is available in Web dashboard currently.")}
             >
-              <Ionicons name="download-outline" size={14} color="#e2e8f0" />
+              <Ionicons name="download-outline" size={14} color="#ea580c" />
               <Text style={styles.downloadBtnText}>Download Report</Text>
             </TouchableOpacity>
           </View>
@@ -264,10 +264,10 @@ const CallDetailScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: "#090b13" },
+  safeArea: { flex: 1, backgroundColor: "#fff7ed" },
   flex: { flex: 1 },
   centerWrap: { flex: 1, justifyContent: "center", alignItems: "center", gap: 10, paddingHorizontal: 24 },
-  loadingText: { color: "#94a3b8", fontSize: 14 },
+  loadingText: { color: "#6b7280", fontSize: 14 },
   errorText: { color: "#fca5a5", fontSize: 14, textAlign: "center", marginBottom: 6 },
   scrollContent: { paddingHorizontal: 14, paddingBottom: 36, paddingTop: 8, gap: 12 },
 
@@ -277,17 +277,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 6,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    borderColor: "rgba(249,115,22,0.18)",
+    backgroundColor: "rgba(249,115,22,0.06)",
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 10,
   },
-  backBtnText: { color: "#e2e8f0", fontSize: 14, fontWeight: "700" },
+  backBtnText: { color: "#111827", fontSize: 14, fontWeight: "700" },
 
-  title: { color: "#ffffff", fontSize: 22, lineHeight: 28, fontWeight: "900", marginTop: 2 },
+  title: { color: "#111827", fontSize: 22, lineHeight: 28, fontWeight: "900", marginTop: 2 },
   metaRow: { flexDirection: "row", flexWrap: "wrap", gap: 10, marginTop: 6 },
-  metaText: { color: "#94a3b8", fontSize: 13 },
+  metaText: { color: "#6b7280", fontSize: 13 },
 
   chipsRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 4 },
   chip: {
@@ -307,17 +307,17 @@ const styles = StyleSheet.create({
     gap: 6,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.14)",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    backgroundColor: "rgba(249,115,22,0.06)",
     borderRadius: 12,
     paddingHorizontal: 10,
     paddingVertical: 6,
   },
-  downloadBtnText: { color: "#e2e8f0", fontSize: 12, fontWeight: "700" },
+  downloadBtnText: { color: "#111827", fontSize: 12, fontWeight: "700" },
 
   sectionWrap: {
     borderWidth: 1,
     borderColor: "rgba(148,163,184,0.18)",
-    backgroundColor: "rgba(17,24,39,0.8)",
+    backgroundColor: "#ffffff",
     borderRadius: 16,
     overflow: "hidden",
   },
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
   },
   sectionHeaderLeft: { flexDirection: "row", alignItems: "center", gap: 8 },
-  sectionTitle: { color: "#f1f5f9", fontSize: 18, fontWeight: "900" },
+  sectionTitle: { color: "#111827", fontSize: 18, fontWeight: "900" },
   sectionBody: { paddingHorizontal: 14, paddingBottom: 14, gap: 10 },
 
   actionCard: {
@@ -341,30 +341,30 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   actionPriority: { color: "#fbbf24", fontSize: 11, fontWeight: "900", letterSpacing: 0.6 },
-  actionTitle: { color: "#ffffff", fontSize: 20, fontWeight: "900", lineHeight: 28 },
-  actionReason: { color: "#cbd5e1", fontSize: 18, lineHeight: 26 },
+  actionTitle: { color: "#111827", fontSize: 20, fontWeight: "900", lineHeight: 28 },
+  actionReason: { color: "#374151", fontSize: 18, lineHeight: 26 },
 
   objectionCard: {
     borderWidth: 1,
     borderColor: "rgba(148,163,184,0.25)",
-    backgroundColor: "rgba(30,41,59,0.4)",
+    backgroundColor: "rgba(249,115,22,0.04)",
     borderRadius: 12,
     padding: 12,
     gap: 8,
   },
-  objectionTitle: { color: "#ffffff", fontSize: 18, fontWeight: "800", lineHeight: 25 },
+  objectionTitle: { color: "#111827", fontSize: 18, fontWeight: "800", lineHeight: 25 },
   quoteBox: {
     borderLeftWidth: 3,
-    borderLeftColor: "#818cf8",
-    backgroundColor: "rgba(99,102,241,0.12)",
+    borderLeftColor: "#ea580c",
+    backgroundColor: "rgba(249,115,22,0.12)",
     borderRadius: 8,
     paddingHorizontal: 10,
     paddingVertical: 8,
     gap: 4,
   },
-  quoteHead: { color: "#c7d2fe", fontSize: 14, fontWeight: "900", letterSpacing: 0.5 },
-  quoteBody: { color: "#e2e8f0", fontSize: 17, fontStyle: "italic", lineHeight: 25 },
-  listItem: { color: "#cbd5e1", fontSize: 16, lineHeight: 22 },
+  quoteHead: { color: "#ea580c", fontSize: 14, fontWeight: "900", letterSpacing: 0.5 },
+  quoteBody: { color: "#111827", fontSize: 17, fontStyle: "italic", lineHeight: 25 },
+  listItem: { color: "#374151", fontSize: 16, lineHeight: 22 },
 
   alertCardBad: {
     borderLeftWidth: 3,
@@ -383,7 +383,7 @@ const styles = StyleSheet.create({
     padding: 10,
     gap: 4,
   },
-  alertHeadGood: { color: "#6ee7b7", fontSize: 13, fontWeight: "900" },
+  alertHeadGood: { color: "#047857", fontSize: 13, fontWeight: "900" },
   alertCardInfo: {
     borderLeftWidth: 3,
     borderLeftColor: "#22d3ee",
@@ -393,7 +393,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   alertHeadInfo: { color: "#67e8f9", fontSize: 13, fontWeight: "900" },
-  alertBody: { color: "#e2e8f0", fontSize: 19, lineHeight: 27 },
+  alertBody: { color: "#111827", fontSize: 19, lineHeight: 27 },
 
   summaryCard: {
     borderWidth: 1,
@@ -403,31 +403,31 @@ const styles = StyleSheet.create({
     padding: 10,
     gap: 4,
   },
-  summaryHead: { color: "#c7d2fe", fontSize: 13, fontWeight: "900" },
+  summaryHead: { color: "#ea580c", fontSize: 13, fontWeight: "900" },
 
   followText: {
     borderLeftWidth: 3,
     borderLeftColor: "#22d3ee",
     backgroundColor: "rgba(14,116,144,0.22)",
-    color: "#e2e8f0",
+    color: "#111827",
     borderRadius: 10,
     padding: 12,
     fontSize: 18,
     lineHeight: 26,
   },
 
-  emailSubject: { color: "#e2e8f0", fontSize: 20, fontWeight: "900" },
+  emailSubject: { color: "#111827", fontSize: 20, fontWeight: "900" },
   emailBodyWrap: {
     borderWidth: 1,
     borderColor: "rgba(148,163,184,0.26)",
     borderRadius: 12,
     padding: 12,
-    backgroundColor: "rgba(30,41,59,0.58)",
+    backgroundColor: "#fff7ed",
   },
-  emailBody: { color: "#cbd5e1", fontSize: 18, lineHeight: 28 },
-  summaryText: { color: "#cbd5e1", fontSize: 18, lineHeight: 28 },
+  emailBody: { color: "#374151", fontSize: 18, lineHeight: 28 },
+  summaryText: { color: "#374151", fontSize: 18, lineHeight: 28 },
 
-  emptyStateText: { color: "#94a3b8", fontSize: 14 },
+  emptyStateText: { color: "#6b7280", fontSize: 14 },
 });
 
 export default CallDetailScreen;

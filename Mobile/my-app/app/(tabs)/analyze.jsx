@@ -26,14 +26,14 @@ const { width: SW } = Dimensions.get("window");
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const PIPELINE_STEPS = [
-  { key: "uploading",    label: "Uploading file",               desc: "Saving to server",        color: "#6C63FF" },
+  { key: "uploading",    label: "Uploading file",               desc: "Saving to server",        color: "#fb923c" },
   { key: "transcribing",label: "Transcribing with Groq Whisper",desc: "Speech to Text",          color: "#00D4AA" },
   { key: "analyzing",   label: "Analyzing with LLaMA-3.3-70b", desc: "GPT intelligence",         color: "#F59E0B" },
   { key: "done",        label: "Insights ready!",               desc: "Opening your results…",   color: "#10B981" },
 ];
 
 const DETECTION_ITEMS = [
-  { icon: "🎙️", label: "Full Transcript",        desc: "Groq Whisper STT",            color: "#6C63FF" },
+  { icon: "🎙️", label: "Full Transcript",        desc: "Groq Whisper STT",            color: "#fb923c" },
   { icon: "📝", label: "Call Summary",            desc: "3-5 sentence overview",       color: "#00D4AA" },
   { icon: "✅", label: "Buying Signals",          desc: "Purchase intent indicators",  color: "#10B981" },
   { icon: "⚠️", label: "Objections",              desc: "Pricing & feature concerns",  color: "#F59E0B" },
@@ -120,7 +120,7 @@ function PipelineScreen({ step, completedSteps, inputType }) {
             <Ionicons name="checkmark-circle" size={52} color="#fff" />
           </LinearGradient>
         ) : (
-          <LinearGradient colors={["#6C63FF", "#4f46e5"]} style={styles.pipelineOrb}>
+          <LinearGradient colors={["#fb923c", "#f97316"]} style={styles.pipelineOrb}>
             <ActivityIndicator size={52} color="#fff" />
           </LinearGradient>
         )}
@@ -143,7 +143,7 @@ function PipelineScreen({ step, completedSteps, inputType }) {
         </View>
         <View style={styles.progressBarBg}>
           <LinearGradient
-            colors={["#6C63FF", "#00D4AA", "#10B981"]}
+            colors={["#fb923c", "#00D4AA", "#10B981"]}
             start={[0, 0]}
             end={[1, 0]}
             style={[styles.progressBarFill, { width: `${progress}%` }]}
@@ -171,13 +171,13 @@ function PipelineScreen({ step, completedSteps, inputType }) {
                   styles.stepBadge,
                   isDone && { backgroundColor: "rgba(16,185,129,0.2)" },
                   isCurrent && { backgroundColor: "rgba(108,99,255,0.2)" },
-                  !isDone && !isCurrent && { backgroundColor: "rgba(255,255,255,0.07)" },
+                  !isDone && !isCurrent && { backgroundColor: "rgba(249,115,22,0.08)" },
                 ]}
               >
                 {isDone ? (
                   <Ionicons name="checkmark" size={14} color="#34d399" />
                 ) : isCurrent ? (
-                  <ActivityIndicator size={13} color="#818cf8" />
+                  <ActivityIndicator size={13} color="#ea580c" />
                 ) : (
                   <Text style={styles.stepNum}>{idx + 1}</Text>
                 )}
@@ -187,7 +187,7 @@ function PipelineScreen({ step, completedSteps, inputType }) {
                   style={[
                     styles.stepLabel,
                     isDone && { color: "#34d399" },
-                    isCurrent && { color: "#a5b4fc" },
+                    isCurrent && { color: "#ea580c" },
                     !isDone && !isCurrent && { color: "#6b7280" },
                   ]}
                 >
@@ -365,8 +365,8 @@ export default function AnalyzeCallScreen() {
   if (step) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <StatusBar barStyle="light-content" />
-        <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.container}>
+        <StatusBar barStyle="dark-content" />
+        <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.container}>
           <PipelineScreen step={step} completedSteps={completedSteps} inputType={inputType} />
         </LinearGradient>
       </SafeAreaView>
@@ -377,7 +377,7 @@ export default function AnalyzeCallScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
 
       {/* Sidebar */}
       <MobileSidebar
@@ -386,7 +386,7 @@ export default function AnalyzeCallScreen() {
         user={user}
       />
 
-      <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.container}>
+      <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.container}>
         <KeyboardAvoidingView
           style={{ flex: 1 }}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -403,7 +403,7 @@ export default function AnalyzeCallScreen() {
                 style={styles.menuBtn}
                 activeOpacity={0.7}
               >
-                <Ionicons name="menu" size={22} color="#d1d5db" />
+                <Ionicons name="menu" size={22} color="#6b7280" />
               </TouchableOpacity>
               <View style={{ flex: 1 }}>
                 <Text style={styles.h1}>Analyze Call</Text>
@@ -414,7 +414,7 @@ export default function AnalyzeCallScreen() {
             {/* ── Page Header ── */}
             <View style={styles.pageHeader}>
               <View style={styles.aiPill}>
-                <Ionicons name="sparkles" size={11} color="#818cf8" />
+                <Ionicons name="sparkles" size={11} color="#ea580c" />
                 <Text style={styles.aiPillText}>Groq Whisper + LLaMA-3.3-70b</Text>
               </View>
               <Text style={styles.pageTitle}>Conversation Analysis Studio</Text>
@@ -463,7 +463,7 @@ export default function AnalyzeCallScreen() {
 
             {/* ── Customer Details ── */}
             <SectionCard>
-              <CardHeader iconName="mic" iconColor="#818cf8" iconBg="rgba(108,99,255,0.15)" title="Customer Details" />
+              <CardHeader iconName="mic" iconColor="#ea580c" iconBg="rgba(108,99,255,0.15)" title="Customer Details" />
               <View style={styles.formFields}>
                 <StyledInput placeholder="Customer Name" value={customerName} onChangeText={setCustomerName} />
                 <StyledInput placeholder="Customer Email *" value={customerEmail} onChangeText={setCustomerEmail} keyboardType="email-address" />
@@ -518,7 +518,7 @@ export default function AnalyzeCallScreen() {
                     <TouchableOpacity onPress={pickFile} style={styles.dropZone} activeOpacity={0.8}>
                       <LinearGradient colors={["rgba(108,99,255,0.12)", "rgba(108,99,255,0.04)"]} style={styles.dropZoneInner}>
                         <View style={styles.dropIconWrap}>
-                          <Ionicons name="cloud-upload" size={32} color="#818cf8" />
+                          <Ionicons name="cloud-upload" size={32} color="#ea580c" />
                         </View>
                         <Text style={styles.dropTitle}>Tap to select file</Text>
                         <Text style={styles.dropSub}>MP3 · WAV · M4A · OGG · MP4 · Max 50MB</Text>
@@ -527,7 +527,7 @@ export default function AnalyzeCallScreen() {
                   ) : (
                     <View style={styles.fileBox}>
                       <View style={styles.fileIconWrap}>
-                        <Ionicons name="musical-notes" size={24} color="#818cf8" />
+                        <Ionicons name="musical-notes" size={24} color="#ea580c" />
                       </View>
                       <View style={{ flex: 1 }}>
                         <Text style={styles.fileName} numberOfLines={2}>{audioFile.name}</Text>
@@ -569,7 +569,7 @@ export default function AnalyzeCallScreen() {
                 style={styles.submitBtn}
               >
                 <LinearGradient
-                  colors={["#6C63FF", "#4f46e5"]}
+                  colors={["#fb923c", "#f97316"]}
                   start={[0, 0]}
                   end={[1, 0]}
                   style={styles.submitGradient}
@@ -652,7 +652,7 @@ export default function AnalyzeCallScreen() {
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  safeArea:  { flex: 1, backgroundColor: "#090b13" },
+  safeArea:  { flex: 1, backgroundColor: "#fff7ed" },
   container: { flex: 1 },
   scroll:    { padding: 20, paddingBottom: 40 },
 
@@ -665,11 +665,11 @@ const styles = StyleSheet.create({
   },
   menuBtn: {
     width: 40, height: 40, borderRadius: 10,
-    backgroundColor: "rgba(255,255,255,0.08)",
-    borderWidth: 1, borderColor: "rgba(255,255,255,0.12)",
+    backgroundColor: "rgba(249,115,22,0.10)",
+    borderWidth: 1, borderColor: "rgba(249,115,22,0.18)",
     justifyContent: "center", alignItems: "center",
   },
-  h1:        { fontSize: 19, fontWeight: "800", color: "#fff", letterSpacing: -0.3 },
+  h1:        { fontSize: 19, fontWeight: "800", color: "#111827", letterSpacing: -0.3 },
   headerSub: { fontSize: 12, color: "#6b7280", marginTop: 1 },
 
   // Pipeline screen
@@ -678,15 +678,15 @@ const styles = StyleSheet.create({
   pipelineOrb: {
     width: 112, height: 112, borderRadius: 56,
     justifyContent: "center", alignItems: "center",
-    shadowColor: "#6C63FF", shadowOffset: { width: 0, height: 10 },
+    shadowColor: "#fb923c", shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.4, shadowRadius: 24, elevation: 12,
   },
-  pipelineTitle: { fontSize: 26, fontWeight: "900", color: "#fff", textAlign: "center" },
+  pipelineTitle: { fontSize: 26, fontWeight: "900", color: "#111827", textAlign: "center" },
   pipelineSubtitle: { fontSize: 13, color: "#9ca3af", marginTop: 8, textAlign: "center" },
   progressWrap: { width: "100%", marginTop: 24, marginBottom: 8 },
   progressLabelRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 6 },
   progressLabel: { color: "#6b7280", fontSize: 11 },
-  progressBarBg: { height: 8, borderRadius: 4, backgroundColor: "rgba(255,255,255,0.07)", overflow: "hidden" },
+  progressBarBg: { height: 8, borderRadius: 4, backgroundColor: "rgba(249,115,22,0.08)", overflow: "hidden" },
   progressBarFill: { height: "100%", borderRadius: 4 },
   stepsWrap: { width: "100%", marginTop: 16, gap: 10 },
   stepItem: {
@@ -695,7 +695,7 @@ const styles = StyleSheet.create({
   },
   stepDone:    { borderColor: "rgba(16,185,129,0.25)", backgroundColor: "rgba(16,185,129,0.08)" },
   stepCurrent: { borderColor: "rgba(108,99,255,0.35)", backgroundColor: "rgba(108,99,255,0.10)" },
-  stepPending: { borderColor: "rgba(255,255,255,0.06)", backgroundColor: "rgba(255,255,255,0.02)", opacity: 0.55 },
+  stepPending: { borderColor: "rgba(249,115,22,0.08)", backgroundColor: "rgba(249,115,22,0.05)", opacity: 0.55 },
   stepBadge: { width: 30, height: 30, borderRadius: 15, justifyContent: "center", alignItems: "center" },
   stepNum:   { color: "#6b7280", fontSize: 12, fontWeight: "bold" },
   stepLabel: { fontSize: 13, fontWeight: "600" },
@@ -705,31 +705,32 @@ const styles = StyleSheet.create({
   pageHeader: { marginBottom: 20 },
   aiPill: {
     flexDirection: "row", alignItems: "center", gap: 6, alignSelf: "flex-start",
-    backgroundColor: "rgba(99,102,241,0.12)", borderColor: "rgba(99,102,241,0.25)", borderWidth: 1,
+    backgroundColor: "rgba(249,115,22,0.12)", borderColor: "rgba(249,115,22,0.35)", borderWidth: 1,
     borderRadius: 20, paddingHorizontal: 10, paddingVertical: 5, marginBottom: 12,
   },
-  aiPillText:  { color: "#818cf8", fontSize: 11, fontWeight: "600" },
-  pageTitle:   { fontSize: 24, fontWeight: "900", color: "#fff", marginBottom: 6 },
+  aiPillText:  { color: "#ea580c", fontSize: 11, fontWeight: "600" },
+  pageTitle:   { fontSize: 24, fontWeight: "900", color: "#111827", marginBottom: 6 },
   pageDesc:    { fontSize: 13, color: "#9ca3af", lineHeight: 20 },
 
   // Tabs
   tabBar: {
     flexDirection: "row", gap: 6,
-    backgroundColor: "rgba(15,17,32,0.9)",
-    borderColor: "rgba(255,255,255,0.08)", borderWidth: 1,
+    backgroundColor: "#fff7ed",
+    borderColor: "rgba(249,115,22,0.20)", borderWidth: 1,
     borderRadius: 14, padding: 5, marginBottom: 16,
   },
   tabBtn: {
     flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center",
     gap: 6, borderRadius: 10, paddingVertical: 9,
+    backgroundColor: "rgba(255,255,255,0.75)",
   },
   tabBtnActive: {
-    backgroundColor: "#4f46e5",
-    shadowColor: "#6C63FF", shadowOffset: { width: 0, height: 4 },
+    backgroundColor: "#f97316",
+    shadowColor: "#fb923c", shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.4, shadowRadius: 10, elevation: 6,
   },
   tabText:       { color: "#6b7280", fontSize: 13, fontWeight: "600" },
-  tabTextActive: { color: "#fff" },
+  tabTextActive: { color: "#111827" },
 
   // Feedback
   feedbackBanner: {
@@ -742,50 +743,50 @@ const styles = StyleSheet.create({
 
   // Card
   card: {
-    backgroundColor: "rgba(18,21,39,0.9)",
-    borderColor: "rgba(255,255,255,0.08)", borderWidth: 1,
+    backgroundColor: "#ffffff",
+    borderColor: "rgba(249,115,22,0.10)", borderWidth: 1,
     borderRadius: 16, padding: 16, marginBottom: 14,
   },
   cardHeaderRow: { flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 14 },
   cardIcon:      { width: 30, height: 30, borderRadius: 8, justifyContent: "center", alignItems: "center" },
-  cardTitle:     { flex: 1, color: "#fff", fontSize: 14, fontWeight: "bold" },
+  cardTitle:     { flex: 1, color: "#111827", fontSize: 14, fontWeight: "bold" },
   badge: {
-    backgroundColor: "rgba(99,102,241,0.12)", borderColor: "rgba(99,102,241,0.25)", borderWidth: 1,
+    backgroundColor: "rgba(249,115,22,0.12)", borderColor: "rgba(249,115,22,0.35)", borderWidth: 1,
     borderRadius: 12, paddingHorizontal: 8, paddingVertical: 3,
   },
-  badgeText: { color: "#818cf8", fontSize: 10, fontWeight: "700" },
+  badgeText: { color: "#ea580c", fontSize: 10, fontWeight: "700" },
 
   // Form fields
   formFields: { gap: 10 },
   input: {
-    backgroundColor: "rgba(255,255,255,0.05)",
-    borderColor: "rgba(255,255,255,0.1)", borderWidth: 1,
+    backgroundColor: "rgba(249,115,22,0.07)",
+    borderColor: "#fed7aa", borderWidth: 1,
     borderRadius: 10, paddingHorizontal: 14, paddingVertical: 12,
-    color: "#fff", fontSize: 14,
+    color: "#111827", fontSize: 14,
   },
 
   // Product selector
   productBtn: {
     flexDirection: "row", alignItems: "center", gap: 10,
-    backgroundColor: "rgba(255,255,255,0.05)",
-    borderColor: "rgba(255,255,255,0.1)", borderWidth: 1,
+    backgroundColor: "rgba(249,115,22,0.07)",
+    borderColor: "#fed7aa", borderWidth: 1,
     borderRadius: 10, paddingHorizontal: 14, paddingVertical: 12,
   },
-  productBtnText: { flex: 1, color: "#d1d5db", fontSize: 14 },
+  productBtnText: { flex: 1, color: "#4b5563", fontSize: 14 },
   productDropdown: {
-    backgroundColor: "#161829",
-    borderColor: "rgba(255,255,255,0.1)", borderWidth: 1,
+    backgroundColor: "#fffbf5",
+    borderColor: "#fed7aa", borderWidth: 1,
     borderRadius: 10, overflow: "hidden", marginTop: 4,
   },
-  productOption: { paddingHorizontal: 14, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255,0.05)" },
-  productOptionActive: { backgroundColor: "rgba(99,102,241,0.12)" },
+  productOption: { paddingHorizontal: 14, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: "rgba(249,115,22,0.07)" },
+  productOptionActive: { backgroundColor: "rgba(249,115,22,0.12)" },
   productOptionText: { color: "#9ca3af", fontSize: 14 },
-  productOptionTextActive: { color: "#a5b4fc", fontWeight: "600" },
+  productOptionTextActive: { color: "#ea580c", fontWeight: "600" },
 
   // Drop zone
   dropZone: { borderRadius: 12, overflow: "hidden", marginTop: 4 },
   dropZoneInner: {
-    borderRadius: 12, borderWidth: 2, borderStyle: "dashed", borderColor: "rgba(255,255,255,0.12)",
+    borderRadius: 12, borderWidth: 2, borderStyle: "dashed", borderColor: "rgba(249,115,22,0.18)",
     alignItems: "center", paddingVertical: 36, paddingHorizontal: 20,
   },
   dropIconWrap: {
@@ -793,7 +794,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(108,99,255,0.12)",
     justifyContent: "center", alignItems: "center", marginBottom: 12,
   },
-  dropTitle: { color: "#fff", fontSize: 15, fontWeight: "bold", marginBottom: 4 },
+  dropTitle: { color: "#111827", fontSize: 15, fontWeight: "bold", marginBottom: 4 },
   dropSub:   { color: "#6b7280", fontSize: 11 },
 
   // Selected file
@@ -808,7 +809,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(108,99,255,0.15)",
     justifyContent: "center", alignItems: "center",
   },
-  fileName:     { color: "#fff", fontSize: 13, fontWeight: "600" },
+  fileName:     { color: "#111827", fontSize: 13, fontWeight: "600" },
   fileSize:     { color: "#9ca3af", fontSize: 11, marginTop: 2 },
   fileRemoveBtn: {
     width: 28, height: 28, borderRadius: 8,
@@ -827,26 +828,26 @@ const styles = StyleSheet.create({
   submitGradient: {
     flexDirection: "row", alignItems: "center", justifyContent: "center",
     gap: 8, paddingVertical: 14,
-    shadowColor: "#6C63FF", shadowOffset: { width: 0, height: 8 },
+    shadowColor: "#fb923c", shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.4, shadowRadius: 16, elevation: 8,
   },
-  submitText: { color: "#fff", fontSize: 15, fontWeight: "bold" },
+  submitText: { color: "#111827", fontSize: 15, fontWeight: "bold" },
 
   // Collapsible
   collapsibleHeader: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
 
   // Detection grid
-  detectionGrid: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 4 },
+  detectionGrid: { gap: 10, marginTop: 4 },
   detectionItem: {
-    flexDirection: "row", alignItems: "center", gap: 8,
-    width: (SW - 80) / 2,
-    backgroundColor: "rgba(255,255,255,0.03)",
-    borderColor: "rgba(255,255,255,0.06)", borderWidth: 1,
-    borderRadius: 10, paddingHorizontal: 10, paddingVertical: 8,
+    flexDirection: "row", alignItems: "flex-start", gap: 10,
+    width: "100%",
+    backgroundColor: "#fffaf5",
+    borderColor: "rgba(249,115,22,0.14)", borderWidth: 1,
+    borderRadius: 12, paddingHorizontal: 12, paddingVertical: 10,
   },
-  detectionEmoji: { fontSize: 16 },
-  detectionLabel: { color: "#e2e8f0", fontSize: 11, fontWeight: "600" },
-  detectionDesc:  { color: "#6b7280", fontSize: 10, marginTop: 1 },
+  detectionEmoji: { fontSize: 18, marginTop: 1 },
+  detectionLabel: { color: "#111827", fontSize: 13, fontWeight: "700" },
+  detectionDesc:  { color: "#4b5563", fontSize: 12, marginTop: 2, lineHeight: 17 },
 
   // Pipeline info
   pipelineInfoList: { gap: 0, marginTop: 4 },
@@ -856,6 +857,6 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(108,99,255,0.15)",
     justifyContent: "center", alignItems: "center", marginTop: 1,
   },
-  pipelineInfoNumText: { color: "#818cf8", fontSize: 9, fontWeight: "bold" },
+  pipelineInfoNumText: { color: "#ea580c", fontSize: 9, fontWeight: "bold" },
   pipelineInfoText:    { flex: 1, color: "#9ca3af", fontSize: 12, lineHeight: 18 },
 });

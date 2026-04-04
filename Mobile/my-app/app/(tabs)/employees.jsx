@@ -39,7 +39,7 @@ const StatCard = ({ iconName, label, value, gradientColors, sub }) => (
   </View>
 );
 
-const SectionCard = ({ title, subtitle, badge, badgeColor = "#818cf8", children }) => (
+const SectionCard = ({ title, subtitle, badge, badgeColor = "#ea580c", children }) => (
   <View style={styles.sectionCard}>
     <View style={styles.sectionHeaderRow}>
       <View style={{ flex: 1 }}>
@@ -135,7 +135,7 @@ const EmployeeIntelligenceView = ({ employee, token, onBack }) => {
 
       {loading ? (
         <View style={styles.loadingWrapInner}>
-          <ActivityIndicator size="large" color="#6C63FF" />
+          <ActivityIndicator size="large" color="#fb923c" />
           <Text style={styles.loadingText}>Loading employee intelligence...</Text>
         </View>
       ) : error ? (
@@ -190,7 +190,7 @@ const EmployeeIntelligenceView = ({ employee, token, onBack }) => {
               iconName="call-outline"
               label="Calls Handled"
               value={intel?.summary?.totalCalls ?? 0}
-              gradientColors={["#6C63FF", "#8B5CF6"]}
+              gradientColors={["#fb923c", "#8B5CF6"]}
             />
             <StatCard
               iconName="trending-up-outline"
@@ -349,7 +349,7 @@ const EmployeeIntelligenceView = ({ employee, token, onBack }) => {
               title="Recent Conversational Output"
               subtitle="Latest calls logged under this agent"
               badge={`${intel.recentCalls.length} calls`}
-              badgeColor="#818cf8"
+              badgeColor="#ea580c"
             >
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.recentScrollContent}>
                 <View style={styles.recentCallsList}>
@@ -487,8 +487,8 @@ export default function EmployeesScreen() {
   if (loading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.loadingWrapInner}>
-          <ActivityIndicator size="large" color="#6C63FF" />
+        <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.loadingWrapInner}>
+          <ActivityIndicator size="large" color="#fb923c" />
           <Text style={styles.loadingText}>Loading team...</Text>
         </LinearGradient>
       </SafeAreaView>
@@ -497,7 +497,7 @@ export default function EmployeesScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
 
       <MobileSidebar
         visible={sidebarOpen}
@@ -505,10 +505,10 @@ export default function EmployeesScreen() {
         user={user}
       />
 
-      <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.flex}>
+      <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.flex}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => setSidebarOpen(true)} style={styles.menuBtn} activeOpacity={0.7}>
-            <Ionicons name="menu" size={22} color="#d1d5db" />
+            <Ionicons name="menu" size={22} color="#6b7280" />
           </TouchableOpacity>
           <View style={{ flex: 1 }}>
             <Text style={styles.title}>Company Employees</Text>
@@ -547,7 +547,7 @@ export default function EmployeesScreen() {
             showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
             refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#6C63FF" colors={["#6C63FF"]} />
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#fb923c" colors={["#fb923c"]} />
             }
             renderItem={({ item }) => {
               const isAdmin = (item.role || "").toLowerCase() === "admin";
@@ -566,7 +566,7 @@ export default function EmployeesScreen() {
                     <Text style={[styles.rolePill, isAdmin ? styles.roleAdmin : styles.roleEmployee]}>
                       {item.role || "employee"}
                     </Text>
-                    <Ionicons name="arrow-forward" size={14} color="#818cf8" style={{ marginTop: 8 }} />
+                    <Ionicons name="arrow-forward" size={14} color="#ea580c" style={{ marginTop: 8 }} />
                   </View>
                 </TouchableOpacity>
               );
@@ -658,7 +658,7 @@ export default function EmployeesScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: "#090b13" },
+  safeArea: { flex: 1, backgroundColor: "#fff7ed" },
   flex: { flex: 1 },
 
   loadingWrapInner: { flex: 1, justifyContent: "center", alignItems: "center" },
@@ -676,9 +676,9 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 10,
-    backgroundColor: "rgba(255,255,255,0.08)",
+    backgroundColor: "rgba(249,115,22,0.10)",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
+    borderColor: "rgba(249,115,22,0.18)",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -688,28 +688,28 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(99,102,241,0.2)",
+    backgroundColor: "rgba(249,115,22,0.14)",
     borderWidth: 1,
     borderColor: "rgba(99,102,241,0.4)",
   },
-  title: { color: "#fff", fontSize: 22, fontWeight: "900" },
-  subtitle: { color: "#94a3b8", marginTop: 2, fontSize: 12 },
+  title: { color: "#111827", fontSize: 22, fontWeight: "900" },
+  subtitle: { color: "#6b7280", marginTop: 2, fontSize: 12 },
 
   listContent: { paddingHorizontal: 16, paddingBottom: 34, paddingTop: 4 },
 
   employeeCard: {
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(18,21,39,0.92)",
+    borderColor: "#fed7aa",
+    backgroundColor: "#ffffff",
     padding: 14,
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
   },
-  empName: { color: "#fff", fontSize: 15, fontWeight: "800" },
-  empSub: { color: "#cbd5e1", fontSize: 12, marginTop: 3 },
-  empEmail: { color: "#94a3b8", fontSize: 12, marginTop: 3 },
+  empName: { color: "#111827", fontSize: 15, fontWeight: "800" },
+  empSub: { color: "#374151", fontSize: 12, marginTop: 3 },
+  empEmail: { color: "#6b7280", fontSize: 12, marginTop: 3 },
   rightWrap: { alignItems: "flex-end" },
   rolePill: {
     borderRadius: 99,
@@ -726,7 +726,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(251,191,36,0.12)",
   },
   roleEmployee: {
-    color: "#6ee7b7",
+    color: "#047857",
     borderColor: "rgba(52,211,153,0.35)",
     backgroundColor: "rgba(52,211,153,0.12)",
   },
@@ -738,7 +738,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "rgba(129,140,248,0.3)",
     backgroundColor: "rgba(99,102,241,0.14)",
-    color: "#c7d2fe",
+    color: "#ea580c",
     fontSize: 11,
     fontWeight: "700",
     paddingHorizontal: 10,
@@ -749,8 +749,8 @@ const styles = StyleSheet.create({
   profileHeaderCard: {
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(18,21,39,0.92)",
+    borderColor: "#fed7aa",
+    backgroundColor: "#ffffff",
     padding: 14,
     flexDirection: "row",
     alignItems: "center",
@@ -767,11 +767,11 @@ const styles = StyleSheet.create({
     borderColor: "rgba(99,102,241,0.35)",
   },
   avatarLargeText: {
-    color: "#fff",
+    color: "#111827",
     fontSize: 22,
     fontWeight: "900",
   },
-  nameLarge: { color: "#fff", fontSize: 22, fontWeight: "900", letterSpacing: -0.3 },
+  nameLarge: { color: "#111827", fontSize: 22, fontWeight: "900", letterSpacing: -0.3 },
   roleRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 7, marginBottom: 7 },
   roleChipSoft: {
     flexDirection: "row",
@@ -779,12 +779,12 @@ const styles = StyleSheet.create({
     gap: 5,
     borderRadius: 999,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    borderColor: "rgba(249,115,22,0.10)",
+    backgroundColor: "rgba(249,115,22,0.07)",
     paddingHorizontal: 9,
     paddingVertical: 4,
   },
-  roleChipSoftText: { color: "#cbd5e1", fontSize: 10, fontWeight: "800", textTransform: "uppercase" },
+  roleChipSoftText: { color: "#374151", fontSize: 10, fontWeight: "800", textTransform: "uppercase" },
   roleChipGreen: {
     flexDirection: "row",
     alignItems: "center",
@@ -796,24 +796,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     paddingVertical: 4,
   },
-  roleChipGreenText: { color: "#6ee7b7", fontSize: 10, fontWeight: "800", textTransform: "uppercase" },
-  emailText: { color: "#94a3b8", fontSize: 12 },
+  roleChipGreenText: { color: "#047857", fontSize: 10, fontWeight: "800", textTransform: "uppercase" },
+  emailText: { color: "#6b7280", fontSize: 12 },
 
   summaryStrip: {
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.06)",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    borderColor: "rgba(249,115,22,0.08)",
+    backgroundColor: "rgba(249,115,22,0.06)",
     padding: 12,
   },
-  summaryStripText: { color: "#cbd5e1", fontSize: 13, lineHeight: 19 },
-  summaryStripStrong: { color: "#fff", fontWeight: "900" },
+  summaryStripText: { color: "#374151", fontSize: 13, lineHeight: 19 },
+  summaryStripStrong: { color: "#111827", fontWeight: "900" },
 
   summaryCard: {
     borderRadius: 18,
     borderWidth: 1,
     borderColor: "rgba(99,102,241,0.18)",
-    backgroundColor: "rgba(18,21,39,0.92)",
+    backgroundColor: "#ffffff",
     padding: 14,
   },
   summaryCardTop: { flexDirection: "row", alignItems: "center", gap: 10 },
@@ -826,15 +826,15 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(99,102,241,0.14)",
   },
   summaryCardTitle: { color: "#c4b5fd", fontSize: 11, fontWeight: "900", textTransform: "uppercase", flex: 1 },
-  summaryCardText: { marginTop: 8, color: "#e2e8f0", fontSize: 13, lineHeight: 19 },
+  summaryCardText: { marginTop: 8, color: "#111827", fontSize: 13, lineHeight: 19 },
 
   statsGrid: { flexDirection: "row", flexWrap: "wrap", gap: 12 },
   statCard: {
     width: "48%",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(18,21,39,0.92)",
+    borderColor: "#fed7aa",
+    backgroundColor: "#ffffff",
     padding: 14,
   },
   statIconWrap: {
@@ -846,19 +846,19 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   statLabel: { color: "#64748b", fontSize: 10, fontWeight: "800", textTransform: "uppercase", letterSpacing: 0.8 },
-  statValue: { color: "#fff", fontSize: 18, fontWeight: "900", marginTop: 4 },
-  statSub: { color: "#94a3b8", fontSize: 11, marginTop: 4 },
+  statValue: { color: "#111827", fontSize: 18, fontWeight: "900", marginTop: 4 },
+  statSub: { color: "#6b7280", fontSize: 11, marginTop: 4 },
 
   twoColWrap: { gap: 12 },
   sectionCard: {
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(18,21,39,0.92)",
+    borderColor: "#fed7aa",
+    backgroundColor: "#ffffff",
     padding: 14,
   },
   sectionHeaderRow: { flexDirection: "row", alignItems: "flex-start", gap: 10, marginBottom: 10 },
-  sectionTitle: { color: "#fff", fontSize: 15, fontWeight: "900" },
+  sectionTitle: { color: "#111827", fontSize: 15, fontWeight: "900" },
   sectionSubtitle: { marginTop: 2, color: "#64748b", fontSize: 11, lineHeight: 16 },
   sectionBadge: {
     borderRadius: 999,
@@ -874,12 +874,12 @@ const styles = StyleSheet.create({
   progressList: { gap: 10 },
   progressItem: { gap: 6 },
   progressTopRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 8 },
-  progressLabel: { color: "#cbd5e1", fontSize: 12, fontWeight: "700", flex: 1 },
+  progressLabel: { color: "#374151", fontSize: 12, fontWeight: "700", flex: 1 },
   progressBg: {
     width: "100%",
     height: 7,
     borderRadius: 999,
-    backgroundColor: "rgba(255,255,255,0.07)",
+    backgroundColor: "rgba(249,115,22,0.08)",
     overflow: "hidden",
   },
   progressFill: { height: "100%", borderRadius: 999 },
@@ -887,7 +887,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 5,
     borderRadius: 999,
-    backgroundColor: "rgba(255,255,255,0.06)",
+    backgroundColor: "rgba(249,115,22,0.08)",
     overflow: "hidden",
   },
   progressFillThin: { height: "100%", borderRadius: 999 },
@@ -902,13 +902,13 @@ const styles = StyleSheet.create({
   miniPositive: { borderColor: "rgba(52,211,153,0.35)", backgroundColor: "rgba(52,211,153,0.12)" },
   miniNegative: { borderColor: "rgba(244,63,94,0.35)", backgroundColor: "rgba(244,63,94,0.12)" },
   miniNeutral: { borderColor: "rgba(251,191,36,0.35)", backgroundColor: "rgba(251,191,36,0.12)" },
-  miniPillText: { color: "#cbd5e1", fontSize: 10, fontWeight: "800" },
+  miniPillText: { color: "#374151", fontSize: 10, fontWeight: "800" },
 
   insightList: { gap: 10 },
   insightGrid: { gap: 10 },
   insightRow: { gap: 7 },
   insightRowTop: { flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between", gap: 10 },
-  insightText: { flex: 1, color: "#e2e8f0", fontSize: 12, fontWeight: "700", lineHeight: 17 },
+  insightText: { flex: 1, color: "#111827", fontSize: 12, fontWeight: "700", lineHeight: 17 },
 
   recentCallsList: { gap: 8 },
   recentScrollContent: { paddingBottom: 2 },
@@ -918,7 +918,7 @@ const styles = StyleSheet.create({
     minWidth: 720,
     paddingBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.06)",
+    borderBottomColor: "rgba(249,115,22,0.08)",
   },
   recentHeaderCellWide: { flex: 1.3, color: "#64748b", fontSize: 10, fontWeight: "900", textTransform: "uppercase" },
   recentHeaderCell: { flex: 1, color: "#64748b", fontSize: 10, fontWeight: "900", textTransform: "uppercase" },
@@ -929,11 +929,11 @@ const styles = StyleSheet.create({
     minWidth: 720,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.05)",
+    borderBottomColor: "rgba(249,115,22,0.07)",
   },
-  recentCallWide: { flex: 1.3, color: "#e2e8f0", fontSize: 12, fontWeight: "800" },
-  recentCallCell: { flex: 1, color: "#cbd5e1", fontSize: 11 },
-  recentCallCellStrong: { flex: 1, color: "#fff", fontSize: 11, fontWeight: "800" },
+  recentCallWide: { flex: 1.3, color: "#111827", fontSize: 12, fontWeight: "800" },
+  recentCallCell: { flex: 1, color: "#374151", fontSize: 11 },
+  recentCallCellStrong: { flex: 1, color: "#111827", fontSize: 11, fontWeight: "800" },
   sentimentPill: {
     alignSelf: "flex-start",
     borderRadius: 999,
@@ -944,7 +944,7 @@ const styles = StyleSheet.create({
   sentimentPositive: { backgroundColor: "rgba(52,211,153,0.12)", borderColor: "rgba(52,211,153,0.35)" },
   sentimentNegative: { backgroundColor: "rgba(244,63,94,0.12)", borderColor: "rgba(244,63,94,0.35)" },
   sentimentNeutral: { backgroundColor: "rgba(251,191,36,0.12)", borderColor: "rgba(251,191,36,0.35)" },
-  sentimentText: { color: "#e2e8f0", fontSize: 10, fontWeight: "800" },
+  sentimentText: { color: "#111827", fontSize: 10, fontWeight: "800" },
 
   emptyInline: { color: "#64748b", fontSize: 12, lineHeight: 18 },
   errorWrap: {
@@ -962,7 +962,7 @@ const styles = StyleSheet.create({
   errorWrapText: { color: "#fca5a5", fontSize: 12, flex: 1 },
 
   emptyWrap: { flex: 1, justifyContent: "center", alignItems: "center", paddingHorizontal: 30, gap: 8 },
-  emptyTitle: { color: "#fff", fontSize: 18, fontWeight: "800" },
+  emptyTitle: { color: "#111827", fontSize: 18, fontWeight: "800" },
   emptySub: { color: "#9ca3af", fontSize: 13, textAlign: "center" },
 
   errorBanner: {
@@ -997,24 +997,24 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.14)",
-    backgroundColor: "rgba(255,255,255,0.06)",
+    backgroundColor: "rgba(249,115,22,0.08)",
     paddingHorizontal: 10,
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
   },
-  backBtnText: { color: "#cbd5e1", fontSize: 12, fontWeight: "700" },
-  detailTitle: { flex: 1, color: "#fff", fontSize: 15, fontWeight: "800" },
+  backBtnText: { color: "#374151", fontSize: 12, fontWeight: "700" },
+  detailTitle: { flex: 1, color: "#111827", fontSize: 15, fontWeight: "800" },
   detailContent: { paddingHorizontal: 16, paddingBottom: 28, gap: 12 },
   card: {
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(18,21,39,0.92)",
+    borderColor: "#fed7aa",
+    backgroundColor: "#ffffff",
     padding: 14,
   },
-  cardTitle: { color: "#fff", fontSize: 14, fontWeight: "800", marginBottom: 8 },
-  detailLine: { color: "#cbd5e1", fontSize: 12, marginBottom: 6, lineHeight: 18 },
+  cardTitle: { color: "#111827", fontSize: 14, fontWeight: "800", marginBottom: 8 },
+  detailLine: { color: "#374151", fontSize: 12, marginBottom: 6, lineHeight: 18 },
 
   modalOverlay: {
     flex: 1,
@@ -1025,7 +1025,7 @@ const styles = StyleSheet.create({
   modalCard: {
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
+    borderColor: "rgba(249,115,22,0.18)",
     backgroundColor: "#121527",
     padding: 14,
   },
@@ -1035,17 +1035,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 8,
   },
-  modalTitle: { color: "#fff", fontSize: 18, fontWeight: "800" },
+  modalTitle: { color: "#111827", fontSize: 18, fontWeight: "800" },
   modalClose: {
     width: 30,
     height: 30,
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(249,115,22,0.07)",
   },
   label: {
-    color: "#94a3b8",
+    color: "#6b7280",
     fontSize: 11,
     fontWeight: "700",
     textTransform: "uppercase",
@@ -1056,9 +1056,9 @@ const styles = StyleSheet.create({
     height: 42,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(255,255,255,0.05)",
-    color: "#fff",
+    borderColor: "#fed7aa",
+    backgroundColor: "rgba(249,115,22,0.07)",
+    color: "#111827",
     paddingHorizontal: 12,
     fontSize: 13,
   },
@@ -1069,19 +1069,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.14)",
-    backgroundColor: "rgba(255,255,255,0.06)",
+    backgroundColor: "rgba(249,115,22,0.08)",
     justifyContent: "center",
     alignItems: "center",
   },
-  secondaryBtnText: { color: "#cbd5e1", fontSize: 12, fontWeight: "700" },
+  secondaryBtnText: { color: "#374151", fontSize: 12, fontWeight: "700" },
   primaryBtn: {
     flex: 1,
     height: 40,
     borderRadius: 10,
-    backgroundColor: "#4f46e5",
+    backgroundColor: "#f97316",
     justifyContent: "center",
     alignItems: "center",
   },
-  primaryBtnText: { color: "#fff", fontSize: 12, fontWeight: "700" },
+  primaryBtnText: { color: "#111827", fontSize: 12, fontWeight: "700" },
   btnDisabled: { opacity: 0.55 },
 });

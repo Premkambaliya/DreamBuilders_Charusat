@@ -201,8 +201,8 @@ export default function ProfileScreen() {
   if (loading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.centerWrap}>
-          <ActivityIndicator size="large" color="#6C63FF" />
+        <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.centerWrap}>
+          <ActivityIndicator size="large" color="#fb923c" />
           <Text style={styles.loadingText}>Loading profile...</Text>
         </LinearGradient>
       </SafeAreaView>
@@ -211,7 +211,7 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
 
       <MobileSidebar
         visible={sidebarOpen}
@@ -219,14 +219,14 @@ export default function ProfileScreen() {
         user={user}
       />
 
-      <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.flex}>
+      <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.flex}>
         <View style={styles.header}>
           <TouchableOpacity
             onPress={() => setSidebarOpen(true)}
             style={styles.menuBtn}
             activeOpacity={0.7}
           >
-            <Ionicons name="menu" size={22} color="#d1d5db" />
+            <Ionicons name="menu" size={22} color="#6b7280" />
           </TouchableOpacity>
           <View style={{ flex: 1 }}>
             <Text style={styles.title}>Account & Profile</Text>
@@ -241,8 +241,8 @@ export default function ProfileScreen() {
             <RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}
-              tintColor="#6C63FF"
-              colors={["#6C63FF"]}
+              tintColor="#fb923c"
+              colors={["#fb923c"]}
             />
           }
         >
@@ -412,7 +412,7 @@ export default function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: "#090b13" },
+  safeArea: { flex: 1, backgroundColor: "#fff7ed" },
   flex: { flex: 1 },
   centerWrap: { flex: 1, justifyContent: "center", alignItems: "center" },
   loadingText: { color: "#9ca3af", marginTop: 12 },
@@ -429,22 +429,22 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 10,
-    backgroundColor: "rgba(255,255,255,0.08)",
+    backgroundColor: "rgba(249,115,22,0.10)",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
+    borderColor: "rgba(249,115,22,0.18)",
     justifyContent: "center",
     alignItems: "center",
   },
-  title: { color: "#fff", fontSize: 22, fontWeight: "900" },
-  subtitle: { color: "#94a3b8", marginTop: 2, fontSize: 12 },
+  title: { color: "#111827", fontSize: 22, fontWeight: "900" },
+  subtitle: { color: "#6b7280", marginTop: 2, fontSize: 12 },
 
   content: { paddingHorizontal: 16, paddingBottom: 36, gap: 12 },
 
   summaryCard: {
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(18,21,39,0.9)",
+    borderColor: "#fed7aa",
+    backgroundColor: "#ffffff",
     padding: 14,
     flexDirection: "row",
     alignItems: "center",
@@ -456,11 +456,11 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#4f46e5",
+    backgroundColor: "#f97316",
   },
-  avatarText: { color: "#fff", fontSize: 22, fontWeight: "900" },
-  nameText: { color: "#fff", fontSize: 18, fontWeight: "800" },
-  emailText: { color: "#94a3b8", fontSize: 12, marginTop: 2 },
+  avatarText: { color: "#111827", fontSize: 22, fontWeight: "900" },
+  nameText: { color: "#111827", fontSize: 18, fontWeight: "800" },
+  emailText: { color: "#6b7280", fontSize: 12, marginTop: 2 },
   companyPill: {
     marginTop: 6,
     alignSelf: "flex-start",
@@ -470,22 +470,22 @@ const styles = StyleSheet.create({
     borderRadius: 99,
     borderWidth: 1,
     borderColor: "rgba(129,140,248,0.3)",
-    backgroundColor: "rgba(99,102,241,0.12)",
+    backgroundColor: "rgba(249,115,22,0.12)",
     paddingHorizontal: 10,
     paddingVertical: 4,
   },
-  companyPillText: { color: "#a5b4fc", fontSize: 11, fontWeight: "700" },
+  companyPillText: { color: "#ea580c", fontSize: 11, fontWeight: "700" },
 
   card: {
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(18,21,39,0.9)",
+    borderColor: "#fed7aa",
+    backgroundColor: "#ffffff",
     padding: 14,
   },
-  cardTitle: { color: "#fff", fontSize: 15, fontWeight: "800", marginBottom: 10 },
+  cardTitle: { color: "#111827", fontSize: 15, fontWeight: "800", marginBottom: 10 },
   label: {
-    color: "#94a3b8",
+    color: "#6b7280",
     fontSize: 11,
     fontWeight: "700",
     textTransform: "uppercase",
@@ -496,9 +496,9 @@ const styles = StyleSheet.create({
     height: 42,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(255,255,255,0.05)",
-    color: "#fff",
+    borderColor: "#fed7aa",
+    backgroundColor: "rgba(249,115,22,0.07)",
+    color: "#111827",
     paddingHorizontal: 12,
     fontSize: 13,
   },
@@ -527,7 +527,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     height: 42,
     borderRadius: 10,
-    backgroundColor: "#4f46e5",
+    backgroundColor: "#f97316",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -543,7 +543,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 7,
   },
-  primaryBtnText: { color: "#fff", fontSize: 13, fontWeight: "700" },
+  primaryBtnText: { color: "#111827", fontSize: 13, fontWeight: "700" },
   btnDisabled: { opacity: 0.55 },
 
   dangerCard: {
@@ -554,7 +554,7 @@ const styles = StyleSheet.create({
     padding: 14,
   },
   dangerTitle: { color: "#fda4af", fontSize: 15, fontWeight: "800" },
-  dangerSub: { color: "#94a3b8", marginTop: 4, fontSize: 12 },
+  dangerSub: { color: "#6b7280", marginTop: 4, fontSize: 12 },
   deleteBtn: {
     marginTop: 12,
     borderRadius: 10,
@@ -578,8 +578,8 @@ const styles = StyleSheet.create({
   modalCard: {
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "#161829",
+    borderColor: "rgba(249,115,22,0.18)",
+    backgroundColor: "#fffbf5",
     padding: 14,
   },
   modalHead: {
@@ -588,16 +588,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 8,
   },
-  modalTitle: { color: "#fff", fontSize: 16, fontWeight: "800", flex: 1, paddingRight: 8 },
+  modalTitle: { color: "#111827", fontSize: 16, fontWeight: "800", flex: 1, paddingRight: 8 },
   modalClose: {
     width: 30,
     height: 30,
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(249,115,22,0.07)",
   },
-  modalText: { color: "#94a3b8", fontSize: 12, lineHeight: 18, marginBottom: 10 },
+  modalText: { color: "#6b7280", fontSize: 12, lineHeight: 18, marginBottom: 10 },
   modalActions: { marginTop: 12, flexDirection: "row", gap: 10 },
   secondaryBtn: {
     flex: 1,
@@ -605,11 +605,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.14)",
-    backgroundColor: "rgba(255,255,255,0.06)",
+    backgroundColor: "rgba(249,115,22,0.08)",
     alignItems: "center",
     justifyContent: "center",
   },
-  secondaryBtnText: { color: "#cbd5e1", fontWeight: "700", fontSize: 12 },
+  secondaryBtnText: { color: "#374151", fontWeight: "700", fontSize: 12 },
   deleteConfirmBtn: {
     flex: 1,
     height: 40,
@@ -620,5 +620,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 6,
   },
-  deleteConfirmText: { color: "#fff", fontWeight: "700", fontSize: 12 },
+  deleteConfirmText: { color: "#111827", fontWeight: "700", fontSize: 12 },
 });

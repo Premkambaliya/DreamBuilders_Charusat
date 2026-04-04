@@ -231,7 +231,7 @@ const CallCard = ({ call, onPress }) => {
       {/* Tap hint */}
       <View style={styles.tapRow}>
         <Text style={styles.tapHint}>Tap for full call details</Text>
-        <Ionicons name="chevron-forward" size={14} color="#4f46e5" />
+        <Ionicons name="chevron-forward" size={14} color="#f97316" />
       </View>
     </TouchableOpacity>
   );
@@ -275,7 +275,7 @@ const FilterDropdown = ({ label, value, options, isOpen, onToggle, onSelect }) =
                 {option}
               </Text>
               {isSelected ? (
-                <Ionicons name="checkmark" size={14} color="#818cf8" />
+                <Ionicons name="checkmark" size={14} color="#ea580c" />
               ) : null}
             </TouchableOpacity>
           );
@@ -384,8 +384,8 @@ export default function CallsScreen() {
   if (loading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.centerFlex}>
-          <ActivityIndicator size="large" color="#6C63FF" />
+        <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.centerFlex}>
+          <ActivityIndicator size="large" color="#fb923c" />
           <Text style={styles.loadingText}>Loading calls…</Text>
         </LinearGradient>
       </SafeAreaView>
@@ -394,7 +394,7 @@ export default function CallsScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
 
       {/* Sidebar */}
       <MobileSidebar
@@ -403,7 +403,7 @@ export default function CallsScreen() {
         user={user}
       />
 
-      <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.flex}>
+      <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.flex}>
         {/* ── Screen Header ── */}
         <View style={styles.screenHeader}>
           <TouchableOpacity
@@ -411,7 +411,7 @@ export default function CallsScreen() {
             style={styles.menuBtn}
             activeOpacity={0.7}
           >
-            <Ionicons name="menu" size={22} color="#d1d5db" />
+            <Ionicons name="menu" size={22} color="#6b7280" />
           </TouchableOpacity>
           <View style={{ flex: 1 }}>
             <Text style={styles.h1}>Conversation Library</Text>
@@ -424,7 +424,7 @@ export default function CallsScreen() {
             style={styles.refreshBtn}
             activeOpacity={0.7}
           >
-            <Ionicons name="refresh-outline" size={20} color="#818cf8" />
+            <Ionicons name="refresh-outline" size={20} color="#ea580c" />
           </TouchableOpacity>
         </View>
 
@@ -514,8 +514,8 @@ export default function CallsScreen() {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
-                tintColor="#6C63FF"
-                colors={["#6C63FF"]}
+                tintColor="#fb923c"
+                colors={["#fb923c"]}
               />
             }
             ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
@@ -529,7 +529,7 @@ export default function CallsScreen() {
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  safeArea:  { flex: 1, backgroundColor: "#090b13" },
+  safeArea:  { flex: 1, backgroundColor: "#fff7ed" },
   flex:      { flex: 1 },
   centerFlex:{ flex: 1, justifyContent: "center", alignItems: "center" },
 
@@ -546,17 +546,17 @@ const styles = StyleSheet.create({
   },
   menuBtn: {
     width: 40, height: 40, borderRadius: 10,
-    backgroundColor: "rgba(255,255,255,0.08)",
-    borderWidth: 1, borderColor: "rgba(255,255,255,0.12)",
+    backgroundColor: "rgba(249,115,22,0.10)",
+    borderWidth: 1, borderColor: "rgba(249,115,22,0.18)",
     justifyContent: "center", alignItems: "center",
   },
   refreshBtn: {
     width: 38, height: 38, borderRadius: 10,
-    backgroundColor: "rgba(99,102,241,0.12)",
-    borderWidth: 1, borderColor: "rgba(99,102,241,0.25)",
+    backgroundColor: "rgba(249,115,22,0.12)",
+    borderWidth: 1, borderColor: "rgba(249,115,22,0.35)",
     justifyContent: "center", alignItems: "center",
   },
-  h1:       { fontSize: 19, fontWeight: "800", color: "#fff", letterSpacing: -0.3 },
+  h1:       { fontSize: 19, fontWeight: "800", color: "#111827", letterSpacing: -0.3 },
   subtitle: { fontSize: 12, color: "#6b7280", marginTop: 1 },
 
   // ── Error Banner ──
@@ -577,15 +577,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    borderColor: "#fed7aa",
+    backgroundColor: "rgba(249,115,22,0.06)",
     height: 44,
   },
   searchInput: {
     flex: 1,
     height: "100%",
     paddingHorizontal: 10,
-    color: "#f1f5f9",
+    color: "#111827",
     fontSize: 14,
   },
 
@@ -611,11 +611,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    borderColor: "#fed7aa",
+    backgroundColor: "rgba(249,115,22,0.06)",
   },
   dropdownButtonText: {
-    color: "#e5e7eb",
+    color: "#4b5563",
     fontSize: 13,
     fontWeight: "600",
   },
@@ -623,8 +623,8 @@ const styles = StyleSheet.create({
     marginTop: 6,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
-    backgroundColor: "rgba(15,18,34,0.98)",
+    borderColor: "rgba(249,115,22,0.10)",
+    backgroundColor: "#ffffff",
     overflow: "hidden",
   },
   dropdownItem: {
@@ -634,18 +634,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.06)",
+    borderBottomColor: "rgba(249,115,22,0.08)",
   },
   dropdownItemSelected: {
-    backgroundColor: "rgba(99,102,241,0.14)",
+    backgroundColor: "rgba(249,115,22,0.10)",
   },
   dropdownItemText: {
-    color: "#cbd5e1",
+    color: "#374151",
     fontSize: 13,
     fontWeight: "500",
   },
   dropdownItemTextSelected: {
-    color: "#a5b4fc",
+    color: "#ea580c",
     fontWeight: "700",
   },
 
@@ -654,17 +654,17 @@ const styles = StyleSheet.create({
 
   // ── Card ──
   card: {
-    backgroundColor: "rgba(18,21,39,0.95)",
+    backgroundColor: "#ffffff",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: "rgba(249,115,22,0.10)",
     borderRadius: 16,
     padding: 14,
   },
   cardHeader: { flexDirection: "row", alignItems: "flex-start", marginBottom: 6 },
-  cardTitle:  { color: "#f1f5f9", fontSize: 14, fontWeight: "800" },
-  cardType:   { color: "#38bdf8", fontSize: 10, marginTop: 2, fontWeight: "600" },
+  cardTitle:  { color: "#111827", fontSize: 14, fontWeight: "800" },
+  cardType:   { color: "#0284c7", fontSize: 10, marginTop: 2, fontWeight: "600" },
   typeLabel:  { color: "#6b7280" },
-  cardSummary:{ color: "#9ca3af", fontSize: 12, lineHeight: 17, marginBottom: 10 },
+  cardSummary:{ color: "#6b7280", fontSize: 12, lineHeight: 17, marginBottom: 10 },
 
   analyzedBadge: {
     flexDirection: "row", alignItems: "center",
@@ -675,7 +675,7 @@ const styles = StyleSheet.create({
   analyzedText: { color: "#34d399", fontSize: 10, fontWeight: "600" },
 
   divider: {
-    height: 1, backgroundColor: "rgba(255,255,255,0.06)", marginVertical: 10,
+    height: 1, backgroundColor: "rgba(249,115,22,0.08)", marginVertical: 10,
   },
 
   // ── Stats ──
@@ -688,7 +688,7 @@ const styles = StyleSheet.create({
   probText:   { fontSize: 13, fontWeight: "800" },
   probBarBg: {
     flex: 1, height: 5,
-    backgroundColor: "rgba(255,255,255,0.08)",
+    backgroundColor: "rgba(249,115,22,0.10)",
     borderRadius: 3, overflow: "hidden",
   },
   probBarFill: { height: "100%", borderRadius: 3 },
@@ -699,7 +699,7 @@ const styles = StyleSheet.create({
 
   // Owner
   ownerRow: { flexDirection: "row", alignItems: "center", gap: 4 },
-  ownerText: { color: "#d1d5db", fontSize: 12, fontWeight: "500", flex: 1 },
+  ownerText: { color: "#4b5563", fontSize: 12, fontWeight: "500", flex: 1 },
 
   // Date
   dateRow: { flexDirection: "row", alignItems: "center", gap: 4 },
@@ -707,7 +707,7 @@ const styles = StyleSheet.create({
 
   // Tap hint
   tapRow:  { flexDirection: "row", alignItems: "center", justifyContent: "flex-end", marginTop: 8, gap: 4 },
-  tapHint: { color: "#4f46e5", fontSize: 11, fontWeight: "600" },
+  tapHint: { color: "#f97316", fontSize: 11, fontWeight: "600" },
 
   // ── Badge ──
   badge: {
@@ -721,7 +721,7 @@ const styles = StyleSheet.create({
   emptyWrap: {
     flex: 1, justifyContent: "center", alignItems: "center", padding: 40, gap: 10,
   },
-  emptyTitle:    { color: "#e2e8f0", fontSize: 18, fontWeight: "bold" },
+  emptyTitle:    { color: "#111827", fontSize: 18, fontWeight: "bold" },
   emptySubtitle: { color: "#6b7280", fontSize: 13, textAlign: "center" },
   analyzeBtn: {
     flexDirection: "row", alignItems: "center", gap: 8,
@@ -730,5 +730,5 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(99,102,241,0.25)",
     borderWidth: 1, borderColor: "rgba(99,102,241,0.5)",
   },
-  analyzeBtnText: { color: "#fff", fontSize: 14, fontWeight: "700" },
+  analyzeBtnText: { color: "#111827", fontSize: 14, fontWeight: "700" },
 });
