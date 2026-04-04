@@ -90,13 +90,25 @@ const HintCard = ({ hint, onDismiss }) => {
         </div>
       )}
 
-      {/* KB Products — matched product chips */}
+      {/* KB Products — detailed cards for instant in-call response */}
       {hint.kbProducts && hint.kbProducts.length > 0 && (
-        <div style={{ marginTop: 8, display: "flex", flexWrap: "wrap", gap: 4 }}>
+        <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 6 }}>
           {hint.kbProducts.map((p, i) => (
-            <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "3px 8px", borderRadius: 8, background: "rgba(108,99,255,.08)", border: "1px solid rgba(108,99,255,.15)", fontSize: ".65rem", color: "#a78bfa" }}>
-              🚗 {p.name} — {p.price}
-            </span>
+            <div key={i} style={{ padding: "8px 10px", borderRadius: 10, background: "rgba(108,99,255,.08)", border: "1px solid rgba(108,99,255,.2)" }}>
+              <div style={{ fontSize: ".74rem", fontWeight: 700, color: "#c4b5fd", marginBottom: 2 }}>
+                {p.name} {p.variant ? `(${p.variant})` : ""}
+              </div>
+              {p.shortLine && (
+                <div style={{ fontSize: ".68rem", color: "#cbd5e1", marginBottom: 3, lineHeight: 1.5 }}>
+                  {p.shortLine}
+                </div>
+              )}
+              {p.featureLine && (
+                <div style={{ fontSize: ".66rem", color: "#94a3b8", lineHeight: 1.5 }}>
+                  Key highlights: {p.featureLine}
+                </div>
+              )}
+            </div>
           ))}
         </div>
       )}

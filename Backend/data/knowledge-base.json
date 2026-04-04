@@ -7,209 +7,294 @@
 
   "products": [
     {
-      "id": "nexon-smart",
-      "name": "Tata Nexon Smart",
+      "id": "nexon",
+      "name": "Tata Nexon",
       "category": "Compact SUV",
-      "variant": "Base",
-      "price": 899000,
-      "priceFormatted": "₹8.99 Lakhs",
-      "engine": "1.2L Turbo Petrol Revotron",
-      "power": "120 PS / 170 Nm",
-      "transmission": "6-Speed Manual",
-      "mileage": "17.4 km/l",
-      "fuelType": "Petrol",
+      "segment": "Sub-4 Meter SUV",
+      "priceRange": {
+        "min": 732000,
+        "max": 1515000,
+        "formatted": "₹7.32L - ₹15.15L"
+      },
       "safety": "5-Star Global NCAP",
+      "engineOptions": [
+        "1.2L Turbo Petrol (120 PS / 170 Nm)",
+        "1.5L Diesel (115 PS / 260 Nm)",
+        "1.2L Turbo CNG"
+      ],
+      "transmissionOptions": [
+        "5-Speed MT",
+        "6-Speed MT",
+        "6-Speed AMT",
+        "7-Speed DCA"
+      ],
       "seating": 5,
-      "keyFeatures": [
-        "Dual Airbags",
-        "ABS with EBD",
-        "Rear Parking Sensors",
-        "Follow-me-home Headlamps",
-        "Engine Start-Stop"
+
+      "variants": [
+        {
+          "name": "Nexon Smart",
+          "price": 732000,
+          "type": "Base",
+          "engine": "1.2L Turbo Petrol",
+          "power": "120 PS / 170 Nm",
+          "transmission": "5-Speed MT",
+          "mileage": "17 km/l",
+          "fuel": "Petrol",
+          "uniqueFeatures": [
+            "6 Airbags",
+            "ESP",
+            "LED DRLs",
+            "Digital Cluster"
+          ],
+          "bestFor": "Budget buyers prioritizing safety"
+        },
+        {
+          "name": "Nexon Smart+",
+          "price": 800000,
+          "type": "Value",
+          "engine": "1.2L Turbo Petrol",
+          "power": "120 PS / 170 Nm",
+          "transmission": "MT / AMT",
+          "mileage": "17 km/l",
+          "fuel": "Petrol",
+          "uniqueFeatures": [
+            "7-inch Touchscreen",
+            "Android Auto & CarPlay",
+            "Steering Controls"
+          ],
+          "bestFor": "Best entry-level tech"
+        },
+        {
+          "name": "Nexon Smart+ S",
+          "price": 930000,
+          "type": "Value+",
+          "engine": "1.2L Petrol",
+          "power": "120 PS",
+          "transmission": "MT",
+          "mileage": "17 km/l",
+          "fuel": "Petrol",
+          "uniqueFeatures": [
+            "Electric Sunroof",
+            "Auto AC"
+          ],
+          "bestFor": "Cheapest Nexon with sunroof"
+        },
+        {
+          "name": "Nexon Pure",
+          "price": 995000,
+          "type": "Mid",
+          "engine": "Petrol / Diesel",
+          "power": "120 PS / 115 PS",
+          "transmission": "MT",
+          "mileage": "17–23 km/l",
+          "fuel": "Petrol/Diesel",
+          "uniqueFeatures": [
+            "4 Speakers",
+            "Better interiors",
+            "Rear camera"
+          ],
+          "bestFor": "Balanced daily usage"
+        },
+        {
+          "name": "Nexon Pure+",
+          "price": 1050000,
+          "type": "Mid+",
+          "engine": "Petrol / Diesel",
+          "power": "120 PS / 115 PS",
+          "transmission": "MT / AMT",
+          "mileage": "17–23 km/l",
+          "fuel": "Petrol/Diesel",
+          "uniqueFeatures": [
+            "Push Start",
+            "Touchscreen upgrade",
+            "Cruise control"
+          ],
+          "bestFor": "Best value-for-money variant"
+        },
+        {
+          "name": "Nexon Pure+ S",
+          "price": 1100000,
+          "type": "Mid+ Sunroof",
+          "engine": "Petrol / Diesel / CNG",
+          "power": "120 PS / 115 PS",
+          "transmission": "MT / AMT",
+          "mileage": "17–24 km/l",
+          "fuel": "Petrol/Diesel/CNG",
+          "uniqueFeatures": [
+            "Sunroof",
+            "Auto climate control",
+            "Rear AC vents"
+          ],
+          "bestFor": "Feature-rich mid variant"
+        },
+        {
+          "name": "Nexon Creative",
+          "price": 1099000,
+          "type": "Upper Mid",
+          "engine": "Petrol / Diesel",
+          "power": "118 bhp / 115 PS",
+          "transmission": "MT / AMT / DCT",
+          "mileage": "17.4 km/l",
+          "fuel": "Petrol/Diesel",
+          "uniqueFeatures": [
+            "360 Camera",
+            "Cruise Control",
+            "Alloy Wheels"
+          ],
+          "bestFor": "Most recommended variant"
+        },
+        {
+          "name": "Nexon Creative+ S",
+          "price": 1200000,
+          "type": "Upper Mid+",
+          "engine": "Petrol / Diesel",
+          "power": "120 PS / 115 PS",
+          "transmission": "MT / AMT / DCT",
+          "mileage": "17–23 km/l",
+          "fuel": "Petrol/Diesel",
+          "uniqueFeatures": [
+            "Large Infotainment",
+            "JBL Sound",
+            "Sunroof"
+          ],
+          "bestFor": "Premium features at mid price"
+        },
+        {
+          "name": "Nexon Fearless",
+          "price": 1300000,
+          "type": "Top",
+          "engine": "Petrol / Diesel",
+          "power": "120 PS / 115 PS",
+          "transmission": "MT / AMT / DCT",
+          "mileage": "17–23 km/l",
+          "fuel": "Petrol/Diesel",
+          "uniqueFeatures": [
+            "10.25-inch Infotainment",
+            "Ventilated Seats",
+            "Wireless Charging"
+          ],
+          "bestFor": "Top-end comfort & tech"
+        },
+        {
+          "name": "Nexon Fearless+ S Dark",
+          "price": 1450000,
+          "type": "Top Premium",
+          "engine": "Petrol / Diesel",
+          "power": "120 PS / 115 PS",
+          "transmission": "MT / DCT",
+          "mileage": "17–23 km/l",
+          "fuel": "Petrol/Diesel",
+          "uniqueFeatures": [
+            "Dark Edition Styling",
+            "Red Interiors",
+            "360 Camera",
+            "Premium Sound"
+          ],
+          "bestFor": "Buyers wanting premium styling + full features"
+        }
       ],
-      "bestFor": "First-time buyers looking for a safe, affordable compact SUV",
-      "tags": ["nexon", "budget", "entry", "affordable", "petrol", "manual", "safe", "compact suv"]
-    },
-    {
-      "id": "nexon-smart-plus",
-      "name": "Tata Nexon Smart+",
-      "category": "Compact SUV",
-      "variant": "Smart+",
-      "price": 1099000,
-      "priceFormatted": "₹10.99 Lakhs",
-      "engine": "1.2L Turbo Petrol Revotron",
-      "power": "120 PS / 170 Nm",
-      "transmission": "6-Speed Manual / 6-Speed AMT",
-      "mileage": "17.4 km/l (MT) / 17.0 km/l (AMT)",
-      "fuelType": "Petrol",
-      "safety": "5-Star Global NCAP",
-      "seating": 5,
-      "keyFeatures": [
-        "4 Airbags",
-        "7-inch Touchscreen Infotainment",
-        "Steering Mounted Controls",
-        "Automatic Climate Control",
-        "LED DRLs",
-        "Height Adjustable Driver Seat"
+
+      "highlights": [
+        "5-Star Global NCAP safest SUV in segment",
+        "Available in Petrol, Diesel & CNG",
+        "60+ variants across trims",
+        "High resale value (~65% after 3 years)",
+        "Advanced features like 360 camera, ventilated seats"
       ],
-      "bestFor": "Budget-conscious buyers wanting modern features with 5-star safety",
-      "tags": ["nexon", "budget", "value", "petrol", "amt", "automatic", "touchscreen", "safe"]
-    },
-    {
-      "id": "nexon-creative",
-      "name": "Tata Nexon Creative",
-      "category": "Compact SUV",
-      "variant": "Creative",
-      "price": 1249000,
-      "priceFormatted": "₹12.49 Lakhs",
-      "engine": "1.2L Turbo Petrol Revotron",
-      "power": "120 PS / 170 Nm",
-      "transmission": "6-Speed Manual / 6-Speed AMT",
-      "mileage": "17.4 km/l (MT) / 17.0 km/l (AMT)",
-      "fuelType": "Petrol",
-      "safety": "5-Star Global NCAP",
-      "seating": 5,
-      "keyFeatures": [
-        "6 Airbags",
-        "10.25-inch Touchscreen",
-        "Wireless Android Auto & Apple CarPlay",
-        "Sunroof",
-        "Automatic Headlamps",
-        "Rain Sensing Wipers",
-        "Cruise Control"
+
+      "competitors": [
+        {
+          "name": "Hyundai Venue",
+          "priceRange": "₹7.9L - ₹13.5L",
+          "engineOptions": ["1.2 Petrol", "1.0 Turbo", "1.5 Diesel"],
+          "power": "83–120 PS",
+          "keyFeatures": [
+            "Bluelink Connected Tech",
+            "Smooth DCT gearbox",
+            "Refined petrol engines"
+          ],
+          "advantages": [
+            "Best engine refinement",
+            "Good automatic gearbox",
+            "Premium interiors"
+          ],
+          "bestModel": "SX(O) Turbo DCT",
+          "weakness": "Lower safety rating (~3 star)"
+        },
+        {
+          "name": "Maruti Brezza",
+          "priceRange": "₹8.5L - ₹14L",
+          "engineOptions": ["1.5 Petrol", "CNG"],
+          "power": "103 PS",
+          "keyFeatures": [
+            "High mileage",
+            "Reliable engine",
+            "Low maintenance"
+          ],
+          "advantages": [
+            "Best resale value",
+            "Cheap service",
+            "Smooth engine"
+          ],
+          "bestModel": "ZXI+ AT",
+          "weakness": "No turbo engine"
+        },
+        {
+          "name": "Kia Sonet",
+          "priceRange": "₹7.9L - ₹14.8L",
+          "engineOptions": ["1.2 Petrol", "1.0 Turbo", "1.5 Diesel"],
+          "power": "83–120 PS",
+          "keyFeatures": [
+            "10.25-inch infotainment",
+            "Ventilated seats",
+            "Premium interiors"
+          ],
+          "advantages": [
+            "Most features",
+            "Multiple engine options",
+            "Stylish design"
+          ],
+          "bestModel": "GTX+ Diesel AT",
+          "weakness": "Lower safety rating"
+        },
+        {
+          "name": "Mahindra XUV 3XO",
+          "priceRange": "₹7.5L - ₹15L",
+          "engineOptions": ["1.2 Turbo", "1.5 Diesel"],
+          "power": "110–130 PS",
+          "keyFeatures": [
+            "Best performance",
+            "Panoramic sunroof",
+            "5-star safety"
+          ],
+          "advantages": [
+            "Powerful engines",
+            "High safety",
+            "Fun to drive"
+          ],
+          "bestModel": "AX7 Turbo",
+          "weakness": "Lower mileage"
+        }
       ],
-      "bestFor": "Best value-for-money with premium features — our best seller in this segment",
-      "tags": ["nexon", "mid-range", "sunroof", "premium", "best-seller", "touchscreen", "apple carplay", "cruise"]
-    },
-    {
-      "id": "nexon-creative-plus",
-      "name": "Tata Nexon Creative+",
-      "category": "Compact SUV",
-      "variant": "Creative+",
-      "price": 1399000,
-      "priceFormatted": "₹13.99 Lakhs",
-      "engine": "1.2L Turbo Petrol / 1.5L Diesel",
-      "power": "120 PS (Petrol) / 115 PS (Diesel)",
-      "transmission": "6-Speed Manual / 6-Speed AMT",
-      "mileage": "17.4 km/l (Petrol) / 23.2 km/l (Diesel)",
-      "fuelType": "Petrol / Diesel",
-      "safety": "5-Star Global NCAP",
-      "seating": 5,
-      "keyFeatures": [
-        "6 Airbags",
-        "Ventilated Front Seats",
-        "Air Purifier",
-        "360-Degree Camera",
-        "Wireless Charging",
-        "10.25-inch Touchscreen",
-        "JBL Sound System (9 Speakers)"
-      ],
-      "bestFor": "Customers who want the full premium experience with every feature",
-      "tags": ["nexon", "premium", "diesel", "ventilated seats", "camera 360", "jbl", "wireless charging", "top"]
-    },
-    {
-      "id": "nexon-fearless",
-      "name": "Tata Nexon Fearless",
-      "category": "Compact SUV",
-      "variant": "Fearless (Top)",
-      "price": 1499000,
-      "priceFormatted": "₹14.99 Lakhs",
-      "engine": "1.2L Turbo Petrol / 1.5L Diesel",
-      "power": "120 PS (Petrol) / 115 PS (Diesel)",
-      "transmission": "6-Speed Manual / 6-Speed AMT / 7-Speed DCT",
-      "mileage": "17.4 km/l (Petrol) / 23.2 km/l (Diesel)",
-      "fuelType": "Petrol / Diesel",
-      "safety": "5-Star Global NCAP",
-      "seating": 5,
-      "keyFeatures": [
-        "6 Airbags",
-        "ADAS (Advanced Driver Assistance)",
-        "Blind Spot Monitor",
-        "Lane Departure Warning",
-        "Auto Emergency Braking",
-        "Heads-Up Display",
-        "Powered Driver Seat",
-        "Ambient Lighting"
-      ],
-      "bestFor": "Tech-savvy customers wanting ADAS/autonomous features — the flagship variant",
-      "tags": ["nexon", "top", "flagship", "adas", "autonomous", "hud", "blind spot", "dct", "diesel"]
-    },
-    {
-      "id": "nexon-ev-smart-plus",
-      "name": "Tata Nexon EV Smart+",
-      "category": "Electric Compact SUV",
-      "variant": "Smart+ EV",
-      "price": 1499000,
-      "priceFormatted": "₹14.99 Lakhs",
-      "engine": "Permanent Magnet Synchronous Motor",
-      "power": "143 PS / 215 Nm",
-      "transmission": "Single Speed Automatic",
-      "mileage": "325 km (MIDC Range)",
-      "fuelType": "Electric",
-      "safety": "5-Star Global NCAP",
-      "seating": 5,
-      "keyFeatures": [
-        "30.2 kWh Battery",
-        "Fast Charging (0-80% in 56 min)",
-        "Connected Car Tech (ZConnect)",
-        "Regenerative Braking",
-        "10.25-inch Touchscreen",
-        "Multi-Mode Regen"
-      ],
-      "bestFor": "Eco-conscious buyers ready to switch to electric with zero running costs",
-      "tags": ["nexon", "ev", "electric", "green", "zero emission", "fast charging", "battery", "range"]
-    },
-    {
-      "id": "harrier",
-      "name": "Tata Harrier Adventurous",
-      "category": "Mid-Size SUV",
-      "variant": "Adventurous",
-      "price": 1599000,
-      "priceFormatted": "₹15.99 Lakhs",
-      "engine": "2.0L Kryotec Diesel",
-      "power": "170 PS / 350 Nm",
-      "transmission": "6-Speed Manual / 6-Speed AT",
-      "mileage": "16.35 km/l",
-      "fuelType": "Diesel",
-      "safety": "5-Star Global NCAP",
-      "seating": 5,
-      "keyFeatures": [
-        "OMEGA Architecture (Land Rover D8 Platform)",
-        "Panoramic Sunroof",
-        "12.3-inch Touchscreen",
-        "JBL 9-Speaker System",
-        "6 Airbags",
-        "Terrain Response Modes",
-        "Connected Car Tech"
-      ],
-      "bestFor": "Customers wanting a big, premium SUV with Land Rover DNA",
-      "tags": ["harrier", "suv", "big", "premium", "diesel", "land rover", "panoramic sunroof", "jbl"]
-    },
-    {
-      "id": "safari",
-      "name": "Tata Safari Accomplished+",
-      "category": "Full-Size SUV",
-      "variant": "Accomplished+",
-      "price": 1999000,
-      "priceFormatted": "₹19.99 Lakhs",
-      "engine": "2.0L Kryotec Diesel",
-      "power": "170 PS / 350 Nm",
-      "transmission": "6-Speed AT",
-      "mileage": "14.5 km/l",
-      "fuelType": "Diesel",
-      "safety": "5-Star Global NCAP",
-      "seating": 7,
-      "keyFeatures": [
-        "7-Seater with Captain Seats (2nd Row)",
-        "ADAS Suite",
-        "Panoramic Sunroof",
-        "Ventilated Seats (1st & 2nd Row)",
-        "12.3-inch Touchscreen",
-        "Boss Mode (Rear Seat Controls)",
-        "Air Purifier"
-      ],
-      "bestFor": "Families needing 7 seats with luxury and comfort",
-      "tags": ["safari", "7 seater", "family", "captain seats", "luxury", "adas", "boss mode", "diesel"]
+
+      "tags": [
+        "nexon", "compact suv", "sub 4 meter", "5 star safety", "ncap",
+        "turbo petrol", "diesel suv", "cng", "amt", "dct", "automatic",
+        "sunroof", "connected car", "best suv india",
+        "mileage", "kmpl", "fuel efficient", "fuel economy",
+        "safety", "airbag", "esp", "abs",
+        "camera", "360 camera", "touchscreen", "infotainment",
+        "ventilated seats", "wireless charging", "jbl",
+        "resale", "first car", "family car", "budget suv",
+        "petrol", "diesel", "price", "lakhs",
+        "venue", "brezza", "sonet", "xuv3xo", "creta", "maruti", "hyundai", "kia", "mahindra",
+        "compare", "comparison", "difference", "vs",
+        "service", "maintenance", "low maintenance",
+        "delivery", "booking", "test drive", "exchange", "warranty",
+        "review", "mixed review", "after sales", "service center",
+        "adas", "hud", "blind spot", "lane", "powerful", "engine", "performance",
+        "strong", "torque", "power", "pickup"
+      ]
     }
   ],
 
@@ -221,37 +306,37 @@
     },
     {
       "question": "Do you offer financing / EMI options?",
-      "answer": "Yes! We partner with SBI, HDFC Bank, ICICI Bank, and Axis Bank. Interest rates start from 8.5% p.a. For example, the Nexon Smart+ at ₹10.99L can be financed at just ₹17,499/month EMI with a 20% down payment over 5 years.",
+      "answer": "Yes! We partner with SBI, HDFC Bank, ICICI Bank, and Axis Bank. Interest rates start from 8.5% p.a. For example, the Nexon Smart+ at ₹8.00L can be financed at just ₹13,499/month EMI with a 20% down payment over 5 years.",
       "tags": ["finance", "emi", "loan", "bank", "payment", "monthly", "interest", "down payment"]
     },
     {
       "question": "What is the delivery time?",
-      "answer": "Current delivery timelines vary by model: Nexon — 2 to 4 weeks, Harrier — 4 to 6 weeks, Safari — 4 to 8 weeks, Nexon EV — 6 to 8 weeks. Exact timelines depend on variant and color choice.",
+      "answer": "Current delivery timelines: Nexon — 2 to 4 weeks depending on variant and color. Exact availability can be confirmed at the showroom.",
       "tags": ["delivery", "waiting", "time", "when", "how long", "availability", "stock"]
     },
     {
       "question": "What colors are available?",
-      "answer": "The Nexon comes in 10 exciting colors including Fearless Purple, Creative Ocean, Flame Red, Daytona Grey, Pure Grey, and the exclusive Grasslands Beige. The Harrier adds Ash Grey and Coral Red options.",
+      "answer": "The Nexon comes in exciting colors including Fearless Purple, Creative Ocean, Flame Red, Daytona Grey, Pure Grey, and the exclusive Grasslands Beige.",
       "tags": ["color", "colour", "shade", "available", "options", "paint"]
     },
     {
       "question": "What is the service schedule?",
       "answer": "Service intervals are every 6 months or 7,500 km. The first 3 services cost approximately ₹3,500 to ₹5,500 depending on the model. We also offer a Tata Service Value Pack starting at ₹14,999 covering 5 years of maintenance.",
-      "tags": ["service", "maintenance", "cost", "schedule", "interval", "free service"]
+      "tags": ["service", "maintenance", "cost", "schedule", "interval", "free service", "after sales", "review", "mixed review"]
     },
     {
       "question": "Is there a test drive available?",
-      "answer": "Absolutely! We offer both showroom test drives and home test drives. You can book a test drive instantly through our website or I can schedule one for you right now. Weekend slots fill up quickly, so I recommend booking today.",
+      "answer": "Absolutely! We offer both showroom test drives and home test drives. You can book a test drive instantly — weekend slots fill up quickly, so I recommend booking today.",
       "tags": ["test drive", "try", "drive", "experience", "demo", "book"]
     },
     {
       "question": "What about resale value?",
-      "answer": "Tata vehicles have seen a significant jump in resale values. The Nexon retains approximately 60-65% of its value after 3 years, which is the highest in the compact SUV segment. The Harrier and Safari retain 58-62%.",
+      "answer": "Tata vehicles have seen a significant jump in resale values. The Nexon retains approximately 60-65% of its value after 3 years, which is the highest in the compact SUV segment.",
       "tags": ["resale", "value", "sell", "second hand", "depreciation", "retain"]
     },
     {
       "question": "Do you offer exchange/trade-in?",
-      "answer": "Yes, we have the Tata Exchange program. Bring any brand's used car and we'll give you the best valuation through our certified evaluation process. Exchange customers get an additional ₹15,000 to ₹25,000 exchange bonus depending on the model.",
+      "answer": "Yes, we have the Tata Exchange program. Bring any brand's used car and we'll give you the best valuation. Exchange customers get an additional ₹15,000 to ₹25,000 exchange bonus depending on the model.",
       "tags": ["exchange", "trade", "old car", "used car", "replace", "swap"]
     }
   ],
@@ -259,23 +344,33 @@
   "objectionHandlers": [
     {
       "objection": "Price is too high / too expensive",
-      "response": "I understand the concern about pricing. Let me share something important — the Nexon has the highest resale value in its segment at 65% after 3 years. When you factor in the 5-star safety, lower insurance premiums, and maintenance costs of just ₹4,000 per service, the total cost of ownership over 5 years is actually 12-15% lower than competitors. Plus, with our EMI options starting at ₹17,499/month, it becomes very manageable.",
+      "response": "I understand the concern about pricing. The Nexon has the highest resale value in its segment at 65% after 3 years. When you factor in the 5-star safety, lower insurance premiums, and maintenance costs of just ₹4,000 per service, the total cost of ownership over 5 years is actually 12-15% lower than competitors. Plus, with our EMI options starting at ₹13,499/month, it becomes very manageable.",
       "tags": ["price", "expensive", "cost", "budget", "afford", "cheap", "money", "costly"]
     },
     {
-      "objection": "Competitor is better / Why not Hyundai / Maruti",
-      "response": "That's a great comparison to bring up. The key differentiators are: (1) Safety — Nexon is the ONLY 5-star GNCAP rated car in the compact SUV segment, while Venue and Brezza have scored 3-4 stars. (2) Build quality — Nexon uses high-strength steel with impact-absorbing crumple zones. (3) Connected car features with iRA are included FREE for 5 years, while competitors charge ₹10,000/year. Safety is not an optional feature — it protects your family.",
-      "tags": ["competitor", "hyundai", "venue", "brezza", "maruti", "kia", "sonet", "creta", "comparison", "better", "gong"]
+      "objection": "Competitor is better / Why not Hyundai / Maruti / Kia",
+      "response": "That's a great comparison. The key differentiator is safety — Nexon is the ONLY 5-star GNCAP rated car in the compact SUV segment, while Venue and Brezza have scored lower. Build quality uses high-strength steel with impact-absorbing crumple zones. Connected car features with iRA are FREE for 5 years.",
+      "tags": ["competitor", "hyundai", "venue", "brezza", "maruti", "kia", "sonet", "creta", "mahindra", "xuv", "comparison", "better", "vs"]
+    },
+    {
+      "objection": "After-sales service quality concern",
+      "response": "I understand the concern about service. Tata has significantly expanded its service network to over 1,500+ touchpoints across India. We also offer a Tata Service Value Pack at ₹14,999 for 5 years of worry-free maintenance with fixed service costs. Many customers who had early concerns now rate our service 4.2/5.",
+      "tags": ["service", "after sales", "maintenance", "review", "mixed review", "service center", "problem", "issue", "concern"]
     },
     {
       "objection": "I need to think about it / Not ready to decide",
-      "response": "I completely respect that — it's a big decision. Here's what I'd suggest: let me book a test drive for this weekend so you can experience it firsthand. There's absolutely no pressure. I should also mention that we have a special offer ending this month — ₹25,000 cashback on the Creative variant. This offer won't be available next month.",
+      "response": "I completely respect that — it's a big decision. Let me book a test drive for this weekend so you can experience it firsthand. There's absolutely no pressure. We also have a special offer ending this month — ₹25,000 cashback on select variants.",
       "tags": ["think", "decide", "later", "not sure", "wait", "time", "consider", "decide later"]
     },
     {
-      "objection": "Diesel / Petrol confusion",
-      "response": "Both are excellent options. If you drive more than 1,500 km per month, diesel makes sense — you'll save ₹3,000-4,000 per month on fuel. The diesel engine also has higher torque (250 Nm) which is great for highways. If you drive under 1,000 km/month in the city, petrol is more cost-effective with lower upfront cost.",
-      "tags": ["diesel", "petrol", "fuel", "mileage", "which engine", "fuel type", "efficient"]
+      "objection": "Diesel vs Petrol confusion",
+      "response": "Both are excellent options. If you drive more than 1,500 km per month, diesel makes sense — you'll save ₹3,000-4,000/month on fuel and the diesel gives 23 km/l. Under 1,000 km/month in the city, petrol is more cost-effective with a lower upfront price.",
+      "tags": ["diesel", "petrol", "fuel", "mileage", "kmpl", "which engine", "fuel type", "efficient", "economy"]
+    },
+    {
+      "objection": "Mileage not good enough / competitor has better mileage",
+      "response": "The Nexon diesel gives 23.2 km/l which is actually one of the best in segment. The petrol gives 17 km/l with turbo power. If mileage is the top priority, I'd recommend the Nexon Diesel Pure+ variant which gives you the best of both — great mileage and premium features.",
+      "tags": ["mileage", "kmpl", "fuel economy", "brezza mileage", "venue mileage", "economy", "efficient", "stone diesel"]
     }
   ]
 }

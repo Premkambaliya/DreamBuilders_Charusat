@@ -23,6 +23,66 @@ const groq = new Groq({
 
 const MIN_NEW_WORDS = 8;
 
+const GENERIC_HINT_PATTERNS = [
+  /provide\s+details?/i,
+  /share\s+details?/i,
+  /give\s+more\s+info/i,
+  /answer\s+the\s+question/i,
+  /explain\s+the\s+product/i,
+  /more\s+positive\s+info/i,
+];
+
+const isLikelyGenericHint = (hintText = "", detailText = "") => {
+  const combined = `${hintText} ${detailText}`.trim();
+  if (!combined) return true;
+  return GENERIC_HINT_PATTERNS.some((pattern) => pattern.test(combined));
+};
+
+const buildProductSummary = (product) => {
+  const coreFeatures = Array.isArray(product.keyFeatures)
+    ? product.keyFeatures.slice(0, 3).join(", ")
+    : "";
+
+  return {
+    name: product.name,
+    variant: product.variant || "",
+    price: product.priceFormatted || "",
+    engine: product.engine || "",
+    mileage: product.mileage || "",
+    safety: product.safety || "",
+    bestFor: product.bestFor || "",
+    features: Array.isArray(product.keyFeatures) ? product.keyFeatures.slice(0, 5) : [],
+    shortLine: [product.priceFormatted, product.engine, product.safety].filter(Boolean).join(" | "),
+    featureLine: coreFeatures,
+  };
+};
+
+const buildKnowledgeFallbackHint = (kbResults, callContext = {}) => {
+  const products = (kbResults?.products || []).slice(0, 3);
+  if (!products.length) return null;
+
+  const customerName = callContext.customerName || "there";
+  const topProduct = products[0];
+  const productLabels = products
+    .map((p) => `${p.name}${p.priceFormatted ? ` at ${p.priceFormatted}` : ""}`)
+    .join(", ");
+
+  const topFeatures = Array.isArray(topProduct.keyFeatures)
+    ? topProduct.keyFeatures.slice(0, 2).join(" and ")
+    : "";
+
+  const talkTrack = `Great question, ${customerName}! Based on what you asked, top options are ${productLabels}. ${topFeatures ? `${topProduct.name} stands out with ${topFeatures}. ` : ""}Would you like a quick comparison of the best two options for your needs?`;
+
+  return {
+    type: "QUESTION",
+    confidence: 0.92,
+    trigger: "Customer asked for product details",
+    hint: `Share exact model details now: ${products.map((p) => p.name).join(" / ")}`,
+    detail: `Use these matched products with exact pricing and features so the customer gets a direct answer immediately.`,
+    talkTrack,
+  };
+};
+
 /**
  * Analyze the recent transcript, search the Knowledge Base,
  * and generate a real-time hint with a Talk Track.
@@ -113,20 +173,29 @@ CRITICAL RULES:
 
     if (!hint.type || !hint.hint) return null;
 
+    const shouldUseKnowledgeFallback =
+      hint.type === "QUESTION" &&
+      kbResults.products.length > 0 &&
+      (isLikelyGenericHint(hint.hint, hint.detail) || !hint.talkTrack?.trim());
+
+    const effectiveHint = shouldUseKnowledgeFallback
+      ? buildKnowledgeFallbackHint(kbResults, callContext)
+      : {
+          type: hint.type,
+          confidence: hint.confidence || 0.8,
+          trigger: hint.trigger || "",
+          hint: hint.hint,
+          detail: hint.detail || "",
+          talkTrack: hint.talkTrack || "",
+        };
+
+    if (!effectiveHint) return null;
+
     return {
-      type: hint.type,
-      confidence: hint.confidence || 0.8,
-      trigger: hint.trigger || "",
-      hint: hint.hint,
-      detail: hint.detail || "",
-      talkTrack: hint.talkTrack || "",
+      ...effectiveHint,
       timestamp: Date.now(),
-      // Include matched KB products for the frontend to display
-      kbProducts: kbResults.products.slice(0, 3).map((p) => ({
-        name: p.name,
-        price: p.priceFormatted,
-        features: p.keyFeatures.slice(0, 4),
-      })),
+      // Include richer matched KB products for frontend rendering
+      kbProducts: kbResults.products.slice(0, 3).map((p) => buildProductSummary(p)),
     };
   } catch (error) {
     if (error.status === 429) {
