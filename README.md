@@ -288,10 +288,11 @@ by leveraging data that already exists in their conversations.
 ## 13. One-Line Definition
 
 AI Conversation Intelligence & Action Platform that converts customer conversations into actionable business decisions across calls, products, and teams.
+---
 For admin Side 
-user-testcompany@gmail.com
+user - testcompany@gmail.com
 password-12345678
 
 For Employee side
-user-testemployee@gmail.com
+user - testemployee@gmail.com
 password-12345678
