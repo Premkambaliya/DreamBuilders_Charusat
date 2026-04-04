@@ -36,8 +36,8 @@ import {
 } from 'lucide-react';
 import { dashboardApi } from '../api/api';
 
-const cardClassName = 'rounded-2xl border border-white/10 bg-[#121527]/90 p-5 shadow-[0_16px_50px_rgba(0,0,0,0.25)] backdrop-blur-md';
-const inputClassName = 'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-indigo-400/50 focus:bg-white/8';
+const cardClassName = 'rounded-2xl border border-gray-200 bg-[#ffffff]/90 p-5 shadow-[0_16px_50px_rgba(0,0,0,0.25)] backdrop-blur-md';
+const inputClassName = 'w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-orange-500/50 focus:bg-gray-100';
 
 const sentimentMap = {
   positive: { label: 'Positive', icon: Smile, className: 'border-emerald-500/20 bg-emerald-500/10 text-emerald-300' },
@@ -70,9 +70,9 @@ function Section({ title, icon: Icon, iconColor = '#6C63FF', defaultOpen = true,
       >
         <div className="flex items-center gap-2.5">
           {createElement(Icon, { size: 18, style: { color: iconColor } })}
-          <h3 className="text-base font-bold text-white">{title}</h3>
+          <h3 className="text-base font-bold text-gray-900">{title}</h3>
         </div>
-        {open ? <ChevronUp size={18} className="text-slate-400" /> : <ChevronDown size={18} className="text-slate-400" />}
+        {open ? <ChevronUp size={18} className="text-gray-500" /> : <ChevronDown size={18} className="text-gray-500" />}
       </button>
       {open ? <div className="px-6 pb-6">{children}</div> : null}
     </section>
@@ -81,7 +81,7 @@ function Section({ title, icon: Icon, iconColor = '#6C63FF', defaultOpen = true,
 
 function ListItems({ items, variant = 'info' }) {
   if (!items?.length) {
-    return <p className="text-sm text-slate-400">None detected.</p>;
+    return <p className="text-sm text-gray-500">None detected.</p>;
   }
 
   const rowClassName = getBadgeClassName(variant);
@@ -123,7 +123,7 @@ function MeterRing({ value, color, label }) {
         <div className="absolute inset-0 grid place-items-center text-center">
           <div>
             <div className="text-4xl font-black" style={{ color }}>{value}%</div>
-            <div className="mt-1 text-xs text-slate-400">{label}</div>
+            <div className="mt-1 text-xs text-gray-500">{label}</div>
           </div>
         </div>
       </div>
@@ -140,10 +140,10 @@ function RatingRing({ score }) {
       className="relative flex h-28 w-28 items-center justify-center rounded-full"
       style={{ background: `conic-gradient(${ringColor} ${angle}%, rgba(255,255,255,0.06) ${angle}% 100%)` }}
     >
-      <div className="absolute inset-2 rounded-full bg-[#121527]" />
+      <div className="absolute inset-2 rounded-full bg-[#ffffff]" />
       <div className="relative z-10 text-center">
         <span className="text-4xl font-black" style={{ color: ringColor }}>{score}</span>
-        <span className="text-base text-slate-300">/10</span>
+        <span className="text-base text-gray-600">/10</span>
       </div>
     </div>
   );
@@ -198,9 +198,9 @@ function CallDetail({ token }) {
 
   if (loading) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center py-8 text-slate-200">
+      <div className="flex min-h-[60vh] items-center justify-center py-8 text-gray-700">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-white/20 border-t-indigo-400" />
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-white/20 border-t-orange-500" />
           <p>Loading call details...</p>
         </div>
       </div>
@@ -209,10 +209,10 @@ function CallDetail({ token }) {
 
   if (!call) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center py-8 text-slate-200">
+      <div className="flex min-h-[60vh] items-center justify-center py-8 text-gray-700">
         <div className="flex flex-col items-center gap-4">
           <p className="text-lg">Call not found</p>
-          <Link to="/dashboard/calls" className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10">
+          <Link to="/dashboard/calls" className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-white/10">
             <ArrowLeft size={16} /> Back to Calls
           </Link>
         </div>
@@ -316,7 +316,7 @@ function CallDetail({ token }) {
   };
 
   return (
-    <div className="flex flex-col gap-6 py-8 text-slate-200">
+    <div className="flex flex-col gap-6 py-8 text-gray-700">
       {feedback ? (
         <div className={`rounded-2xl border px-4 py-3 text-sm ${feedback.type === 'error' ? 'border-rose-500/20 bg-rose-500/10 text-rose-200' : 'border-emerald-500/20 bg-emerald-500/10 text-emerald-200'}`}>
           {feedback.message}
@@ -324,16 +324,16 @@ function CallDetail({ token }) {
       ) : null}
 
       <div className="flex flex-col gap-4">
-        <Link to="/dashboard/calls" className="inline-flex w-fit items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10">
+        <Link to="/dashboard/calls" className="inline-flex w-fit items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-white/10">
           <ArrowLeft size={16} /> Back to Calls
         </Link>
 
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-[clamp(1.4rem,3vw,2rem)] font-extrabold text-white">
+            <h1 className="text-[clamp(1.4rem,3vw,2rem)] font-extrabold text-gray-900">
               {call.call_title || callTitle || productName || call.product_name || 'Sales Call Analysis'}
             </h1>
-            <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-slate-400">
+            <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-gray-500">
               <span className="inline-flex items-center gap-1.5"><Package size={13} /> {productName || 'Product'}</span>
               <span className="inline-flex items-center gap-1.5"><User size={13} /> {call.employeeName || 'Unknown'}</span>
               <span className="inline-flex items-center gap-1.5"><Calendar size={13} /> {call.createdAt ? new Date(call.createdAt).toLocaleDateString() : '—'}</span>
@@ -352,7 +352,7 @@ function CallDetail({ token }) {
             </span>
             <button
               type="button"
-              className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={downloadReport}
               disabled={downloading}
             >
@@ -364,7 +364,7 @@ function CallDetail({ token }) {
       </div>
 
       {/* ── TABS NAVIGATION ── */}
-      <div className="mb-2 mt-4 flex overflow-x-auto rounded-xl border border-white/10 bg-[#161829] p-1.5 md:w-fit">
+      <div className="mb-2 mt-4 flex overflow-x-auto rounded-xl border border-gray-200 bg-[#f8f9fa] p-1.5 md:w-fit">
         {[
           { id: 'actions', label: 'Overview & Actions', icon: Target },
           { id: 'analysis', label: 'Deep Analysis', icon: BarChart3 },
@@ -373,7 +373,7 @@ function CallDetail({ token }) {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 whitespace-nowrap rounded-lg px-4 py-2 text-sm font-semibold transition ${activeTab === tab.id ? 'bg-indigo-500/20 text-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.15)]' : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'}`}
+            className={`flex items-center gap-2 whitespace-nowrap rounded-lg px-4 py-2 text-sm font-semibold transition ${activeTab === tab.id ? 'bg-orange-500/20 text-orange-600 shadow-[0_0_15px_rgba(99,102,241,0.15)]' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
           >
             <tab.icon size={16} />
             {tab.label}
@@ -385,9 +385,9 @@ function CallDetail({ token }) {
       <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
         <div className="grid gap-6 xl:grid-cols-3">
         <section className={cardClassName}>
-          <h3 className="mb-2 text-center text-sm font-bold text-white">Deal Probability</h3>
+          <h3 className="mb-2 text-center text-sm font-bold text-gray-900">Deal Probability</h3>
           <MeterRing value={dealProbability} color={probabilityColor} label="Deal Probability" />
-          <p className="mt-1 text-center text-xs text-slate-400">
+          <p className="mt-1 text-center text-xs text-gray-500">
             {dealProbability >= 70 ? 'Prioritize this deal.' : dealProbability >= 40 ? 'Follow up soon.' : 'High risk and needs attention.'}
           </p>
         </section>
@@ -401,13 +401,13 @@ function CallDetail({ token }) {
           ].map((item) => (
             <div key={item.label} className="flex flex-col items-center justify-center text-center">
               <span className="text-4xl font-black" style={{ color: item.color }}>{item.value}</span>
-              <span className="mt-1 text-xs text-slate-400">{item.label}</span>
+              <span className="mt-1 text-xs text-gray-500">{item.label}</span>
             </div>
           ))}
         </section>
 
         <section className={`${cardClassName} flex flex-col items-center justify-center gap-3`}>
-          <h3 className="text-center text-sm font-bold text-white">Salesperson Rating</h3>
+          <h3 className="text-center text-sm font-bold text-gray-900">Salesperson Rating</h3>
           <RatingRing score={rating} />
           <span className={`inline-flex items-center rounded-full border px-3 py-1.5 text-sm font-semibold ${getBadgeClassName(rating >= 7 ? 'positive' : rating >= 5 ? 'neutral' : 'negative')}`}>
             {rating >= 8 ? 'Excellent' : rating >= 6 ? 'Good' : rating >= 4 ? 'Average' : 'Needs Work'}
@@ -416,7 +416,7 @@ function CallDetail({ token }) {
       </div>
 
       <section className={`${cardClassName} flex flex-col items-center justify-center gap-3 py-7`}>
-        <h3 className="text-sm font-bold text-white">Customer Sentiment</h3>
+        <h3 className="text-sm font-bold text-gray-900">Customer Sentiment</h3>
         <div className="text-6xl">{sentiment === 'positive' ? '😊' : sentiment === 'negative' ? '😟' : '😐'}</div>
         <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-semibold ${sentimentConfig.className}`}>
           <SentimentIcon size={14} />
@@ -432,8 +432,8 @@ function CallDetail({ token }) {
         <section className={cardClassName}>
           <div className="mb-4 flex items-center gap-2.5">
             <Target size={18} style={{ color: '#FF6B6B' }} />
-            <h3 className="text-lg font-bold text-white">🎯 Action Center</h3>
-            <span className="ml-auto inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-semibold text-slate-300">{actionCenter.length} actions</span>
+            <h3 className="text-lg font-bold text-gray-900">🎯 Action Center</h3>
+            <span className="ml-auto inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs font-semibold text-gray-600">{actionCenter.length} actions</span>
           </div>
           <div className="flex flex-col gap-3">
             {actionCenter.map((action, i) => {
@@ -441,7 +441,7 @@ function CallDetail({ token }) {
                 critical: { border: 'border-rose-500/30', bg: 'bg-rose-500/10', text: 'text-rose-300', dot: 'bg-rose-400', glow: 'shadow-[0_0_12px_rgba(244,63,94,0.3)]' },
                 high: { border: 'border-amber-500/30', bg: 'bg-amber-500/10', text: 'text-amber-300', dot: 'bg-amber-400', glow: '' },
                 medium: { border: 'border-cyan-500/30', bg: 'bg-cyan-500/10', text: 'text-cyan-300', dot: 'bg-cyan-400', glow: '' },
-                low: { border: 'border-slate-500/30', bg: 'bg-slate-500/10', text: 'text-slate-300', dot: 'bg-slate-400', glow: '' },
+                low: { border: 'border-slate-500/30', bg: 'bg-slate-500/10', text: 'text-gray-600', dot: 'bg-slate-400', glow: '' },
               };
               const c = pColors[action.priority] || pColors.medium;
               return (
@@ -449,17 +449,17 @@ function CallDetail({ token }) {
                   <div className="mb-2 flex items-center gap-2">
                     <span className={`h-2.5 w-2.5 rounded-full ${c.dot}`} />
                     <span className={`text-xs font-extrabold uppercase tracking-wider ${c.text}`}>{action.priority}</span>
-                    {action.owner === 'manager' ? <span className="rounded-full border border-indigo-500/20 bg-indigo-500/10 px-2 py-0.5 text-[10px] font-semibold text-indigo-300">MANAGER</span> : null}
+                    {action.owner === 'manager' ? <span className="rounded-full border border-orange-500/20 bg-orange-500/10 px-2 py-0.5 text-[10px] font-semibold text-orange-600">MANAGER</span> : null}
                   </div>
-                  <p className="text-sm font-semibold text-white">{action.action}</p>
-                  {action.reason ? <p className="mt-1 text-sm text-slate-300">{action.reason}</p> : null}
+                  <p className="text-sm font-semibold text-gray-900">{action.action}</p>
+                  {action.reason ? <p className="mt-1 text-sm text-gray-600">{action.reason}</p> : null}
                   <div className="mt-3 flex flex-wrap items-center gap-2">
                     {action.template ? (
-                      <button type="button" className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-white/20" onClick={() => copyText(action.template, setCopied)}>
+                      <button type="button" className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 text-xs font-medium text-gray-900 transition hover:bg-white/20" onClick={() => copyText(action.template, setCopied)}>
                         <Copy size={12} /> Copy Template
                       </button>
                     ) : null}
-                    {action.deadline ? <span className="inline-flex items-center gap-1 text-xs text-slate-400"><Clock size={12} /> {action.deadline}</span> : null}
+                    {action.deadline ? <span className="inline-flex items-center gap-1 text-xs text-gray-500"><Clock size={12} /> {action.deadline}</span> : null}
                   </div>
                 </div>
               );
@@ -473,21 +473,21 @@ function CallDetail({ token }) {
         <section className={`rounded-2xl border ${riskLevel === 'critical' ? 'border-rose-500/30 bg-rose-500/10 shadow-[0_0_30px_rgba(244,63,94,0.15)]' : 'border-amber-500/30 bg-amber-500/10'} p-5`}>
           <div className="mb-3 flex items-center gap-2">
             <AlertTriangle size={18} className={riskLevel === 'critical' ? 'text-rose-400' : 'text-amber-400'} />
-            <h3 className="text-lg font-bold text-white">⚠️ Deal Risk: <span className={`uppercase ${riskLevel === 'critical' ? 'text-rose-300' : 'text-amber-300'}`}>{riskLevel}</span></h3>
+            <h3 className="text-lg font-bold text-gray-900">⚠️ Deal Risk: <span className={`uppercase ${riskLevel === 'critical' ? 'text-rose-300' : 'text-amber-300'}`}>{riskLevel}</span></h3>
           </div>
-          {riskSummary ? <p className="mb-3 text-sm text-slate-300">{riskSummary}</p> : null}
+          {riskSummary ? <p className="mb-3 text-sm text-gray-600">{riskSummary}</p> : null}
           {dealRecoveryPlan?.requiredActions?.length ? (
             <div className="mt-3">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Recovery Actions ({dealRecoveryPlan.currentProbability}% → {dealRecoveryPlan.targetProbability}%)</p>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Recovery Actions ({dealRecoveryPlan.currentProbability}% → {dealRecoveryPlan.targetProbability}%)</p>
               <ul className="flex flex-col gap-1.5">
                 {dealRecoveryPlan.requiredActions.map((action, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-200">
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
                     {action}
                   </li>
                 ))}
               </ul>
-              {dealRecoveryPlan.timeline ? <p className="mt-2 text-xs text-slate-400">⏰ {dealRecoveryPlan.timeline}</p> : null}
+              {dealRecoveryPlan.timeline ? <p className="mt-2 text-xs text-gray-500">⏰ {dealRecoveryPlan.timeline}</p> : null}
             </div>
           ) : null}
         </section>
@@ -498,30 +498,30 @@ function CallDetail({ token }) {
         <Section title="Objection Playbook" icon={Shield} iconColor="#FF6B6B">
           <div className="flex flex-col gap-4">
             {objectionPlaybook.map((obj, i) => (
-              <div key={i} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+              <div key={i} className="rounded-xl border border-gray-200 bg-white/[0.03] p-4">
                 <div className="mb-2 flex items-center gap-2">
                   <AlertTriangle size={14} className="text-rose-300" />
-                  <span className="text-sm font-bold text-white">"{obj.objection}"</span>
+                  <span className="text-sm font-bold text-gray-900">"{obj.objection}"</span>
                   <span className={`ml-auto rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase ${obj.severity === 'high' ? 'border-rose-500/20 bg-rose-500/10 text-rose-300' : obj.severity === 'low' ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-300' : 'border-amber-500/20 bg-amber-500/10 text-amber-300'}`}>{obj.severity}</span>
                 </div>
                 {obj.suggestedResponse ? (
-                  <div className="mb-3 rounded-lg border-l-3 border-indigo-400 bg-indigo-500/5 px-4 py-3">
-                    <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-indigo-300">💬 What To Say</p>
-                    <p className="text-sm text-slate-200 italic">"{obj.suggestedResponse}"</p>
+                  <div className="mb-3 rounded-lg border-l-3 border-orange-500 bg-orange-500/5 px-4 py-3">
+                    <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-orange-600">💬 What To Say</p>
+                    <p className="text-sm text-gray-700 italic">"{obj.suggestedResponse}"</p>
                   </div>
                 ) : null}
                 {obj.actionItems?.length ? (
                   <div className="mb-3">
-                    <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">Follow-Up Steps</p>
+                    <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-500">Follow-Up Steps</p>
                     <ul className="flex flex-col gap-1">
                       {obj.actionItems.map((item, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-slate-300"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400" />{item}</li>
+                        <li key={j} className="flex items-start gap-2 text-sm text-gray-600"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400" />{item}</li>
                       ))}
                     </ul>
                   </div>
                 ) : null}
                 {obj.responseTemplate ? (
-                  <button type="button" className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-white/20" onClick={() => copyText(obj.responseTemplate, setCopied)}>
+                  <button type="button" className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 text-xs font-medium text-gray-900 transition hover:bg-white/20" onClick={() => copyText(obj.responseTemplate, setCopied)}>
                     <Mail size={12} /> Copy Email Template
                   </button>
                 ) : null}
@@ -538,7 +538,7 @@ function CallDetail({ token }) {
             {competitiveBattleCard.winStrategy ? (
               <div className="rounded-lg border-l-3 border-amber-400 bg-amber-500/5 px-4 py-3">
                 <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-amber-300">🏆 Win Strategy</p>
-                <p className="text-sm text-slate-200">{competitiveBattleCard.winStrategy}</p>
+                <p className="text-sm text-gray-700">{competitiveBattleCard.winStrategy}</p>
               </div>
             ) : null}
             {competitiveBattleCard.counterPoints?.length ? (
@@ -567,25 +567,25 @@ function CallDetail({ token }) {
             {coachingActions.specificIssue ? (
               <div className="rounded-lg border-l-3 border-rose-400 bg-rose-500/5 px-4 py-3">
                 <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-rose-300">❌ What Went Wrong</p>
-                <p className="text-sm text-slate-200">{coachingActions.specificIssue}</p>
+                <p className="text-sm text-gray-700">{coachingActions.specificIssue}</p>
               </div>
             ) : null}
             {coachingActions.coachingTip ? (
               <div className="rounded-lg border-l-3 border-emerald-400 bg-emerald-500/5 px-4 py-3">
                 <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-emerald-300">💡 How To Improve</p>
-                <p className="text-sm text-slate-200">{coachingActions.coachingTip}</p>
+                <p className="text-sm text-gray-700">{coachingActions.coachingTip}</p>
               </div>
             ) : null}
             {coachingActions.practiceExercise ? (
               <div className="rounded-lg border-l-3 border-cyan-400 bg-cyan-500/5 px-4 py-3">
                 <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-cyan-300">🏋️ Practice Exercise</p>
-                <p className="text-sm text-slate-200">{coachingActions.practiceExercise}</p>
+                <p className="text-sm text-gray-700">{coachingActions.practiceExercise}</p>
               </div>
             ) : null}
             {coachingActions.managerSummary ? (
-              <div className="rounded-lg border border-indigo-500/20 bg-indigo-500/5 px-4 py-3">
-                <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-indigo-300">👔 Manager Summary</p>
-                <p className="text-sm text-slate-200">{coachingActions.managerSummary}</p>
+              <div className="rounded-lg border border-orange-500/20 bg-orange-500/5 px-4 py-3">
+                <p className="mb-1 text-[10px] font-bold uppercase tracking-wider text-orange-600">👔 Manager Summary</p>
+                <p className="text-sm text-gray-700">{coachingActions.managerSummary}</p>
               </div>
             ) : null}
           </div>
@@ -594,18 +594,18 @@ function CallDetail({ token }) {
       
       {followUpRecommendation ? (
         <Section title="AI Follow-Up Recommendation" icon={Lightbulb} iconColor="#4CC9F0">
-          <div className="rounded-r-xl border-l-3 border-cyan-400 bg-cyan-500/5 px-4 py-4 text-sm leading-7 text-slate-300">{followUpRecommendation}</div>
+          <div className="rounded-r-xl border-l-3 border-cyan-400 bg-cyan-500/5 px-4 py-4 text-sm leading-7 text-gray-600">{followUpRecommendation}</div>
         </Section>
       ) : null}
 
       <Section title="Generated Follow-Up Email" icon={Mail} iconColor="#6C63FF">
-        <div className="rounded-r-xl border-l-3 border-cyan-400 bg-cyan-500/5 px-4 py-4 text-sm text-slate-300">
+        <div className="rounded-r-xl border-l-3 border-cyan-400 bg-cyan-500/5 px-4 py-4 text-sm text-gray-600">
           <p><strong>Subject:</strong> {emailDraft.subject || 'Follow-up on our call'}</p>
-          <pre className="mt-3 max-h-[220px] overflow-y-auto rounded-xl border border-white/10 bg-white/5 p-4 whitespace-pre-wrap text-sm leading-7 text-slate-300">
+          <pre className="mt-3 max-h-[220px] overflow-y-auto rounded-xl border border-gray-200 bg-gray-50 p-4 whitespace-pre-wrap text-sm leading-7 text-gray-600">
             {emailDraft.body || 'No email draft generated.'}
           </pre>
           <div className="mt-3 flex flex-wrap gap-2">
-            <button type="button" className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10" onClick={() => copyText(`Subject: ${emailDraft.subject || 'Follow-up on our call'}\n\n${emailDraft.body || 'No email draft generated.'}`, setEmailCopied)}>
+            <button type="button" className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-white/10" onClick={() => copyText(`Subject: ${emailDraft.subject || 'Follow-up on our call'}\n\n${emailDraft.body || 'No email draft generated.'}`, setEmailCopied)}>
               {emailCopied ? <CheckCircle2 size={14} /> : <Copy size={14} />}
               {emailCopied ? 'Copied' : 'Copy Email'}
             </button>
@@ -624,8 +624,8 @@ function CallDetail({ token }) {
       <Section title="Conversation Analysis" icon={Activity} iconColor="#4CC9F0">
         <div className="flex flex-col gap-5">
           <div>
-            <h4 className="mb-2 text-sm text-slate-400">Talk Ratio</h4>
-            <div className="flex h-8 overflow-hidden rounded-xl text-xs font-semibold text-white">
+            <h4 className="mb-2 text-sm text-gray-500">Talk Ratio</h4>
+            <div className="flex h-8 overflow-hidden rounded-xl text-xs font-semibold text-gray-900">
               <div className="flex min-w-[60px] items-center justify-center bg-[#6C63FF] transition-[width] duration-500" style={{ width: `${conversationAnalysis.talkRatioSalesperson || 50}%` }}>
                 Rep {conversationAnalysis.talkRatioSalesperson || 50}%
               </div>
@@ -644,11 +644,11 @@ function CallDetail({ token }) {
             ].map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.label} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                <div key={item.label} className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white/[0.03] px-4 py-3">
                   {createElement(Icon, { size: 18, style: { color: item.color } })}
                   <div className="flex flex-col">
-                    <span className="text-lg font-bold text-white">{item.value}</span>
-                    <span className="text-xs text-slate-400">{item.label}</span>
+                    <span className="text-lg font-bold text-gray-900">{item.value}</span>
+                    <span className="text-xs text-gray-500">{item.label}</span>
                   </div>
                 </div>
               );
@@ -657,7 +657,7 @@ function CallDetail({ token }) {
 
           {conversationAnalysis.keyTopics?.length ? (
             <div>
-              <h4 className="mb-2 text-sm font-semibold text-white">🏷️ Key Topics</h4>
+              <h4 className="mb-2 text-sm font-semibold text-gray-900">🏷️ Key Topics</h4>
               <div className="flex flex-wrap gap-2">
                 {conversationAnalysis.keyTopics.map((topic) => (
                   <span key={topic} className={`inline-flex rounded-full border px-3 py-1.5 text-sm font-medium ${getBadgeClassName('neutral')}`}>{topic}</span>
@@ -668,15 +668,15 @@ function CallDetail({ token }) {
 
           {conversationAnalysis.painPoints?.length ? (
             <div>
-              <h4 className="mb-2 text-sm font-semibold text-white">🔥 Customer Pain Points</h4>
+              <h4 className="mb-2 text-sm font-semibold text-gray-900">🔥 Customer Pain Points</h4>
               <ListItems items={conversationAnalysis.painPoints} variant="negative" />
             </div>
           ) : null}
 
           {conversationAnalysis.pricingDiscussed && conversationAnalysis.pricingDetails ? (
             <div>
-              <h4 className="mb-2 inline-flex items-center gap-2 text-sm font-semibold text-white"><DollarSign size={16} /> Pricing Discussion</h4>
-              <div className="rounded-r-xl border-l-3 border-cyan-400 bg-cyan-500/5 px-4 py-4 text-sm leading-7 text-slate-300">
+              <h4 className="mb-2 inline-flex items-center gap-2 text-sm font-semibold text-gray-900"><DollarSign size={16} /> Pricing Discussion</h4>
+              <div className="rounded-r-xl border-l-3 border-cyan-400 bg-cyan-500/5 px-4 py-4 text-sm leading-7 text-gray-600">
                 {conversationAnalysis.pricingDetails}
               </div>
             </div>
@@ -684,7 +684,7 @@ function CallDetail({ token }) {
 
           {conversationAnalysis.decisionMakers?.length ? (
             <div>
-              <h4 className="mb-2 inline-flex items-center gap-2 text-sm font-semibold text-white"><Users size={16} /> Decision Makers</h4>
+              <h4 className="mb-2 inline-flex items-center gap-2 text-sm font-semibold text-gray-900"><Users size={16} /> Decision Makers</h4>
               <div className="flex flex-wrap gap-2">
                 {conversationAnalysis.decisionMakers.map((person) => (
                   <span key={person} className={`inline-flex rounded-full border px-3 py-1.5 text-sm font-medium ${getBadgeClassName('positive')}`}>👤 {person}</span>
@@ -703,7 +703,7 @@ function CallDetail({ token }) {
               ) : null}
               {conversationAnalysis.nextSteps?.length ? (
                 <div>
-                  <h4 className="mb-2 text-sm font-semibold text-indigo-300">➡️ Next Steps</h4>
+                  <h4 className="mb-2 text-sm font-semibold text-orange-600">➡️ Next Steps</h4>
                   <ListItems items={conversationAnalysis.nextSteps} variant="info" />
                 </div>
               ) : null}
@@ -712,15 +712,15 @@ function CallDetail({ token }) {
 
           {conversationAnalysis.objectionResponses?.length ? (
             <div>
-              <h4 className="mb-2 text-sm font-semibold text-white">🛡️ Objection Handling Breakdown</h4>
+              <h4 className="mb-2 text-sm font-semibold text-gray-900">🛡️ Objection Handling Breakdown</h4>
               <div className="flex flex-col gap-3">
                 {conversationAnalysis.objectionResponses.map((item) => (
-                  <div key={`${item.objection}-${item.response}`} className="flex flex-col gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-4">
-                    <div className="flex items-start gap-2 text-sm font-semibold text-white">
+                  <div key={`${item.objection}-${item.response}`} className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-white/[0.03] px-4 py-4">
+                    <div className="flex items-start gap-2 text-sm font-semibold text-gray-900">
                       <AlertTriangle size={14} className="mt-0.5 text-rose-300" />
                       <span>"{item.objection}"</span>
                     </div>
-                    <div className="pl-6 text-sm text-slate-300">→ {item.response}</div>
+                    <div className="pl-6 text-sm text-gray-600">→ {item.response}</div>
                     <span className={`ml-6 inline-flex w-fit rounded-full border px-3 py-1 text-xs font-semibold ${getBadgeClassName(item.effectiveness === 'strong' ? 'positive' : item.effectiveness === 'weak' ? 'negative' : 'neutral')}`}>
                       {item.effectiveness === 'strong' ? 'Strong' : item.effectiveness === 'weak' ? 'Weak' : 'Average'}
                     </span>
@@ -736,11 +736,11 @@ function CallDetail({ token }) {
         <Section title="Key Moments" icon={Zap} iconColor="#F59E0B">
           <div className="flex flex-col gap-3">
             {keyMoments.map((item) => (
-              <div key={item.moment} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-4">
+              <div key={item.moment} className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white/[0.03] px-4 py-4">
                 <div className={`mt-1 h-2.5 w-2.5 shrink-0 rounded-full ${item.impact === 'positive' ? 'bg-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.6)]' : item.impact === 'negative' ? 'bg-rose-400 shadow-[0_0_10px_rgba(244,63,94,0.6)]' : 'bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.6)]'}`} />
                 <div className="flex-1">
-                  <strong className="block text-sm text-white">{item.moment}</strong>
-                  {item.description ? <p className="mt-1 text-sm text-slate-300">{item.description}</p> : null}
+                  <strong className="block text-sm text-gray-900">{item.moment}</strong>
+                  {item.description ? <p className="mt-1 text-sm text-gray-600">{item.description}</p> : null}
                 </div>
                 <span className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${getBadgeClassName(item.impact === 'positive' ? 'positive' : item.impact === 'negative' ? 'negative' : 'neutral')}`}>
                   {item.impact === 'positive' ? 'Positive' : item.impact === 'negative' ? 'Negative' : 'Neutral'}
@@ -779,7 +779,7 @@ function CallDetail({ token }) {
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-slate-400">No competitors mentioned.</p>
+              <p className="text-sm text-gray-500">No competitors mentioned.</p>
             )}
           </Section>
           <Section title="Competitor Advantages" icon={Shield} iconColor="#FF6B6B">
@@ -789,7 +789,7 @@ function CallDetail({ token }) {
       ) : null}
 
       <div>
-        <h2 className="mb-6 flex items-center gap-2 border-t border-white/10 pt-6 text-2xl font-bold text-indigo-300">
+        <h2 className="mb-6 flex items-center gap-2 border-t border-gray-200 pt-6 text-2xl font-bold text-orange-600">
           <User size={24} /> Salesperson Analysis Deep Dive
         </h2>
 
@@ -809,24 +809,24 @@ function CallDetail({ token }) {
 
               {salespersonTone.breakdown?.length ? (
                 <div>
-                  <h4 className="mb-2 text-sm text-slate-400">Tone Breakdown</h4>
+                  <h4 className="mb-2 text-sm text-gray-500">Tone Breakdown</h4>
                   <ListItems items={salespersonTone.breakdown} variant="info" />
                 </div>
               ) : null}
 
               {salespersonTone.toneShifts?.length ? (
                 <div>
-                  <h4 className="mb-2 text-sm text-slate-400">🔄 Tone Shifts</h4>
+                  <h4 className="mb-2 text-sm text-gray-500">🔄 Tone Shifts</h4>
                   <ListItems items={salespersonTone.toneShifts} variant="neutral" />
                 </div>
               ) : null}
 
               {salespersonTone.examples?.length ? (
                 <div>
-                  <h4 className="mb-2 text-sm text-slate-400">Examples from Call</h4>
+                  <h4 className="mb-2 text-sm text-gray-500">Examples from Call</h4>
                   <div className="flex flex-col gap-2">
                     {salespersonTone.examples.map((example) => (
-                      <blockquote key={example} className="rounded-r-xl border-l-3 border-indigo-400 bg-indigo-500/5 px-4 py-3 text-sm italic text-slate-300">
+                      <blockquote key={example} className="rounded-r-xl border-l-3 border-orange-500 bg-orange-500/5 px-4 py-3 text-sm italic text-gray-600">
                         "{example}"
                       </blockquote>
                     ))}
@@ -839,13 +839,13 @@ function CallDetail({ token }) {
           <Section title="Salesperson Performance Scorecard" icon={BarChart3} iconColor="#6C63FF">
             <div className="flex flex-col gap-4">
               {salespersonPerformance.verdict ? (
-                <div className="rounded-r-xl border-l-3 border-indigo-400 bg-indigo-500/5 px-4 py-4 text-sm leading-7 text-slate-300">
+                <div className="rounded-r-xl border-l-3 border-orange-500 bg-orange-500/5 px-4 py-4 text-sm leading-7 text-gray-600">
                   {salespersonPerformance.verdict}
                 </div>
               ) : null}
 
               <div>
-                <h4 className="mb-3 text-sm font-semibold text-white">Skill Scores</h4>
+                <h4 className="mb-3 text-sm font-semibold text-gray-900">Skill Scores</h4>
                 <div className="flex flex-col gap-3">
                   {Object.entries(salespersonPerformance.skills || {}).map(([skill, score]) => {
                     const value = score || 5;
@@ -853,7 +853,7 @@ function CallDetail({ token }) {
                     const color = getBarColor(value);
                     return (
                       <div key={skill} className="grid grid-cols-[120px_1fr_48px] items-center gap-3 sm:grid-cols-[140px_1fr_48px]">
-                        <span className="text-xs font-medium text-slate-300">{label}</span>
+                        <span className="text-xs font-medium text-gray-600">{label}</span>
                         <div className="h-2 overflow-hidden rounded-full bg-white/10">
                           <div className="h-full rounded-full transition-[width] duration-500" style={{ width: `${(value / 10) * 100}%`, background: color }} />
                         </div>
@@ -877,7 +877,7 @@ function CallDetail({ token }) {
 
               {salespersonPerformance.tips?.length ? (
                 <div>
-                  <h4 className="mb-2 text-sm font-semibold text-indigo-300">💡 Coaching Tips</h4>
+                  <h4 className="mb-2 text-sm font-semibold text-orange-600">💡 Coaching Tips</h4>
                   <ListItems items={salespersonPerformance.tips} variant="info" />
                 </div>
               ) : null}
@@ -891,7 +891,7 @@ function CallDetail({ token }) {
 
               {salespersonPerformance.callPhases && Object.keys(salespersonPerformance.callPhases).length ? (
                 <div>
-                  <h4 className="mb-3 text-sm font-semibold text-white">📊 Call Phase Scores</h4>
+                  <h4 className="mb-3 text-sm font-semibold text-gray-900">📊 Call Phase Scores</h4>
                   <div className="flex flex-col gap-3">
                     {Object.entries(salespersonPerformance.callPhases).map(([phase, score]) => {
                       const value = score || 5;
@@ -899,7 +899,7 @@ function CallDetail({ token }) {
                       const color = getBarColor(value);
                       return (
                         <div key={phase} className="grid grid-cols-[120px_1fr_48px] items-center gap-3 sm:grid-cols-[140px_1fr_48px]">
-                          <span className="text-xs font-medium text-slate-300">{label}</span>
+                          <span className="text-xs font-medium text-gray-600">{label}</span>
                           <div className="h-2 overflow-hidden rounded-full bg-white/10">
                             <div className="h-full rounded-full transition-[width] duration-500" style={{ width: `${(value / 10) * 100}%`, background: color }} />
                           </div>
@@ -921,13 +921,13 @@ function CallDetail({ token }) {
       <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
       {summary ? (
         <Section title="AI Conversation Summary" icon={MessageSquare} iconColor="#4CC9F0">
-          <p className="rounded-r-xl border-l-3 border-indigo-400 bg-indigo-500/5 px-4 py-4 text-sm leading-8 text-slate-300">{summary}</p>
+          <p className="rounded-r-xl border-l-3 border-orange-500 bg-orange-500/5 px-4 py-4 text-sm leading-8 text-gray-600">{summary}</p>
         </Section>
       ) : null}
 
       <Section title="Review Extracted Metadata" icon={Target} iconColor="#6C63FF">
         {!editMode ? (
-          <div className="rounded-r-xl border-l-3 border-cyan-400 bg-cyan-500/5 px-4 py-4 text-sm leading-7 text-slate-300">
+          <div className="rounded-r-xl border-l-3 border-cyan-400 bg-cyan-500/5 px-4 py-4 text-sm leading-7 text-gray-600">
             <p><strong>Call Title:</strong> {resolvedMeta.callTitle || 'Untitled Call'}</p>
             <p className="capitalize"><strong>Call Type:</strong> {resolvedMeta.callType || 'other'}</p>
             <p><strong>Product:</strong> {resolvedMeta.productName || 'Unknown'}</p>
@@ -937,7 +937,7 @@ function CallDetail({ token }) {
             <div className="mt-3">
               <button
                 type="button"
-                className="rounded-lg bg-[#6C63FF] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#5d54f4]"
+                className="rounded-lg bg-[#6C63FF] px-3 py-2 text-sm font-semibold text-gray-900 transition hover:bg-[#5d54f4]"
                 onClick={() => {
                   setMetaForm({
                     callTitle: resolvedMeta.callTitle,
@@ -974,10 +974,10 @@ function CallDetail({ token }) {
               <input className={inputClassName} placeholder="Customer phone" value={metaForm.customerPhone} onChange={(event) => setMetaForm((current) => ({ ...current, customerPhone: event.target.value }))} />
             </div>
             <div className="mt-4 flex gap-2">
-              <button type="button" className="rounded-lg bg-[#6C63FF] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#5d54f4] disabled:opacity-50" onClick={saveMetadata} disabled={savingMeta}>
+              <button type="button" className="rounded-lg bg-[#6C63FF] px-3 py-2 text-sm font-semibold text-gray-900 transition hover:bg-[#5d54f4] disabled:opacity-50" onClick={saveMetadata} disabled={savingMeta}>
                 {savingMeta ? 'Saving...' : 'Save Metadata'}
               </button>
-              <button type="button" className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10" onClick={() => setEditMode(false)} disabled={savingMeta}>
+              <button type="button" className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-white/10" onClick={() => setEditMode(false)} disabled={savingMeta}>
                 Cancel
               </button>
             </div>
@@ -988,7 +988,7 @@ function CallDetail({ token }) {
       {call.transcript ? (
         <Section title="Full Transcript" icon={Mic2} defaultOpen={false}>
           <div className="mb-3 flex flex-wrap gap-2">
-            <button type="button" className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10" onClick={() => copyText(call.transcript || '', setCopied)}>
+            <button type="button" className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-white/10" onClick={() => copyText(call.transcript || '', setCopied)}>
               {copied ? <CheckCircle2 size={15} /> : <Copy size={15} />}
               {copied ? 'Copied!' : 'Copy Transcript'}
             </button>
@@ -996,7 +996,7 @@ function CallDetail({ token }) {
               🎙 Groq Whisper large-v3-turbo
             </span>
           </div>
-          <pre className="max-h-[400px] overflow-y-auto rounded-xl border border-white/10 bg-white/5 p-5 whitespace-pre-wrap text-sm leading-7 text-slate-300">{call.transcript}</pre>
+          <pre className="max-h-[400px] overflow-y-auto rounded-xl border border-gray-200 bg-gray-50 p-5 whitespace-pre-wrap text-sm leading-7 text-gray-600">{call.transcript}</pre>
         </Section>
       ) : null}
       </div>)}

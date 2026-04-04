@@ -42,41 +42,41 @@ const Login = ({ onLogin, isAuthenticated }) => {
   };
 
   return (
-    <div className="min-h-screen grid place-items-center p-5 relative" style={{ backgroundImage: "linear-gradient(rgba(10, 11, 20, 0.8), rgba(10, 11, 20, 0.9)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-      <section className="w-full max-w-[960px] min-h-[620px] grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] rounded-[20px] overflow-hidden border border-gray-800 shadow-2xl bg-[#0a0b14]/90 animate-[fade-in-up_0.5s_ease-out]">
+    <div className="min-h-screen grid place-items-center p-5 relative bg-gradient-to-br from-orange-50 via-white to-amber-50">
+      <section className="w-full max-w-[960px] min-h-[620px] grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] rounded-[20px] overflow-hidden border border-gray-200 shadow-xl bg-white">
         
         {/* Intro Sidebar */}
-        <aside className="relative p-8 lg:border-r border-b lg:border-b-0 border-gray-800" style={{ background: "linear-gradient(145deg, rgba(108, 99, 255, 0.17), rgba(0, 212, 170, 0.08)), radial-gradient(circle at 80% 20%, rgba(255, 179, 71, 0.2), transparent 36%), #0f1221" }}>
+        <aside className="relative p-8 lg:border-r border-b lg:border-b-0 border-gray-100" style={{ background: "linear-gradient(145deg, rgba(249,115,22,0.08), rgba(251,146,60,0.05)), radial-gradient(circle at 80% 20%, rgba(253,186,116,0.2), transparent 36%), #fff7ed" }}>
           {/* Decorative Blur */}
-          <div className="absolute w-[220px] h-[220px] rounded-full bg-[#4cc9f0]/15 blur-[22px] right-[-35px] bottom-[-45px] pointer-events-none" />
+          <div className="absolute w-[220px] h-[220px] rounded-full bg-orange-300/20 blur-[40px] right-[-35px] bottom-[-45px] pointer-events-none" />
           
           <div className="inline-flex items-center gap-2 mb-6">
-            <span className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-emerald-500" />
-            <strong className="tracking-[0.06em] text-[0.85rem] text-gray-400 uppercase">SalesIQ</strong>
+            <span className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-orange-400 to-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.4)]" />
+            <strong className="tracking-[0.06em] text-[0.85rem] text-gray-500 uppercase">SalesIQ</strong>
           </div>
           
-          <h2 className="text-[clamp(1.6rem,3vw,2.2rem)] font-bold text-white leading-[1.15] mb-3">Welcome back to your call intelligence workspace</h2>
-          <p className="text-gray-300 max-w-[40ch] mb-6">Continue tracking deal momentum, rep performance, and customer sentiment in real-time.</p>
+          <h2 className="text-[clamp(1.6rem,3vw,2.2rem)] font-bold text-gray-900 leading-[1.15] mb-3">Welcome back to your call intelligence workspace</h2>
+          <p className="text-gray-500 max-w-[40ch] mb-6">Continue tracking deal momentum, rep performance, and customer sentiment in real-time.</p>
 
           <ul className="grid gap-3 mt-5">
-            <li className="flex items-start gap-2.5 text-gray-400 text-[0.9rem]"><CircleCheckBig size={15} className="mt-[3px] text-emerald-400" /> Unified call-level timeline and follow-up actions</li>
-            <li className="flex items-start gap-2.5 text-gray-400 text-[0.9rem]"><CircleCheckBig size={15} className="mt-[3px] text-emerald-400" /> High-risk call alerts surfaced instantly</li>
-            <li className="flex items-start gap-2.5 text-gray-400 text-[0.9rem]"><CircleCheckBig size={15} className="mt-[3px] text-emerald-400" /> AI summaries for faster manager reviews</li>
+            <li className="flex items-start gap-2.5 text-gray-500 text-[0.9rem]"><CircleCheckBig size={15} className="mt-[3px] text-emerald-500" /> Unified call-level timeline and follow-up actions</li>
+            <li className="flex items-start gap-2.5 text-gray-500 text-[0.9rem]"><CircleCheckBig size={15} className="mt-[3px] text-emerald-500" /> High-risk call alerts surfaced instantly</li>
+            <li className="flex items-start gap-2.5 text-gray-500 text-[0.9rem]"><CircleCheckBig size={15} className="mt-[3px] text-emerald-500" /> AI summaries for faster manager reviews</li>
           </ul>
         </aside>
 
         {/* Form Area */}
-        <div className="p-8 flex flex-col justify-center">
-          <h1 className="text-2xl font-bold text-white mb-1.5">Login</h1>
-          <p className="text-gray-400 mb-5">Sign in to continue your analysis workflow.</p>
+        <div className="p-8 flex flex-col justify-center bg-white">
+          <h1 className="text-2xl font-bold text-gray-900 mb-1.5">Login</h1>
+          <p className="text-gray-500 mb-5">Sign in to continue your analysis workflow.</p>
 
           <form className="grid gap-3.5" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-1.5">
-              <label className="text-[0.85rem] font-medium text-gray-300" htmlFor="email">Work Email</label>
+              <label className="text-[0.85rem] font-medium text-gray-700" htmlFor="email">Work Email</label>
               <input
                 id="email"
                 type="email"
-                className="w-full px-3.5 py-2.5 bg-[#161829] border border-gray-700 rounded-lg text-white text-[0.95rem] focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 text-[0.95rem] focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400/30 transition-colors"
                 placeholder="you@company.com"
                 value={form.email}
                 onChange={onChange("email")}
@@ -85,11 +85,11 @@ const Login = ({ onLogin, isAuthenticated }) => {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-[0.85rem] font-medium text-gray-300" htmlFor="password">Password</label>
+              <label className="text-[0.85rem] font-medium text-gray-700" htmlFor="password">Password</label>
               <input
                 id="password"
                 type="password"
-                className="w-full px-3.5 py-2.5 bg-[#161829] border border-gray-700 rounded-lg text-white text-[0.95rem] focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 text-[0.95rem] focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400/30 transition-colors"
                 placeholder="Enter your password"
                 value={form.password}
                 onChange={onChange("password")}
@@ -98,31 +98,30 @@ const Login = ({ onLogin, isAuthenticated }) => {
               />
             </div>
 
-            <div className="flex justify-between items-center gap-4 mt-[-0.1rem]">
-              <label className="inline-flex items-center gap-2 text-gray-400 text-[0.85rem] cursor-pointer" htmlFor="remember">
+            <div className="flex items-center gap-4 mt-[-0.1rem]">
+              <label className="inline-flex items-center gap-2 text-gray-500 text-[0.85rem] cursor-pointer" htmlFor="remember">
                 <input
                   id="remember"
                   type="checkbox"
-                  className="accent-indigo-500 w-4 h-4 cursor-pointer"
+                  className="accent-orange-500 w-4 h-4 cursor-pointer"
                   checked={form.remember}
                   onChange={onChange("remember")}
                 />
                 Remember me
               </label>
-              <a href="#" className="text-indigo-400 text-[0.85rem] font-semibold hover:text-indigo-300 transition-colors">Forgot password?</a>
             </div>
 
-            {error ? <p className="text-[0.84rem] text-red-400">{error}</p> : null}
+            {error ? <p className="text-[0.84rem] text-red-500">{error}</p> : null}
 
-            <button className="mt-1.5 w-full rounded-lg bg-indigo-600 px-4 py-2.5 font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60" type="submit" disabled={isSubmitting}>
+            <button className="mt-1.5 w-full rounded-lg bg-orange-500 px-4 py-2.5 font-medium text-white transition-colors hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-60 shadow-sm shadow-orange-200" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Signing in..." : "Login to Dashboard"}
             </button>
           </form>
 
-          <p className="mt-4 text-gray-400 text-[0.86rem]">
-            New here? <Link to="/signup" className="text-emerald-400 font-semibold hover:text-emerald-300 transition-colors">Create an account</Link>
+          <p className="mt-4 text-gray-500 text-[0.86rem]">
+            New here? <Link to="/signup" className="text-orange-500 font-semibold hover:text-orange-600 transition-colors">Create an account</Link>
           </p>
-          <Link to="/" className="mt-3 inline-block text-gray-400 text-[0.85rem] hover:text-white transition-colors">Back to landing page</Link>
+          <Link to="/" className="mt-3 inline-block text-gray-400 text-[0.85rem] hover:text-gray-700 transition-colors">Back to landing page</Link>
         </div>
       </section>
     </div>

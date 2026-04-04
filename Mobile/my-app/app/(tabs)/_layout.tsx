@@ -44,6 +44,10 @@ export default function TabLayout() {
         options={{ href: null, title: 'All Calls' }}
       />
       <Tabs.Screen
+        name="live-copilot"
+        options={{ href: null, title: 'Live Copilot' }}
+      />
+      <Tabs.Screen
         name="insights"
         options={{ href: null, title: 'Insights' }}
       />

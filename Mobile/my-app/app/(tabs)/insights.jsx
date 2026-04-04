@@ -175,8 +175,8 @@ export default function InsightsScreen() {
   if (loading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.centerFlex}>
-          <ActivityIndicator size="large" color="#6C63FF" />
+        <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.centerFlex}>
+          <ActivityIndicator size="large" color="#fb923c" />
           <Text style={styles.loadingText}>Loading insights…</Text>
         </LinearGradient>
       </SafeAreaView>
@@ -186,7 +186,7 @@ export default function InsightsScreen() {
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
 
       {/* Sidebar */}
       <MobileSidebar
@@ -195,7 +195,7 @@ export default function InsightsScreen() {
         user={user}
       />
 
-      <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.flex}>
+      <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.flex}>
 
         {/* Top Header bar */}
         <View style={styles.screenHeader}>
@@ -204,7 +204,7 @@ export default function InsightsScreen() {
             style={styles.menuBtn}
             activeOpacity={0.7}
           >
-            <Ionicons name="menu" size={22} color="#d1d5db" />
+            <Ionicons name="menu" size={22} color="#6b7280" />
           </TouchableOpacity>
           <View style={{ flex: 1 }}>
             <Text style={styles.h1}>Signal Insights</Text>
@@ -213,7 +213,7 @@ export default function InsightsScreen() {
             </Text>
           </View>
           <TouchableOpacity onPress={handleRefresh} style={styles.refreshBtn} activeOpacity={0.7}>
-            <Ionicons name="refresh-outline" size={20} color="#818cf8" />
+            <Ionicons name="refresh-outline" size={20} color="#ea580c" />
           </TouchableOpacity>
         </View>
 
@@ -224,15 +224,15 @@ export default function InsightsScreen() {
             <RefreshControl
               refreshing={refreshing}
               onRefresh={handleRefresh}
-              tintColor="#6C63FF"
-              colors={["#6C63FF"]}
+              tintColor="#fb923c"
+              colors={["#fb923c"]}
             />
           }
         >
           {/* ── Hero label ── */}
           <View style={styles.pillRow}>
             <View style={styles.pill}>
-              <Ionicons name="sparkles" size={11} color="#818cf8" />
+              <Ionicons name="sparkles" size={11} color="#ea580c" />
               <Text style={styles.pillText}>Live conversation intelligence</Text>
             </View>
           </View>
@@ -255,7 +255,7 @@ export default function InsightsScreen() {
               iconName="bar-chart"
               label="Calls Analyzed"
               value={totalCalls}
-              colors={["#6C63FF", "#8B5CF6"]}
+              colors={["#fb923c", "#8B5CF6"]}
             />
             <StatCard
               iconName="trending-up"
@@ -336,7 +336,7 @@ export default function InsightsScreen() {
             <View style={styles.card}>
               <SectionHeader
                 iconName="cube"
-                iconColor="#818cf8"
+                iconColor="#ea580c"
                 iconBg="rgba(99,102,241,0.15)"
                 title="Product Improvements Needed"
                 subtitle="Most-requested gaps from customer feedback"
@@ -419,7 +419,7 @@ export default function InsightsScreen() {
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  safeArea:  { flex: 1, backgroundColor: "#090b13" },
+  safeArea:  { flex: 1, backgroundColor: "#fff7ed" },
   flex:      { flex: 1 },
   centerFlex:{ flex: 1, justifyContent: "center", alignItems: "center" },
   loadingText: { color: "#9ca3af", marginTop: 14, fontSize: 14 },
@@ -431,17 +431,17 @@ const styles = StyleSheet.create({
   },
   menuBtn: {
     width: 40, height: 40, borderRadius: 10,
-    backgroundColor: "rgba(255,255,255,0.08)",
-    borderWidth: 1, borderColor: "rgba(255,255,255,0.12)",
+    backgroundColor: "rgba(249,115,22,0.10)",
+    borderWidth: 1, borderColor: "rgba(249,115,22,0.18)",
     justifyContent: "center", alignItems: "center",
   },
   refreshBtn: {
     width: 38, height: 38, borderRadius: 10,
-    backgroundColor: "rgba(99,102,241,0.12)",
-    borderWidth: 1, borderColor: "rgba(99,102,241,0.25)",
+    backgroundColor: "rgba(249,115,22,0.12)",
+    borderWidth: 1, borderColor: "rgba(249,115,22,0.35)",
     justifyContent: "center", alignItems: "center",
   },
-  h1:        { fontSize: 19, fontWeight: "800", color: "#fff", letterSpacing: -0.3 },
+  h1:        { fontSize: 19, fontWeight: "800", color: "#111827", letterSpacing: -0.3 },
   headerSub: { fontSize: 12, color: "#6b7280", marginTop: 1 },
 
   scroll: { paddingHorizontal: 16, paddingBottom: 20 },
@@ -451,11 +451,11 @@ const styles = StyleSheet.create({
   pill: {
     flexDirection: "row", alignItems: "center", gap: 6,
     alignSelf: "flex-start",
-    backgroundColor: "rgba(99,102,241,0.12)",
-    borderColor: "rgba(99,102,241,0.25)", borderWidth: 1,
+    backgroundColor: "rgba(249,115,22,0.12)",
+    borderColor: "rgba(249,115,22,0.35)", borderWidth: 1,
     borderRadius: 20, paddingHorizontal: 10, paddingVertical: 5,
   },
-  pillText:  { color: "#818cf8", fontSize: 11, fontWeight: "600" },
+  pillText:  { color: "#ea580c", fontSize: 11, fontWeight: "600" },
   pageDesc:  { color: "#9ca3af", fontSize: 13, lineHeight: 19, marginBottom: 18 },
 
   // ── Error ──
@@ -474,8 +474,8 @@ const styles = StyleSheet.create({
   },
   statCard: {
     width: "48.5%",
-    backgroundColor: "rgba(18,21,39,0.9)",
-    borderColor: "rgba(255,255,255,0.08)", borderWidth: 1,
+    backgroundColor: "#ffffff",
+    borderColor: "rgba(249,115,22,0.10)", borderWidth: 1,
     borderRadius: 16, padding: 14, marginBottom: 12,
   },
   statIconWrap: {
@@ -483,19 +483,19 @@ const styles = StyleSheet.create({
     justifyContent: "center", alignItems: "center", marginBottom: 10,
   },
   statLabel: { color: "#6b7280", fontSize: 10, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5 },
-  statValue: { color: "#fff", fontSize: 24, fontWeight: "900", marginTop: 2 },
+  statValue: { color: "#111827", fontSize: 24, fontWeight: "900", marginTop: 2 },
 
   // ── Section Card ──
   card: {
-    backgroundColor: "rgba(18,21,39,0.9)",
-    borderColor: "rgba(255,255,255,0.08)", borderWidth: 1,
+    backgroundColor: "#ffffff",
+    borderColor: "rgba(249,115,22,0.10)", borderWidth: 1,
     borderRadius: 18, padding: 16, marginBottom: 16,
   },
 
   // ── Section Header ──
   sectionHeader: {
     flexDirection: "row", alignItems: "center", justifyContent: "space-between",
-    borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255,0.05)",
+    borderBottomWidth: 1, borderBottomColor: "rgba(249,115,22,0.07)",
     paddingBottom: 14, marginBottom: 14, gap: 8,
   },
   sectionHeaderLeft: { flexDirection: "row", alignItems: "center", gap: 10, flex: 1 },
@@ -503,7 +503,7 @@ const styles = StyleSheet.create({
     width: 36, height: 36, borderRadius: 10,
     justifyContent: "center", alignItems: "center",
   },
-  sectionTitle:    { color: "#fff", fontSize: 14, fontWeight: "bold" },
+  sectionTitle:    { color: "#111827", fontSize: 14, fontWeight: "bold" },
   sectionSubtitle: { color: "#6b7280", fontSize: 11, marginTop: 1 },
 
   // ── Badge ──
@@ -517,8 +517,8 @@ const styles = StyleSheet.create({
   // ── Insight Row ──
   insightRow: {
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.05)",
-    backgroundColor: "rgba(255,255,255,0.02)",
+    borderColor: "rgba(249,115,22,0.07)",
+    backgroundColor: "rgba(249,115,22,0.05)",
     borderRadius: 12, padding: 12, marginBottom: 10,
   },
   insightRowTop: {
@@ -526,19 +526,19 @@ const styles = StyleSheet.create({
     alignItems: "flex-start", gap: 8, marginBottom: 10,
   },
   insightText: {
-    color: "#e2e8f0", fontSize: 13, fontWeight: "500",
+    color: "#111827", fontSize: 13, fontWeight: "500",
     lineHeight: 19, flex: 1,
   },
   insightBarBg: {
     height: 6, borderRadius: 3,
-    backgroundColor: "rgba(255,255,255,0.06)", overflow: "hidden",
+    backgroundColor: "rgba(249,115,22,0.08)", overflow: "hidden",
   },
   insightBarFill: { height: "100%", borderRadius: 3 },
 
   // ── Empty state ──
   emptyState: {
     borderWidth: 1, borderStyle: "dashed",
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: "#fed7aa",
     borderRadius: 12, paddingVertical: 28,
     alignItems: "center",
   },
@@ -547,8 +547,8 @@ const styles = StyleSheet.create({
   // ── Skeleton ──
   skeleton: {
     borderRadius: 14,
-    borderWidth: 1, borderColor: "rgba(255,255,255,0.06)",
-    backgroundColor: "rgba(255,255,255,0.03)",
+    borderWidth: 1, borderColor: "rgba(249,115,22,0.08)",
+    backgroundColor: "rgba(249,115,22,0.06)",
     marginBottom: 12,
   },
 });

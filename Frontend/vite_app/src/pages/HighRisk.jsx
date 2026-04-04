@@ -34,11 +34,11 @@ const HighRisk = ({ token }) => {
   }, [token]);
 
   return (
-    <div className="py-8 text-slate-200">
+    <div className="py-8 text-gray-700">
       <div className="mb-4">
         <div>
-        <h1 className="text-[1.9rem] font-extrabold text-white">At-Risk Opportunities</h1>
-          <p className="mt-1.5 text-[0.95rem] text-slate-400">
+        <h1 className="text-[1.9rem] font-extrabold text-gray-900">At-Risk Opportunities</h1>
+          <p className="mt-1.5 text-[0.95rem] text-gray-500">
         Calls flagged for low close probability or negative customer sentiment, requiring fast intervention.
           </p>
         </div>
@@ -49,12 +49,12 @@ const HighRisk = ({ token }) => {
           {[...Array(4)].map((_, i) => (
             <div
               key={i}
-              className="h-40 animate-pulse rounded-xl border border-white/8 bg-[linear-gradient(110deg,rgba(255,255,255,0.03),rgba(255,255,255,0.08),rgba(255,255,255,0.03))] bg-size-[200%_100%]"
+              className="h-40 animate-pulse rounded-xl border border-gray-100 bg-[linear-gradient(110deg,rgba(255,255,255,0.03),rgba(255,255,255,0.08),rgba(255,255,255,0.03))] bg-size-[200%_100%]"
             />
           ))}
         </div>
       ) : calls.length === 0 ? (
-        <div className="grid place-items-center gap-2 rounded-2xl border border-dashed border-white/15 px-4 py-16 text-center text-slate-400">
+        <div className="grid place-items-center gap-2 rounded-2xl border border-dashed border-gray-300 px-4 py-16 text-center text-gray-500">
           <Shield size={48} className="mb-2 text-emerald-400" />
           <h3 className="text-lg font-semibold text-emerald-300">No high-risk deals!</h3>
           <p className="mt-1">All analyzed calls look healthy. 🎉</p>
@@ -73,7 +73,7 @@ const HighRisk = ({ token }) => {
             return (
               <div
                 key={call.callId}
-                className="rounded-2xl border bg-[#121527eb] p-4"
+                className="rounded-2xl border bg-white/95 p-4"
                 style={{ borderColor: `${riskColor}99` }}
               >
                 <div className="flex items-start justify-between gap-4">
@@ -93,12 +93,12 @@ const HighRisk = ({ token }) => {
 
                     <Link
                       to={`/dashboard/calls/${call.callId}`}
-                      className="inline-flex items-center gap-1.5 text-[0.95rem] font-bold text-slate-50 transition hover:text-indigo-300"
+                      className="inline-flex items-center gap-1.5 text-[0.95rem] font-bold text-gray-900 transition hover:text-orange-600"
                     >
                       {call.callTitle || call.productName || call.product_name || "Sales Call"} <ArrowUpRight size={13} />
                     </Link>
 
-                    <p className="mt-0.5 text-[0.78rem] text-slate-500">
+                    <p className="mt-0.5 text-[0.78rem] text-gray-400">
                       {call.summary?.substring(0, 70)}{call.summary?.length > 70 ? "..." : ""}
                     </p>
 
@@ -111,7 +111,7 @@ const HighRisk = ({ token }) => {
                     <div className="text-[1.8rem] font-black leading-none" style={{ color: riskColor }}>
                       {prob}%
                     </div>
-                    <div className="text-[0.72rem] text-slate-500">Probability</div>
+                    <div className="text-[0.72rem] text-gray-400">Probability</div>
                   </div>
                 </div>
 
@@ -121,7 +121,7 @@ const HighRisk = ({ token }) => {
 
                 {ins.objections?.length > 0 && (
                   <div className="mt-3">
-                    <p className="mb-1 text-[0.75rem] font-semibold text-slate-500">
+                    <p className="mb-1 text-[0.75rem] font-semibold text-gray-400">
                       Objections:
                     </p>
                     {ins.objections.slice(0, 2).map((o, i) => (
@@ -141,7 +141,7 @@ const HighRisk = ({ token }) => {
                   </p>
                 )}
 
-                <p className="mt-2 text-[0.75rem] text-slate-500">
+                <p className="mt-2 text-[0.75rem] text-gray-400">
                   {call.createdAt ? new Date(call.createdAt).toLocaleDateString() : "—"}
                 </p>
               </div>

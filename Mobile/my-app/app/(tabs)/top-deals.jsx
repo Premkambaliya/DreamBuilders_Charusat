@@ -189,9 +189,9 @@ export default function TopDealsScreen() {
   if (loading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.flex}>
+        <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.flex}>
           <View style={styles.loadingWrap}>
-            <ActivityIndicator size="large" color="#6C63FF" />
+            <ActivityIndicator size="large" color="#fb923c" />
             <Text style={styles.loadingText}>Loading top opportunities...</Text>
           </View>
           <View style={styles.skeletonWrap}>
@@ -207,7 +207,7 @@ export default function TopDealsScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
 
       <MobileSidebar
         visible={sidebarOpen}
@@ -215,14 +215,14 @@ export default function TopDealsScreen() {
         user={user}
       />
 
-      <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.flex}>
+      <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.flex}>
         <View style={styles.header}>
           <TouchableOpacity
             onPress={() => setSidebarOpen(true)}
             style={styles.menuBtn}
             activeOpacity={0.7}
           >
-            <Ionicons name="menu" size={22} color="#d1d5db" />
+            <Ionicons name="menu" size={22} color="#6b7280" />
           </TouchableOpacity>
           <View style={{ flex: 1 }}>
             <Text style={styles.title}>Top Opportunities</Text>
@@ -235,7 +235,7 @@ export default function TopDealsScreen() {
             style={styles.refreshBtn}
             activeOpacity={0.7}
           >
-            <Ionicons name="refresh-outline" size={20} color="#818cf8" />
+            <Ionicons name="refresh-outline" size={20} color="#ea580c" />
           </TouchableOpacity>
         </View>
 
@@ -272,8 +272,8 @@ export default function TopDealsScreen() {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={onRefresh}
-                tintColor="#6C63FF"
-                colors={["#6C63FF"]}
+                tintColor="#fb923c"
+                colors={["#fb923c"]}
               />
             }
           />
@@ -284,7 +284,7 @@ export default function TopDealsScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: "#090b13" },
+  safeArea: { flex: 1, backgroundColor: "#fff7ed" },
   flex: { flex: 1 },
 
   loadingWrap: {
@@ -304,8 +304,8 @@ const styles = StyleSheet.create({
     height: 160,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.09)",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    borderColor: "rgba(249,115,22,0.18)",
+    backgroundColor: "rgba(249,115,22,0.07)",
   },
 
   header: {
@@ -322,9 +322,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.08)",
+    backgroundColor: "rgba(249,115,22,0.10)",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
+    borderColor: "rgba(249,115,22,0.18)",
   },
   refreshBtn: {
     width: 38,
@@ -332,18 +332,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(99,102,241,0.12)",
+    backgroundColor: "rgba(249,115,22,0.12)",
     borderWidth: 1,
-    borderColor: "rgba(99,102,241,0.25)",
+    borderColor: "rgba(249,115,22,0.35)",
   },
   title: {
-    color: "#ffffff",
+    color: "#111827",
     fontSize: 23,
     fontWeight: "900",
     letterSpacing: -0.4,
   },
   subtitle: {
-    color: "#94a3b8",
+    color: "#6b7280",
     marginTop: 4,
     fontSize: 12,
     lineHeight: 18,
@@ -375,8 +375,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "rgba(18,21,39,0.92)",
+    borderColor: "rgba(249,115,22,0.18)",
+    backgroundColor: "#ffffff",
     padding: 14,
   },
   rankStamp: {
@@ -392,14 +392,14 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   cardTitle: {
-    color: "#f8fafc",
+    color: "#111827",
     fontSize: 16,
     fontWeight: "800",
     paddingRight: 30,
   },
   cardSummary: {
     marginTop: 5,
-    color: "#94a3b8",
+    color: "#6b7280",
     fontSize: 12,
     lineHeight: 17,
   },
@@ -417,7 +417,7 @@ const styles = StyleSheet.create({
   },
   typeText: {
     marginTop: 7,
-    color: "#38bdf8",
+    color: "#0284c7",
     fontSize: 11,
     fontWeight: "600",
     textTransform: "capitalize",
@@ -444,7 +444,7 @@ const styles = StyleSheet.create({
     height: 8,
     borderRadius: 99,
     overflow: "hidden",
-    backgroundColor: "rgba(255,255,255,0.12)",
+    backgroundColor: "rgba(249,115,22,0.18)",
   },
   probBarFill: {
     height: "100%",
@@ -467,7 +467,7 @@ const styles = StyleSheet.create({
     maxWidth: "100%",
   },
   signalText: {
-    color: "#6ee7b7",
+    color: "#047857",
     fontSize: 11,
     fontWeight: "700",
   },
@@ -486,7 +486,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   emptyTitle: {
-    color: "#e2e8f0",
+    color: "#111827",
     fontSize: 17,
     fontWeight: "700",
   },
@@ -494,13 +494,13 @@ const styles = StyleSheet.create({
     marginTop: 6,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "rgba(129,140,248,0.4)",
-    backgroundColor: "rgba(99,102,241,0.2)",
+    borderColor: "rgba(249,115,22,0.35)",
+    backgroundColor: "rgba(249,115,22,0.14)",
     paddingHorizontal: 16,
     paddingVertical: 10,
   },
   emptyButtonText: {
-    color: "#c7d2fe",
+    color: "#ea580c",
     fontSize: 13,
     fontWeight: "700",
   },

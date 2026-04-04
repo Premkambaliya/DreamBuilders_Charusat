@@ -23,6 +23,7 @@ const SIDEBAR_WIDTH = Math.min(280, SCREEN_WIDTH * 0.82);
 const NAV_ITEMS = [
   { label: "Dashboard",    href: "/(tabs)",           icon: "grid-outline",          iconActive: "grid" },
   { label: "Analyze Call", href: "/(tabs)/analyze",   icon: "cloud-upload-outline",  iconActive: "cloud-upload" },
+  { label: "Live Copilot", href: "/(tabs)/live-copilot", icon: "mic-outline", iconActive: "mic" },
   { label: "All Calls",    href: "/(tabs)/calls",     icon: "call-outline",          iconActive: "call" },
   { label: "Insights",     href: "/(tabs)/insights",  icon: "bar-chart-outline",     iconActive: "bar-chart" },
   { label: "Top Deals",    href: "/(tabs)/top-deals", icon: "trending-up-outline",   iconActive: "trending-up" },
@@ -103,10 +104,10 @@ export default function MobileSidebar({ visible, onClose, user }) {
           >
             {/* Header */}
             <LinearGradient
-              colors={["rgba(108,99,255,0.18)", "rgba(108,99,255,0.02)"]}
+              colors={["rgba(249,115,22,0.12)", "rgba(249,115,22,0.02)"]}
               style={styles.drawerHeader}
             >
-              <LinearGradient colors={["#6C63FF", "#00D4AA"]} style={styles.logoBox}>
+              <LinearGradient colors={["#f97316", "#ea580c"]} style={styles.logoBox}>
                 <Ionicons name="flash" size={18} color="#fff" />
               </LinearGradient>
               <View style={{ flex: 1 }}>
@@ -158,7 +159,7 @@ export default function MobileSidebar({ visible, onClose, user }) {
                       <Ionicons
                         name={active ? iconActive : icon}
                         size={18}
-                        color={active ? "#818cf8" : "#6b7280"}
+                        color={active ? "#ea580c" : "#6b7280"}
                       />
                     </View>
                     <Text style={[styles.navLabel, active && styles.navLabelActive]}>
@@ -212,9 +213,9 @@ const styles = StyleSheet.create({
   drawer: {
     width: SIDEBAR_WIDTH,
     height: "100%",
-    backgroundColor: "#10111e",
+    backgroundColor: "#ffffff",
     borderRightWidth: 1,
-    borderRightColor: "rgba(255,255,255,0.08)",
+    borderRightColor: "rgba(249,115,22,0.10)",
     shadowColor: "#000",
     shadowOffset: { width: 6, height: 0 },
     shadowOpacity: 0.45,
@@ -236,7 +237,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.07)",
+    borderBottomColor: "rgba(249,115,22,0.08)",
   },
   drawerScroll: { flex: 1 },
   drawerScrollContent: { paddingBottom: 12 },
@@ -244,11 +245,11 @@ const styles = StyleSheet.create({
     width: 36, height: 36, borderRadius: 10,
     justifyContent: "center", alignItems: "center",
   },
-  logoTitle: { color: "#fff", fontSize: 15, fontWeight: "bold" },
+  logoTitle: { color: "#111827", fontSize: 15, fontWeight: "bold" },
   logoSub:   { color: "#64748b", fontSize: 10, marginTop: 1 },
   closeBtn: {
     width: 34, height: 34, borderRadius: 8,
-    backgroundColor: "rgba(255,255,255,0.07)",
+    backgroundColor: "rgba(249,115,22,0.08)",
     justifyContent: "center", alignItems: "center",
   },
 
@@ -256,17 +257,17 @@ const styles = StyleSheet.create({
   userRow: {
     flexDirection: "row", alignItems: "center", gap: 12,
     paddingHorizontal: 16, paddingVertical: 14,
-    borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255,0.05)",
-    backgroundColor: "rgba(255,255,255,0.025)",
+    borderBottomWidth: 1, borderBottomColor: "rgba(249,115,22,0.07)",
+    backgroundColor: "rgba(249,115,22,0.05)",
   },
   avatar: {
     width: 36, height: 36, borderRadius: 18,
-    backgroundColor: "rgba(108,99,255,0.25)",
-    borderWidth: 1, borderColor: "rgba(108,99,255,0.45)",
+    backgroundColor: "rgba(249,115,22,0.15)",
+    borderWidth: 1, borderColor: "rgba(249,115,22,0.35)",
     justifyContent: "center", alignItems: "center",
   },
-  avatarText: { color: "#818cf8", fontSize: 16, fontWeight: "bold" },
-  userName:  { color: "#e2e8f0", fontSize: 13, fontWeight: "600" },
+  avatarText: { color: "#ea580c", fontSize: 16, fontWeight: "bold" },
+  userName:  { color: "#111827", fontSize: 13, fontWeight: "600" },
   userEmail: { color: "#64748b", fontSize: 11, marginTop: 1 },
 
   // ── Nav ──
@@ -277,29 +278,29 @@ const styles = StyleSheet.create({
     borderRadius: 11, position: "relative", overflow: "hidden",
   },
   navItemActive: {
-    backgroundColor: "rgba(99,102,241,0.13)",
-    borderWidth: 1, borderColor: "rgba(99,102,241,0.22)",
+    backgroundColor: "rgba(249,115,22,0.12)",
+    borderWidth: 1, borderColor: "rgba(249,115,22,0.28)",
   },
   activeBar: {
     position: "absolute", left: 0, top: "15%",
     height: "70%", width: 3, borderRadius: 2,
-    backgroundColor: "#818cf8",
+    backgroundColor: "#ea580c",
   },
   navIconBox: {
     width: 30, height: 30, borderRadius: 8,
     justifyContent: "center", alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    backgroundColor: "rgba(249,115,22,0.06)",
   },
-  navIconBoxActive: { backgroundColor: "rgba(99,102,241,0.18)" },
+  navIconBoxActive: { backgroundColor: "rgba(249,115,22,0.18)" },
   navLabel:       { flex: 1, color: "#6b7280", fontSize: 14, fontWeight: "500" },
-  navLabelActive: { color: "#a5b4fc", fontWeight: "600" },
+  navLabelActive: { color: "#ea580c", fontWeight: "600" },
   activePip: {
-    width: 6, height: 6, borderRadius: 3, backgroundColor: "#818cf8",
+    width: 6, height: 6, borderRadius: 3, backgroundColor: "#ea580c",
   },
 
   // ── Footer ──
   footer: {
-    borderTopWidth: 1, borderTopColor: "rgba(255,255,255,0.07)",
+    borderTopWidth: 1, borderTopColor: "rgba(249,115,22,0.08)",
     padding: 16, gap: 5,
   },
   statusRow: { flexDirection: "row", alignItems: "center", gap: 8 },
@@ -308,7 +309,7 @@ const styles = StyleSheet.create({
     shadowColor: "#34d399", shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.9, shadowRadius: 5,
   },
-  statusText: { color: "#cbd5e1", fontSize: 12, fontWeight: "600" },
+  statusText: { color: "#374151", fontSize: 12, fontWeight: "600" },
   statusSub:  { color: "#4b5563", fontSize: 11, marginBottom: 6 },
   logoutRow: {
     flexDirection: "row", alignItems: "center", gap: 10,

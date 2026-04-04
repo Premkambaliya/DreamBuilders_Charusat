@@ -180,8 +180,8 @@ export default function Dashboard() {
   if (loading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <LinearGradient colors={["#090b13", "#0f1222"]} style={[styles.container, styles.centerContent]}>
-          <ActivityIndicator size="large" color="#6C63FF" />
+        <LinearGradient colors={["#fff7ed", "#ffffff"]} style={[styles.container, styles.centerContent]}>
+          <ActivityIndicator size="large" color="#fb923c" />
           <Text style={styles.loadingText}>Loading dashboard data…</Text>
           {apiUrl ? <Text style={styles.loadingSubText}>{apiUrl}</Text> : null}
         </LinearGradient>
@@ -191,7 +191,7 @@ export default function Dashboard() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
 
       {/* ── Sidebar (renders on top via absolute positioning) ── */}
       <MobileSidebar
@@ -200,7 +200,7 @@ export default function Dashboard() {
         user={user}
       />
 
-      <LinearGradient colors={["#090b13", "#0f1222"]} style={styles.container}>
+      <LinearGradient colors={["#fff7ed", "#ffffff"]} style={styles.container}>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
@@ -208,8 +208,8 @@ export default function Dashboard() {
             <RefreshControl
               refreshing={refreshing}
               onRefresh={handleRefresh}
-              tintColor="#6C63FF"
-              colors={["#6C63FF"]}
+              tintColor="#fb923c"
+              colors={["#fb923c"]}
             />
           }
         >
@@ -221,7 +221,7 @@ export default function Dashboard() {
               style={styles.menuBtn}
               activeOpacity={0.7}
             >
-              <Ionicons name="menu" size={22} color="#d1d5db" />
+              <Ionicons name="menu" size={22} color="#6b7280" />
             </TouchableOpacity>
             <View style={{ flex: 1 }}>
               <Text style={styles.h1}>Command Center</Text>
@@ -244,7 +244,7 @@ export default function Dashboard() {
               label="Analyzed Calls"
               value={an.totalCalls}
               sub="Successfully processed"
-              gradientColors={["#6C63FF", "#00D4AA"]}
+              gradientColors={["#fb923c", "#00D4AA"]}
             />
             <StatCard
               iconName="trending-up"
@@ -265,7 +265,7 @@ export default function Dashboard() {
               label="Rep Rating"
               value={`${an.avgRepRating}/10`}
               sub="Salesperson score"
-              gradientColors={["#A78BFA", "#6C63FF"]}
+              gradientColors={["#A78BFA", "#fb923c"]}
             />
             <StatCard
               iconName="pulse"
@@ -279,7 +279,7 @@ export default function Dashboard() {
               label="Pipeline Status"
               value={`${an.statusBreakdown?.analyzed ?? 0} done`}
               sub={`${an.statusBreakdown?.transcribed ?? 0} transcribed · ${an.statusBreakdown?.uploaded ?? 0} uploaded`}
-              gradientColors={["#4CC9F0", "#6C63FF"]}
+              gradientColors={["#4CC9F0", "#fb923c"]}
             />
           </View>
 
@@ -436,12 +436,12 @@ export default function Dashboard() {
 // ─── Styles ────────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: "#090b13" },
+  safeArea: { flex: 1, backgroundColor: "#fff7ed" },
   container: { flex: 1 },
   centerContent: { justifyContent: "center", alignItems: "center" },
   scrollContent: { padding: 20, paddingBottom: 48 },
 
-  loadingText:    { color: "#d1d5db", marginTop: 16, fontSize: 15 },
+  loadingText:    { color: "#4b5563", marginTop: 16, fontSize: 15 },
   loadingSubText: { color: "#6b7280", marginTop: 6, fontSize: 11 },
 
   header: {
@@ -450,16 +450,16 @@ const styles = StyleSheet.create({
     gap: 14,
     marginBottom: 20,
   },
-  h1:       { fontSize: 22, fontWeight: "bold", color: "#fff", marginBottom: 2 },
+  h1:       { fontSize: 22, fontWeight: "bold", color: "#111827", marginBottom: 2 },
   subtitle: { fontSize: 12, color: "#9ca3af" },
 
   menuBtn: {
     width: 40,
     height: 40,
     borderRadius: 10,
-    backgroundColor: "rgba(255,255,255,0.08)",
+    backgroundColor: "rgba(249,115,22,0.10)",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
+    borderColor: "rgba(249,115,22,0.18)",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -487,8 +487,8 @@ const styles = StyleSheet.create({
   },
   statCard: {
     width: "48.5%",
-    backgroundColor: "rgba(18,21,39,0.9)",
-    borderColor: "rgba(255,255,255,0.08)",
+    backgroundColor: "#ffffff",
+    borderColor: "rgba(249,115,22,0.10)",
     borderWidth: 1,
     borderRadius: 14,
     padding: 14,
@@ -500,12 +500,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   statLabel: { color: "#9ca3af", fontSize: 11, fontWeight: "500", marginBottom: 2 },
-  statValue: { color: "#fff", fontSize: 22, fontWeight: "900" },
+  statValue: { color: "#111827", fontSize: 22, fontWeight: "900" },
   statSub:   { color: "#6b7280", fontSize: 10, marginTop: 3 },
 
   card: {
-    backgroundColor: "rgba(18,21,39,0.9)",
-    borderColor: "rgba(255,255,255,0.08)",
+    backgroundColor: "#ffffff",
+    borderColor: "rgba(249,115,22,0.10)",
     borderWidth: 1,
     borderRadius: 14,
     padding: 18,
@@ -517,27 +517,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 14,
   },
-  cardTitle: { color: "#fff", fontSize: 15, fontWeight: "bold" },
+  cardTitle: { color: "#111827", fontSize: 15, fontWeight: "bold" },
 
   sentimentContainer: { flexDirection: "row", justifyContent: "space-around", paddingVertical: 8 },
   sentimentItem:      { alignItems: "center" },
-  sentimentVal:       { color: "#fff", fontSize: 22, fontWeight: "bold", marginTop: 8 },
+  sentimentVal:       { color: "#111827", fontSize: 22, fontWeight: "bold", marginTop: 8 },
   sentimentName:      { color: "#9ca3af", fontSize: 12, marginTop: 2 },
   totalDisplay:       { color: "#6b7280", fontSize: 11, textAlign: "center", marginTop: 12 },
 
   progressContainer: { gap: 12 },
   progressRow:       { flexDirection: "row", alignItems: "center" },
-  progressLabel:     { width: 110, color: "#d1d5db", fontSize: 12 },
+  progressLabel:     { width: 110, color: "#4b5563", fontSize: 12 },
   progressBarBg: {
     flex: 1,
     height: 7,
-    backgroundColor: "rgba(255,255,255,0.08)",
+    backgroundColor: "rgba(249,115,22,0.10)",
     borderRadius: 4,
     marginHorizontal: 10,
     overflow: "hidden",
   },
   progressBarFill: { height: "100%", borderRadius: 4 },
-  progressCount: { width: 22, textAlign: "right", color: "#e5e7eb", fontSize: 12, fontWeight: "bold" },
+  progressCount: { width: 22, textAlign: "right", color: "#4b5563", fontSize: 12, fontWeight: "bold" },
 
   emptyText: { color: "#6b7280", fontSize: 13, textAlign: "center", paddingVertical: 12 },
 
@@ -547,24 +547,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     padding: 12,
-    backgroundColor: "rgba(255,255,255,0.02)",
+    backgroundColor: "rgba(249,115,22,0.05)",
   },
   riskItemHeader:    { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 6 },
   riskItemTitleWrap: { flexDirection: "row", alignItems: "center", gap: 8, flex: 1 },
   riskDot:    { width: 8, height: 8, borderRadius: 4 },
-  riskTitle:  { color: "#fff", fontSize: 13, fontWeight: "bold", flex: 1 },
+  riskTitle:  { color: "#111827", fontSize: 13, fontWeight: "bold", flex: 1 },
   riskProb:   { fontSize: 12, fontWeight: "bold" },
   riskSummary:{ color: "#9ca3af", fontSize: 12, lineHeight: 17, marginBottom: 4 },
-  riskAction: { color: "#d1d5db", fontSize: 11, fontWeight: "600" },
+  riskAction: { color: "#4b5563", fontSize: 11, fontWeight: "600" },
 
   recentCallsContainer: { gap: 14 },
   callItem: {
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.07)",
+    borderBottomColor: "rgba(249,115,22,0.08)",
     paddingBottom: 14,
   },
   callHeaderRow:  { flexDirection: "row", justifyContent: "space-between", marginBottom: 4 },
-  callTitle:      { color: "#fff", fontSize: 13, fontWeight: "bold", flex: 1, marginRight: 8 },
+  callTitle:      { color: "#111827", fontSize: 13, fontWeight: "bold", flex: 1, marginRight: 8 },
   callDate:       { color: "#6b7280", fontSize: 11 },
   callSummary:    { color: "#9ca3af", fontSize: 12, lineHeight: 18, marginBottom: 8 },
   callFooterRow:  { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },

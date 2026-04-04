@@ -9,17 +9,17 @@ import {
 	Save,
 	Trash2,
 	User,
-	X,
 } from "lucide-react";
 import { updateUserProfile, deleteUserAccount, persistAuth, getStoredAuth } from "../lib/auth";
+import { TimedUndoAction } from "../components/ui/time-undo-action";
 
 const inputCls =
-	"w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-indigo-500/60 focus:bg-white/8 focus:ring-2 focus:ring-indigo-500/15";
-const labelCls = "mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-400";
+	"w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-orange-500/60 focus:bg-gray-100 focus:ring-2 focus:ring-orange-500/15";
+const labelCls = "mb-1.5 block text-xs font-semibold uppercase tracking-wider text-gray-500";
 
 const SectionCard = ({ children, className = "" }) => (
 	<div
-		className={`rounded-2xl border border-white/10 bg-[#121527]/90 p-6 shadow-[0_16px_50px_rgba(0,0,0,0.25)] backdrop-blur-md ${className}`}
+		className={`rounded-2xl border border-gray-200 bg-[#ffffff]/90 p-6 shadow-[0_16px_50px_rgba(0,0,0,0.25)] backdrop-blur-md ${className}`}
 	>
 		{children}
 	</div>
@@ -55,8 +55,6 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 	const [pwdMsg, setPwdMsg] = useState(null);
 
 	/* ---- Delete account ---- */
-	const [deleteOpen, setDeleteOpen] = useState(false);
-	const [deleteConfirmText, setDeleteConfirmText] = useState("");
 	const [deleting, setDeleting] = useState(false);
 	const [deleteMsg, setDeleteMsg] = useState(null);
 
@@ -107,10 +105,7 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 	};
 
 	const handleDeleteAccount = async () => {
-		if (deleteConfirmText !== "DELETE") {
-			setDeleteMsg({ type: "error", text: 'Please type "DELETE" to confirm.' });
-			return;
-		}
+		if (deleting) return;
 		setDeleting(true);
 		setDeleteMsg(null);
 		try {
@@ -133,13 +128,13 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 	};
 
 	return (
-		<div className="py-8 text-slate-200 animate-in fade-in duration-300">
+		<div className="py-8 text-gray-700 animate-in fade-in duration-300">
 			{/* Header */}
 			<div className="mb-8">
-				<h1 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+				<h1 className="text-3xl font-extrabold tracking-tight text-gray-900 md:text-4xl">
 					Account & Profile
 				</h1>
-				<p className="mt-2 text-sm text-slate-400 md:text-base">
+				<p className="mt-2 text-sm text-gray-500 md:text-base">
 					Manage your personal information, security settings, and account preferences.
 				</p>
 			</div>
@@ -148,16 +143,16 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 			<SectionCard className="mb-6">
 				<div className="flex flex-col items-center gap-6 sm:flex-row">
 					<div className="relative">
-						<div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6C63FF] to-[#00D4AA] text-2xl font-extrabold text-white shadow-[0_12px_32px_rgba(108,99,255,0.4)]">
+						<div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-[#f97316] to-[#ea580c] text-2xl font-extrabold text-white shadow-[0_12px_32px_rgba(249,115,22,0.35)]">
 							{getInitials(user?.name)}
 						</div>
-						<div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-[#121527] bg-emerald-400" />
+						<div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-[#ffffff] bg-emerald-400" />
 					</div>
 					<div>
-						<h2 className="text-xl font-bold text-white">{user?.name || "Unknown"}</h2>
-						<p className="text-sm text-slate-400">{user?.email}</p>
+						<h2 className="text-xl font-bold text-gray-900">{user?.name || "Unknown"}</h2>
+						<p className="text-sm text-gray-500">{user?.email}</p>
 						{user?.company_name && (
-							<span className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-indigo-400/20 bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-300">
+							<span className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-orange-500/20 bg-orange-500/10 px-3 py-1 text-xs font-semibold text-orange-600">
 								<Building2 size={11} />
 								{user.company_name}
 							</span>
@@ -170,10 +165,10 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 				{/* Personal Info */}
 				<SectionCard>
 					<div className="mb-5 flex items-center gap-2.5">
-						<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-400">
+						<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-500/15 text-orange-500">
 							<User size={18} />
 						</div>
-						<h3 className="text-base font-bold text-white">Personal Information</h3>
+						<h3 className="text-base font-bold text-gray-900">Personal Information</h3>
 					</div>
 
 					<form onSubmit={handleProfileSave} className="flex flex-col gap-4">
@@ -182,7 +177,7 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 							<div className="relative">
 								<User
 									size={15}
-									className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
+									className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
 								/>
 								<input
 									type="text"
@@ -199,7 +194,7 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 							<div className="relative">
 								<Mail
 									size={15}
-									className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
+									className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
 								/>
 								<input
 									type="email"
@@ -216,7 +211,7 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 							<div className="relative">
 								<Building2
 									size={15}
-									className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
+									className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
 								/>
 								<input
 									type="text"
@@ -233,7 +228,7 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 						<button
 							type="submit"
 							disabled={profileSaving}
-							className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(108,99,255,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(108,99,255,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
+							className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(249,115,22,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(249,115,22,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
 						>
 							{profileSaving ? (
 								<Loader2 size={16} className="animate-spin" />
@@ -251,7 +246,7 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 						<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/15 text-cyan-400">
 							<KeyRound size={18} />
 						</div>
-						<h3 className="text-base font-bold text-white">Change Password</h3>
+						<h3 className="text-base font-bold text-gray-900">Change Password</h3>
 					</div>
 
 					<form onSubmit={handlePasswordSave} className="flex flex-col gap-4">
@@ -315,8 +310,8 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 						<Trash2 size={18} />
 					</div>
 					<div>
-						<h3 className="text-base font-bold text-white">Danger Zone</h3>
-						<p className="text-xs text-slate-400">Irreversible actions — proceed with caution</p>
+						<h3 className="text-base font-bold text-gray-900">Danger Zone</h3>
+						<p className="text-xs text-gray-500">Irreversible actions — proceed with caution</p>
 					</div>
 				</div>
 
@@ -324,90 +319,28 @@ export default function Profile({ user, token, onUserUpdate, onLogout }) {
 					<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 						<div>
 							<p className="font-semibold text-rose-300">Delete My Account</p>
-							<p className="mt-0.5 text-xs text-slate-400">
+							<p className="mt-0.5 text-xs text-gray-500">
 								Permanently deletes your account and all associated call data. This cannot be undone.
 							</p>
 						</div>
-						<button
-							type="button"
-							onClick={() => {
-								setDeleteOpen(true);
-								setDeleteConfirmText("");
-								setDeleteMsg(null);
-							}}
-							className="shrink-0 rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-2 text-sm font-semibold text-rose-400 transition hover:border-rose-500/50 hover:bg-rose-500/18 hover:text-rose-300"
-						>
-							Delete Account
-						</button>
-					</div>
-				</div>
-			</SectionCard>
-
-			{/* Delete confirmation modal */}
-			{deleteOpen && (
-				<div className="fixed inset-0 z-500 flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm">
-					<div className="w-full max-w-md animate-in fade-in zoom-in-95 duration-150 rounded-2xl border border-white/10 bg-[#161829] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
-						<div className="mb-4 flex items-start justify-between gap-3">
-							<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-500/15 text-rose-400">
-								<AlertTriangle size={20} />
-							</div>
-							<button
-								type="button"
-								onClick={() => setDeleteOpen(false)}
-								className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 transition hover:bg-white/5 hover:text-white"
-							>
-								<X size={16} />
-							</button>
-						</div>
-
-						<h3 className="mb-1 text-lg font-bold text-white">Delete Account Permanently</h3>
-						<p className="mb-4 text-sm text-slate-400">
-							This will immediately delete your account, profile data, and{" "}
-							<span className="font-semibold text-slate-300">all analyzed call recordings</span> from
-							our database. You will be signed out.
-						</p>
-
-						<div className="mb-4">
-							<label className={labelCls}>
-								Type <span className="font-bold text-rose-400">DELETE</span> to confirm
-							</label>
-							<input
-								type="text"
-								value={deleteConfirmText}
-								onChange={(e) => setDeleteConfirmText(e.target.value)}
-								placeholder="DELETE"
-								className={inputCls}
-								autoFocus
+						<div className="shrink-0">
+							<TimedUndoAction
+								initialSeconds={10}
+								deleteLabel={deleting ? "Deleting..." : "Delete Account"}
+								undoLabel="Cancel Deletion"
+								onExpire={handleDeleteAccount}
+								disabled={deleting}
 							/>
 						</div>
-
-						{deleteMsg && <Alert type={deleteMsg.type}>{deleteMsg.text}</Alert>}
-
-						<div className="mt-4 flex gap-3">
-							<button
-								type="button"
-								onClick={() => setDeleteOpen(false)}
-								className="flex-1 rounded-xl border border-white/10 bg-white/5 py-2.5 text-sm font-semibold text-slate-300 transition hover:bg-white/8"
-							>
-								Cancel
-							</button>
-							<button
-								type="button"
-								onClick={handleDeleteAccount}
-								disabled={deleting || deleteConfirmText !== "DELETE"}
-								className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-rose-600 py-2.5 text-sm font-semibold text-white transition hover:bg-rose-500 disabled:cursor-not-allowed disabled:opacity-50"
-							>
-								{deleting ? (
-									<Loader2 size={15} className="animate-spin" />
-								) : (
-									<Trash2 size={15} />
-								)}
-								Yes, Delete Everything
-							</button>
-						</div>
 					</div>
+
+					{deleteMsg && (
+						<div className="mt-3">
+							<Alert type={deleteMsg.type}>{deleteMsg.text}</Alert>
+						</div>
+					)}
 				</div>
-			)}
+			</SectionCard>
 		</div>
 	);
 }

@@ -75,13 +75,13 @@ export default function Login({ isAuthenticated }) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <LinearGradient
-          colors={["#0a0b14", "#0f1221", "#0a0b14"]}
+          colors={["#fff7ed", "#ffffff", "#fff7ed"]}
           style={styles.gradientBg}
         >
           <ScrollView
@@ -194,7 +194,7 @@ export default function Login({ isAuthenticated }) {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#0a0b14",
+    backgroundColor: "#fff7ed",
   },
   container: {
     flex: 1,
@@ -236,18 +236,18 @@ const styles = StyleSheet.create({
   h1: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: "#111827",
     lineHeight: 34,
     marginBottom: 12,
   },
   introDesc: {
     fontSize: 15,
-    color: "#d1d5db",
+    color: "#4b5563",
     lineHeight: 22,
   },
   card: {
-    backgroundColor: "rgba(22, 24, 41, 0.9)",
-    borderColor: "#1f2937",
+    backgroundColor: "#ffffff",
+    borderColor: "#fed7aa",
     borderWidth: 1,
     borderRadius: 16,
     padding: 24,
@@ -255,12 +255,12 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: "#111827",
     marginBottom: 6,
   },
   cardSubtitle: {
     fontSize: 14,
-    color: "#9ca3af",
+    color: "#6b7280",
     marginBottom: 24,
   },
   form: {
@@ -272,17 +272,17 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 13,
     fontWeight: "500",
-    color: "#d1d5db",
+    color: "#4b5563",
     marginBottom: 8,
   },
   input: {
-    backgroundColor: "#161829",
-    borderColor: "#374151",
+    backgroundColor: "#fffbf5",
+    borderColor: "#fdba74",
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    color: "#ffffff",
+    color: "#111827",
     fontSize: 15,
   },
   optionsRow: {
@@ -299,21 +299,21 @@ const styles = StyleSheet.create({
     width: 18,
     height: 18,
     borderWidth: 1,
-    borderColor: "#4f46e5",
+    borderColor: "#f97316",
     borderRadius: 4,
     marginRight: 8,
     alignItems: "center",
     justifyContent: "center",
   },
   checkboxActive: {
-    backgroundColor: "#4f46e5",
+    backgroundColor: "#f97316",
   },
   checkboxLabel: {
-    color: "#9ca3af",
+    color: "#6b7280",
     fontSize: 13,
   },
   forgotPasswordText: {
-    color: "#818cf8",
+    color: "#ea580c",
     fontSize: 13,
     fontWeight: "600",
   },
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   submitBtn: {
-    backgroundColor: "#4f46e5",
+    backgroundColor: "#f97316",
     borderRadius: 8,
     paddingVertical: 14,
     alignItems: "center",
@@ -343,11 +343,11 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   footerText: {
-    color: "#9ca3af",
+    color: "#6b7280",
     fontSize: 14,
   },
   footerLinkBold: {
-    color: "#34d399",
+    color: "#ea580c",
     fontSize: 14,
     fontWeight: "600",
   },
@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   backBtnText: {
-    color: "#9ca3af",
+    color: "#6b7280",
     fontSize: 14,
   },
 });
