@@ -13,6 +13,7 @@ import HighRisk from './pages/HighRisk';
 import Employees from './pages/Employees';
 import Products from './pages/Products';
 import Profile from './pages/Profile';
+import LiveCopilot from './pages/LiveCopilot';
 import {
   clearStoredAuth,
   fetchCurrentUser,
@@ -184,6 +185,7 @@ function App() {
             path='profile'
             element={<Profile user={auth?.user} token={auth?.token} onUserUpdate={handleUserUpdate} onLogout={handleLogout} />}
           />
+          <Route path='copilot' element={<LiveCopilot token={auth?.token} />} />
           <Route path='*' element={<Navigate to='/dashboard' replace />} />
         </Route>
         <Route path='*' element={<Navigate to='/' replace />} />

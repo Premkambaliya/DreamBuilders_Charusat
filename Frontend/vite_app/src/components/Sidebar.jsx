@@ -14,6 +14,7 @@ import {
 	Zap,
 	X,
 	Package,
+	Radio,
 } from "lucide-react";
 
 
@@ -24,6 +25,7 @@ const Sidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose, user }) => {
 	const navItems = [
 		{ icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
 		{ icon: Upload, label: "Analyze Call", path: "/dashboard/analyze" },
+		{ icon: Radio, label: "Live Copilot", path: "/dashboard/copilot" },
 		{ icon: Phone, label: "All Calls", path: "/dashboard/calls" },
 		{ icon: BarChart3, label: "Insights", path: "/dashboard/insights" },
 		{ icon: TrendingUp, label: "Top Deals", path: "/dashboard/top-deals" },
